@@ -192,4 +192,23 @@ public abstract class CRMView extends JFrame {
 	public void updateIndexCount(int index, int count) {
 		indexCountLabel.setText(index+1 + "/" + count);
 	}
+	
+	public void enableLeft() { leftButton.setEnabled(true); }
+	public void disableLeft() { leftButton.setEnabled(true); }
+	
+	public void enableRight() { rightButton.setEnabled(true); }
+	public void disableRight() { rightButton.setEnabled(true); }
+	
+	public void enableEdit() { editButton.setEnabled(true); }
+	public void disableEdit() { editButton.setEnabled(true); }
+	
+	public void enableAdd() { addButton.setEnabled(true); }
+	public void disableAdd() { addButton.setEnabled(true); }
+	
+	public void enableDelete() { deleteButton.setEnabled(true); }
+	public void disableDelete() { deleteButton.setEnabled(true); }
+	
+	public void enableSave() { saveButton.setEnabled(true); }
+	public void disableSave() { saveButton.setEnabled(true); }
+
 }

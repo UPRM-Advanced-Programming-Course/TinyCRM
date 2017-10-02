@@ -12,69 +12,33 @@ public class ContactController extends CRMController {
 	}
 	
 	public ArrayList<String> doLeft() {
-		ArrayList<String> errors = new ArrayList<String>();
 		System.out.println("ContactController.doLeft()");
-		// Validate form data
-		boolean formDataValid = true;
-		if (formDataValid) this.getModel().doLeft();
-		this.getView().display(this.getModel().getCurrentBean());
-		this.getView().updateIndexCount(this.getModel().getIndex(), this.getModel().getCount());
-		return errors;
+		return super.doLeft();
 	}
 
 	public ArrayList<String> doRight() {
-		ArrayList<String> errors = new ArrayList<String>();
 		System.out.println("ContactController.doRight()");
-		// Validate form data
-		boolean formDataValid = true;
-		if (formDataValid) this.getModel().doRight();
-		this.getView().display(this.getModel().getCurrentBean());
-		this.getView().updateIndexCount(this.getModel().getIndex(), this.getModel().getCount());
-		return errors;
+		return super.doRight();
 	}
 
 	public ArrayList<String> doEdit() {
-		ArrayList<String> errors = new ArrayList<String>();
-		System.out.println("ContactController.doEdit()");
-		// Add code to handle action here
-		boolean formDataValid = true;
-		if (formDataValid) this.getModel().doEdit();
-		this.getView().display(this.getModel().getCurrentBean());
-		this.getView().updateIndexCount(this.getModel().getIndex(), this.getModel().getCount());
-		return errors;
+		System.out.println("ContactController.doRight()");
+		return super.doEdit();
 	}
 
 	public ArrayList<String> doAdd() {
-		ArrayList<String> errors = new ArrayList<String>();
 		System.out.println("ContactController.doAdd()");
-		// Validate form data
-		boolean formDataValid = true;
-		if (formDataValid) this.getModel().doAdd();
-		this.getView().display(this.getModel().getCurrentBean());
-		this.getView().updateIndexCount(this.getModel().getIndex(), this.getModel().getCount());
-		return errors;
+		return super.doAdd();
 	}
 
 	public ArrayList<String> doDelete() {
-		ArrayList<String> errors = new ArrayList<String>();
 		System.out.println("ContactController.doDelete()");
-		// Validate form data
-		boolean formDataValid = true;
-		if (formDataValid) this.getModel().doDelete();
-		this.getView().display(this.getModel().getCurrentBean());
-		this.getView().updateIndexCount(this.getModel().getIndex(), this.getModel().getCount());
-		return errors;
+		return super.doDelete();
 	}
 
 	public ArrayList<String> doSave() {
-		ArrayList<String> errors = new ArrayList<String>();
 		System.out.println("ContactController.doSave()");
-		// Validate form data
-		boolean formDataValid = true;
-		if (formDataValid) this.getModel().doSave();
-		this.getView().display(this.getModel().getCurrentBean());
-		this.getView().updateIndexCount(this.getModel().getIndex(), this.getModel().getCount());
-		return errors;
+		return super.doSave();
 	}
 	
 }

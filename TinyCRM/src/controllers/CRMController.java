@@ -69,16 +69,71 @@ public abstract class CRMController {
 		this.view = view;
 	}
 
-	public abstract ArrayList<String> doLeft();
+	public ArrayList<String> doLeft() {
+		ArrayList<String> errors = new ArrayList<String>();
+		System.out.println("CRMController.doLeft()");
+		// Validate form data
+		boolean formDataValid = true;
+		if (formDataValid) this.getModel().doLeft();
+		this.getView().display(this.getModel().getCurrentBean());
+		this.getView().updateIndexCount(this.getModel().getIndex(), this.getModel().getCount());
+		return errors;
+	};
 
-	public abstract ArrayList<String> doRight();
+	public ArrayList<String> doRight() {
+		ArrayList<String> errors = new ArrayList<String>();
+		System.out.println("CRMController.doRight()");
+		// Validate form data
+		boolean formDataValid = true;
+		if (formDataValid) this.getModel().doRight();
+		this.getView().display(this.getModel().getCurrentBean());
+		this.getView().updateIndexCount(this.getModel().getIndex(), this.getModel().getCount());
+		return errors;
+	};
 
-	public abstract ArrayList<String> doEdit();
+	public ArrayList<String> doEdit() {
+		ArrayList<String> errors = new ArrayList<String>();
+		System.out.println("CRMController.doEdit()");
+		// Add code to handle action here
+		boolean formDataValid = true;
+		if (formDataValid) this.getModel().doEdit();
+		this.getView().display(this.getModel().getCurrentBean());
+		this.getView().updateIndexCount(this.getModel().getIndex(), this.getModel().getCount());
+		return errors;
+	};
 
-	public abstract ArrayList<String> doAdd();
+	public ArrayList<String> doAdd() {
+		ArrayList<String> errors = new ArrayList<String>();
+		System.out.println("CRMController.doAdd()");
+		// Validate form data
+		boolean formDataValid = true;
+		if (formDataValid) this.getModel().doAdd();
+		this.getView().display(this.getModel().getCurrentBean());
+		this.getView().updateIndexCount(this.getModel().getIndex(), this.getModel().getCount());
+		return errors;
+	};
 
-	public abstract ArrayList<String> doDelete();
+	public ArrayList<String> doDelete() {
+		ArrayList<String> errors = new ArrayList<String>();
+		System.out.println("CRMController.doDelete()");
+		// Validate form data
+		boolean formDataValid = true;
+		if (formDataValid) this.getModel().doDelete();
+		this.getView().display(this.getModel().getCurrentBean());
+		this.getView().updateIndexCount(this.getModel().getIndex(), this.getModel().getCount());
+		return errors;
+	};
 
-	public abstract ArrayList<String> doSave();
+	public ArrayList<String> doSave() {
+		ArrayList<String> errors = new ArrayList<String>();
+		System.out.println("CRMController.doSave()");
+		// Validate form data
+		boolean formDataValid = true;
+		if (formDataValid) this.getModel().doSave();
+		this.getView().display(this.getModel().getCurrentBean());
+		this.getView().updateIndexCount(this.getModel().getIndex(), this.getModel().getCount());
+		return errors;
+
+	};
 	
 }
