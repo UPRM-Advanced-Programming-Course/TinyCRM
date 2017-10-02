@@ -28,6 +28,7 @@ public abstract class CRMView extends JFrame {
 	JLabel indexCountLabel;
 	JLabel messagesLabel;
 	
+	private boolean editMode = false;
 
 	private MouseAdapter leftAdapter;
 	private MouseAdapter rightAdapter;
@@ -187,28 +188,35 @@ public abstract class CRMView extends JFrame {
 		this.saveAdapter = saveAdapter;
 	}
 	
-	public abstract void display(CRMBean bean);
+	public abstract void beanToForm(CRMBean bean);
+	public abstract void formToBean(CRMBean bean);
 	
 	public void updateIndexCount(int index, int count) {
 		indexCountLabel.setText(index+1 + "/" + count);
 	}
 	
-	public void enableLeft() { leftButton.setEnabled(true); }
-	public void disableLeft() { leftButton.setEnabled(true); }
+	public boolean inEditMode() { return editMode; }
 	
-	public void enableRight() { rightButton.setEnabled(true); }
-	public void disableRight() { rightButton.setEnabled(true); }
+	// The following should be overriden to enable/disable editing of input components
+	public void enableEditMode() { editMode = true; }
+	public void disableEditMode() {editMode = false; }
 	
-	public void enableEdit() { editButton.setEnabled(true); }
-	public void disableEdit() { editButton.setEnabled(true); }
+	public void enableLeftButton() { leftButton.setEnabled(true); }
+	public void disableLeftButton() { leftButton.setEnabled(false); }
 	
-	public void enableAdd() { addButton.setEnabled(true); }
-	public void disableAdd() { addButton.setEnabled(true); }
+	public void enableRightButton() { rightButton.setEnabled(true); }
+	public void disableRightButton() { rightButton.setEnabled(false); }
 	
-	public void enableDelete() { deleteButton.setEnabled(true); }
-	public void disableDelete() { deleteButton.setEnabled(true); }
+	public void enableEditButton() { editButton.setEnabled(true); }
+	public void disableEditButton() { editButton.setEnabled(false); }
 	
-	public void enableSave() { saveButton.setEnabled(true); }
-	public void disableSave() { saveButton.setEnabled(true); }
-
+	public void enableAddButton() { addButton.setEnabled(true); }
+	public void disableAddButton() { addButton.setEnabled(false); }
+	
+	public void enableDeleteButton() { deleteButton.setEnabled(true); }
+	public void disableDeleteButton() { deleteButton.setEnabled(false); }
+	
+	public void enableSaveButton() { saveButton.setEnabled(true); }
+	public void disableSaveButton() { saveButton.setEnabled(false); }
+	
 }

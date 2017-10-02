@@ -187,7 +187,7 @@ public class ContactView extends CRMView {
 		this.setMessagesLabel("No Contacts in the CRM");
 		
 	}
-
+	
 	public String getTextId() {
 		return textFirstName.getText();
 	}
@@ -243,15 +243,49 @@ public class ContactView extends CRMView {
 	public void setTextFacebook(String textFacebook) {
 		this.textFacebook.setText(textFacebook);
 	}
+	
+	public void enableEditMode() { 
+		super.enableEditMode();
+		// Make all fields editable
+		textId.setEditable(true);
+		textFirstName.setEditable(true);
+		textLastName.setEditable(true);
+		textCompany.setEditable(true);
+		textTelephone.setEditable(true);
+		textEmail.setEditable(true);
+		textFacebook.setEditable(true);
+	}
+	public void disableEditMode() {
+		super.disableEditMode();
+		// Make all fields not editable
+		textId.setEditable(false);
+		textFirstName.setEditable(false);
+		textLastName.setEditable(false);
+		textCompany.setEditable(false);
+		textTelephone.setEditable(false);
+		textEmail.setEditable(false);
+		textFacebook.setEditable(false);
+	}
 
-	public void display(CRMBean bean) {
+	public void beanToForm(CRMBean bean) {
 		ContactBean cb = (ContactBean) bean;
 		this.setTextId(""+cb.getId());
 		this.setTextFirstName(cb.getFirstName());
 		this.setTextLastName(cb.getLastName());
 		this.setTextCompany(cb.getCompany());
-		this.setTextTelephone(cb.getFirstName());
-		this.setTextFirstName(cb.getFirstName());
-		this.setTextFirstName(cb.getFirstName());
+		this.setTextTelephone(cb.getTelephone());
+		this.setTextEmail(cb.getEmail());
+		this.setTextFacebook(cb.getFacebook());
+	}
+	
+	public void formToBean(CRMBean bean) {
+		ContactBean cb = (ContactBean) bean;
+		cb.setId(Integer.parseInt(textId.getText()));
+		cb.setFirstName(textFirstName.getText());
+		cb.setLastName(textLastName.getText());
+		cb.setCompany(textCompany.getText());
+		cb.setTelephone(textTelephone.getText());
+		cb.setEmail(textEmail.getText());
+		cb.setFacebook(textFacebook.getText());
 	}
 }

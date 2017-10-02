@@ -51,6 +51,9 @@ public abstract class CRMController {
 				ArrayList<String> errors = doSave();
 			}
 		});
+
+		refreshView();
+
 	}
 
 	public CRMModel getModel() {
@@ -73,10 +76,11 @@ public abstract class CRMController {
 		ArrayList<String> errors = new ArrayList<String>();
 		System.out.println("CRMController.doLeft()");
 		// Validate form data
-		boolean formDataValid = true;
-		if (formDataValid) this.getModel().doLeft();
-		this.getView().display(this.getModel().getCurrentBean());
-		this.getView().updateIndexCount(this.getModel().getIndex(), this.getModel().getCount());
+		boolean formDataValid = getModel().getIndex() > 0;
+		if (formDataValid) {
+			this.getModel().doLeft();
+			this.refreshView();
+		}
 		return errors;
 	};
 
@@ -86,8 +90,7 @@ public abstract class CRMController {
 		// Validate form data
 		boolean formDataValid = true;
 		if (formDataValid) this.getModel().doRight();
-		this.getView().display(this.getModel().getCurrentBean());
-		this.getView().updateIndexCount(this.getModel().getIndex(), this.getModel().getCount());
+		this.refreshView();
 		return errors;
 	};
 
@@ -96,9 +99,11 @@ public abstract class CRMController {
 		System.out.println("CRMController.doEdit()");
 		// Add code to handle action here
 		boolean formDataValid = true;
-		if (formDataValid) this.getModel().doEdit();
-		this.getView().display(this.getModel().getCurrentBean());
-		this.getView().updateIndexCount(this.getModel().getIndex(), this.getModel().getCount());
+		if (formDataValid) {
+			view.enableEditMode();
+			this.getModel().doEdit();
+		}
+		this.refreshView();
 		return errors;
 	};
 
@@ -108,8 +113,7 @@ public abstract class CRMController {
 		// Validate form data
 		boolean formDataValid = true;
 		if (formDataValid) this.getModel().doAdd();
-		this.getView().display(this.getModel().getCurrentBean());
-		this.getView().updateIndexCount(this.getModel().getIndex(), this.getModel().getCount());
+		this.refreshView();
 		return errors;
 	};
 
@@ -119,8 +123,7 @@ public abstract class CRMController {
 		// Validate form data
 		boolean formDataValid = true;
 		if (formDataValid) this.getModel().doDelete();
-		this.getView().display(this.getModel().getCurrentBean());
-		this.getView().updateIndexCount(this.getModel().getIndex(), this.getModel().getCount());
+		this.refreshView();
 		return errors;
 	};
 
@@ -129,11 +132,38 @@ public abstract class CRMController {
 		System.out.println("CRMController.doSave()");
 		// Validate form data
 		boolean formDataValid = true;
-		if (formDataValid) this.getModel().doSave();
-		this.getView().display(this.getModel().getCurrentBean());
-		this.getView().updateIndexCount(this.getModel().getIndex(), this.getModel().getCount());
+		if (formDataValid) {
+			view.formToBean(model.getCurrentBean());
+			view.disableEditMode();
+			this.getModel().doSave();
+		}
+		this.refreshView();
 		return errors;
 
 	};
-	
+
+	public void refreshView() {
+		System.out.println("Refreshing View Info");
+		if (model.getCount() > 0) {
+			this.getView().beanToForm(this.getModel().getCurrentBean());
+		}
+		this.getView().updateIndexCount(this.getModel().getIndex(), this.getModel().getCount());
+		view.disableLeftButton();
+		view.disableRightButton();
+		view.disableEditButton();
+		view.disableAddButton();
+		view.disableDeleteButton();
+		view.disableSaveButton();
+		if (view.inEditMode()) {
+			view.enableSaveButton();
+		}
+		else {
+			if (model.getIndex() > 0) view.enableLeftButton();
+			if ((model.getCount() > 0) && (model.getIndex() < model.getCount()-1)) view.enableRightButton();
+			view.enableEditButton();
+			view.enableAddButton();
+			if (model.getCount()>0) view.enableDeleteButton();
+		}
+	}
+
 }

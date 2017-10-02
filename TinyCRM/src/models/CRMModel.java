@@ -11,7 +11,7 @@ public abstract class CRMModel {
 
 	public abstract void doLeft();
 	
-	public void doRight() {		
+	public void doRight() {
 		index = Math.min(index+1, list.size()-1);
 	}
 
