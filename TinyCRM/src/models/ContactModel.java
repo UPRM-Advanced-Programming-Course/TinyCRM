@@ -1,45 +1,53 @@
 package models;
 
-import java.util.ArrayList;
-
 import beans.ContactBean;
 
 public class ContactModel extends CRMModel {
-	
-	public static ArrayList<ContactBean> list = new ArrayList<ContactBean>();
-	public static int index =-1; // Empty list
-	
+
+	public ContactModel() {
+
+	}
+
 	@Override
 	public void doLeft() {
-		index = Math.max(index-1, 0);
+		System.out.println("ContactModel.doLeft()");
+		this.setIndex(Math.max(this.getIndex()-1, 0));
 	}
 
 	@Override
 	public void doRight() {
-		index = Math.min(index+1, list.size());
+		super.doRight();
+		System.out.println("ContactModel.doRight()");
 	}
 
 	@Override
 	public void doEdit() {
-		// For now all done by controller
+		super.doEdit();
+		System.out.println("ContactModel.doEdit()");
 	}
 
 	@Override
 	public void doAdd() {
-		int id = list.get(list.size()-1).getId() + 1;
-		list.add(new ContactBean(id));
-		index = list.size() - 1;
+		System.out.println("ContactModel.doAdd()");
+		int id = 1;
+		if (this.getCount() > 0) {
+			id = ((ContactBean) this.getBean(this.getCount()-1)).getId() + 1;
+		}
+		this.add(new ContactBean(id));
+		this.setIndex(this.getCount() - 1);
 	}
 
 	@Override
 	public void doDelete() {
-		list.remove(index);
-		index = Math.max(0, index-1);
+		super.doDelete();
+		System.out.println("ContactModel.doDelete()");
+
 	}
 
 	@Override
 	public void doSave() {
-		//  For now no DB used
+		super.doSave();
+		System.out.println("ContactModel.doSavet()");
 	}
 
 }

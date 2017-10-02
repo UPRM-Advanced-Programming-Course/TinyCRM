@@ -1,30 +1,19 @@
 package views;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.EventQueue;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.JToolBar;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import beans.CRMBean;
 import beans.ContactBean;
-import java.awt.Dimension;
-import java.awt.Font;
 
 public class ContactView extends CRMView {
 
@@ -40,7 +29,6 @@ public class ContactView extends CRMView {
 	private JTextField textTelephone;
 	private JTextField textEmail;
 	private JTextField textFacebook;
-	private JTextField textFirstname;
 
 	/**
 	 * Create the frame.
@@ -94,15 +82,15 @@ public class ContactView extends CRMView {
 		gbc_lblFirstName.gridy = 1;
 		centerGrid.add(lblFirstName, gbc_lblFirstName);
 		
-		textFirstname = new JTextField();
-		textFirstname.setEditable(false);
+		textFirstName = new JTextField();
+		textFirstName.setEditable(false);
 		GridBagConstraints gbc_txtFirstname = new GridBagConstraints();
 		gbc_txtFirstname.insets = new Insets(0, 0, 5, 0);
 		gbc_txtFirstname.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtFirstname.gridx = 1;
 		gbc_txtFirstname.gridy = 1;
-		centerGrid.add(textFirstname, gbc_txtFirstname);
-		textFirstname.setColumns(10);
+		centerGrid.add(textFirstName, gbc_txtFirstname);
+		textFirstName.setColumns(10);
 		
 		JLabel lblLastName = new JLabel("Last Name");
 		lblLastName.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -200,6 +188,14 @@ public class ContactView extends CRMView {
 		
 	}
 
+	public String getTextId() {
+		return textFirstName.getText();
+	}
+
+	public void setTextId(String textId) {
+		this.textId.setText(textId);
+	}
+	
 	public String getTextFirstName() {
 		return textFirstName.getText();
 	}
@@ -250,6 +246,7 @@ public class ContactView extends CRMView {
 
 	public void display(CRMBean bean) {
 		ContactBean cb = (ContactBean) bean;
+		this.setTextId(""+cb.getId());
 		this.setTextFirstName(cb.getFirstName());
 		this.setTextLastName(cb.getLastName());
 		this.setTextCompany(cb.getCompany());

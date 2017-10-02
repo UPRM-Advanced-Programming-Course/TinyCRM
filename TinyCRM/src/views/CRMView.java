@@ -36,6 +36,13 @@ public abstract class CRMView extends JFrame {
 	private MouseAdapter deleteAdapter;
 	private MouseAdapter saveAdapter;
 	
+	JButton leftButton;
+	JButton rightButton;
+	JButton editButton;
+	JButton addButton;
+	JButton deleteButton;
+	JButton saveButton;
+	
 	public CRMView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 633, 474);
@@ -68,23 +75,23 @@ public abstract class CRMView extends JFrame {
 		Component leftHorizontalStrutBottom = Box.createHorizontalStrut(20);
 		bottomPanel.add(leftHorizontalStrutBottom);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		bottomPanel.add(lblNewLabel);
-		
-		JButton leftButton = new JButton("Left");
+		leftButton = new JButton("Left");
 		bottomPanel.add(leftButton);
 		
-		JButton addButton = new JButton("Add");
+		rightButton = new JButton("Right");
+		bottomPanel.add(rightButton);
+		
+		editButton = new JButton("Edit");
+		bottomPanel.add(editButton);
+
+		addButton = new JButton("Add");
 		bottomPanel.add(addButton);
 		
-		JButton saveButton = new JButton("Save");
-		bottomPanel.add(saveButton);
-		
-		JButton deleteButton = new JButton("Delete");
+		deleteButton = new JButton("Delete");
 		bottomPanel.add(deleteButton);
 		
-		JButton rightButton = new JButton("Right");
-		bottomPanel.add(rightButton);
+		saveButton = new JButton("Save");
+		bottomPanel.add(saveButton);
 		
 		Component rightHorizontalStrutBottom = Box.createHorizontalStrut(20);
 		rightHorizontalStrutBottom.setPreferredSize(new Dimension(50, 0));
@@ -129,8 +136,9 @@ public abstract class CRMView extends JFrame {
 	public MouseAdapter getLeftAdapter() {
 		return leftAdapter;
 	}
-
+	
 	public void setLeftAdapter(MouseAdapter leftAdapter) {
+		leftButton.addMouseListener(leftAdapter);
 		this.leftAdapter = leftAdapter;
 	}
 
@@ -139,6 +147,7 @@ public abstract class CRMView extends JFrame {
 	}
 
 	public void setRightAdapter(MouseAdapter rightAdapter) {
+		rightButton.addMouseListener(rightAdapter);
 		this.rightAdapter = rightAdapter;
 	}
 
@@ -147,6 +156,7 @@ public abstract class CRMView extends JFrame {
 	}
 
 	public void setEditAdapter(MouseAdapter editAdapter) {
+		editButton.addMouseListener(editAdapter);
 		this.editAdapter = editAdapter;
 	}
 
@@ -155,6 +165,7 @@ public abstract class CRMView extends JFrame {
 	}
 
 	public void setAddAdapter(MouseAdapter addAdapter) {
+		addButton.addMouseListener(addAdapter);
 		this.addAdapter = addAdapter;
 	}
 
@@ -163,6 +174,7 @@ public abstract class CRMView extends JFrame {
 	}
 
 	public void setDeleteAdapter(MouseAdapter deleteAdapter) {
+		deleteButton.addMouseListener(deleteAdapter);
 		this.deleteAdapter = deleteAdapter;
 	}
 
@@ -171,8 +183,13 @@ public abstract class CRMView extends JFrame {
 	}
 
 	public void setSaveAdapter(MouseAdapter saveAdapter) {
+		saveButton.addMouseListener(saveAdapter);
 		this.saveAdapter = saveAdapter;
 	}
 	
 	public abstract void display(CRMBean bean);
+	
+	public void updateIndexCount(int index, int count) {
+		indexCountLabel.setText(index+1 + "/" + count);
+	}
 }
