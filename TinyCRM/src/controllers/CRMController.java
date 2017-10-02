@@ -18,39 +18,55 @@ public abstract class CRMController {
 		this.view.setLeftAdapter(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				model.doLeft();
+				ArrayList<String> errors = doLeft();
 			}
 		});
 		this.view.setRightAdapter(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				model.doRight();
+				ArrayList<String> errors = doRight();
 			}
 		});
 		this.view.setEditAdapter(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				model.doEdit();
+				ArrayList<String> errors = doEdit();
 			}
 		});
 		this.view.setAddAdapter(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				model.doAdd();
+				ArrayList<String> errors = doAdd();
 			}
 		});
 		this.view.setDeleteAdapter(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				model.doDelete();
+				ArrayList<String> errors = doDelete();
 			}
 		});
 		this.view.setSaveAdapter(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				model.doSave();
+				ArrayList<String> errors = doSave();
 			}
 		});
+	}
+
+	public CRMModel getModel() {
+		return model;
+	}
+
+	public void setModel(CRMModel model) {
+		this.model = model;
+	}
+
+	public CRMView getView() {
+		return view;
+	}
+
+	public void setView(CRMView view) {
+		this.view = view;
 	}
 
 	public abstract ArrayList<String> doLeft();
