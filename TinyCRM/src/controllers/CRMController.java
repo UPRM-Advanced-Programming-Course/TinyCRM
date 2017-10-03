@@ -131,12 +131,21 @@ public abstract class CRMController {
 		ArrayList<String> errors = new ArrayList<String>();
 		System.out.println("CRMController.doSave()");
 		// Validate form data
-		boolean formDataValid = true;
-		if (formDataValid) {
-			view.formToBean(model.getCurrentBean());
+		errors = validateForm();
+		if (errors.size() == 0) {
 			view.disableEditMode();
 			this.getModel().doSave();
 		}
+		else {
+			String errorString = "Invalid Form: ";
+//			for (String s : errors) {
+//				errorString += s + " : " ;
+//			}
+			// For now show one validation error at a time
+			errorString = errors.get(0);
+			view.setMessagesLabel(errorString);
+		}
+		view.formToBean(model.getCurrentBean());
 		this.refreshView();
 		return errors;
 
@@ -160,10 +169,11 @@ public abstract class CRMController {
 		else {
 			if (model.getIndex() > 0) view.enableLeftButton();
 			if ((model.getCount() > 0) && (model.getIndex() < model.getCount()-1)) view.enableRightButton();
-			view.enableEditButton();
+			if (model.getCount()>0) view.enableEditButton();
 			view.enableAddButton();
 			if (model.getCount()>0) view.enableDeleteButton();
 		}
 	}
 
+	public abstract ArrayList<String> validateForm();
 }

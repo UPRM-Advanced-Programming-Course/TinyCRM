@@ -247,7 +247,7 @@ public class ContactView extends CRMView {
 	public void enableEditMode() { 
 		super.enableEditMode();
 		// Make all fields editable
-		textId.setEditable(true);
+		//textId.setEditable(true);
 		textFirstName.setEditable(true);
 		textLastName.setEditable(true);
 		textCompany.setEditable(true);
