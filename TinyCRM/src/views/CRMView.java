@@ -64,8 +64,8 @@ public abstract class CRMView extends JFrame {
 		topPanel.add(messagesLabel);
 		
 		Component verticalStrut = Box.createVerticalStrut(20);
-		verticalStrut.setPreferredSize(new Dimension(0, 10));
-		verticalStrut.setMinimumSize(new Dimension(0, 10));
+		verticalStrut.setPreferredSize(new Dimension(0, 18));
+		verticalStrut.setMinimumSize(new Dimension(0, 18));
 		topPanel.add(verticalStrut);
 		
 		JPanel panel = new JPanel();
