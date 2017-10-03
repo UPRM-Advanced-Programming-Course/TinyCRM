@@ -12,34 +12,34 @@ public class ContactController extends CRMController {
 		super(view, model);
 	}
 
-	public ArrayList<String> doLeft() {
+	public void doLeft() {
 		System.out.println("ContactController.doLeft()");
-		return super.doLeft();
+		super.doLeft();
 	}
 
-	public ArrayList<String> doRight() {
+	public void doRight() {
 		System.out.println("ContactController.doRight()");
-		return super.doRight();
+		super.doRight();
 	}
 
-	public ArrayList<String> doEdit() {
+	public void doEdit() {
 		System.out.println("ContactController.doRight()");
-		return super.doEdit();
+		super.doEdit();
 	}
 
-	public ArrayList<String> doAdd() {
+	public void doAdd() {
 		System.out.println("ContactController.doAdd()");
-		return super.doAdd();
+		super.doAdd();
 	}
 
-	public ArrayList<String> doDelete() {
+	public void doDelete() {
 		System.out.println("ContactController.doDelete()");
-		return super.doDelete();
+		super.doDelete();
 	}
 
-	public ArrayList<String> doSave() {
+	public void doSave() {
 		System.out.println("ContactController.doSave()");
-		return super.doSave();
+		super.doSave();
 	}
 
 	public ArrayList<String> validateForm() {

@@ -12,53 +12,57 @@ public abstract class CRMController {
 	private CRMModel model;
 	private CRMView view;
 
+	private static final ArrayList<String> emptyErrors = new ArrayList<String>();
+
+	private boolean currentBeanIsNew = false;
+
 	public CRMController(CRMView crmView, CRMModel crmModel) {
 		this.view = crmView;
 		this.model = crmModel;
 		this.view.setLeftAdapter(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ArrayList<String> errors = doLeft();
+				doLeft();
 			}
 		});
 		this.view.setRightAdapter(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ArrayList<String> errors = doRight();
+				doRight();
 			}
 		});
 		this.view.setEditAdapter(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ArrayList<String> errors = doEdit();
+				doEdit();
 			}
 		});
 		this.view.setAddAdapter(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ArrayList<String> errors = doAdd();
+				doAdd();
 			}
 		});
 		this.view.setDeleteAdapter(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ArrayList<String> errors = doDelete();
+				doDelete();
 			}
 		});
 		this.view.setSaveAdapter(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ArrayList<String> errors = doSave();
+				doSave();
 			}
 		});
 		this.view.setCancelAdapter(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				ArrayList<String> errors = doCancel();
+				doCancel();
 			}
 		});
 
-		refreshView();
+		refreshView(emptyErrors);
 
 	}
 
@@ -78,106 +82,78 @@ public abstract class CRMController {
 		this.view = view;
 	}
 
-	public ArrayList<String> doLeft() {
-		ArrayList<String> errors = new ArrayList<String>();
+	public void doLeft() {
 		System.out.println("CRMController.doLeft()");
-		// Validate form data
-		boolean formDataValid = getModel().getIndex() > 0;
-		if (formDataValid) {
+		if (getModel().getIndex() > 0) {
 			this.getModel().doLeft();
-			this.refreshView();
 		}
-		return errors;
+		this.refreshView(emptyErrors);
 	};
 
-	public ArrayList<String> doRight() {
-		ArrayList<String> errors = new ArrayList<String>();
+	public void doRight() {
 		System.out.println("CRMController.doRight()");
-		// Validate form data
-		boolean formDataValid = true;
-		if (formDataValid) this.getModel().doRight();
-		this.refreshView();
-		return errors;
+		this.getModel().doRight();
+		this.refreshView(emptyErrors);
 	};
 
-	public ArrayList<String> doEdit() {
-		ArrayList<String> errors = new ArrayList<String>();
+	public void doEdit() {
 		System.out.println("CRMController.doEdit()");
-		// Add code to handle action here
-		boolean formDataValid = true;
-		if (formDataValid) {
-			view.enableEditMode();
-			this.getModel().doEdit();
-		}
-		this.refreshView();
-		return errors;
+		view.enableEditMode();
+		this.getModel().doEdit();		
+		this.refreshView(emptyErrors);
 	};
 
-	public ArrayList<String> doAdd() {
-		ArrayList<String> errors = new ArrayList<String>();
+	public void doAdd() {
 		System.out.println("CRMController.doAdd()");
-		// Validate form data
-		boolean formDataValid = true;
-		if (formDataValid) {
-			this.getModel().doAdd();
-			return doEdit();
-		}
-		this.refreshView();
-		return errors;
+		this.getModel().doAdd();
+		currentBeanIsNew = true;
+		this.doEdit();
+		view.setMessagesLabel("Edit Current Record and Click Save");
 	};
 
-	public ArrayList<String> doDelete() {
-		ArrayList<String> errors = new ArrayList<String>();
+	public void doDelete() {
 		System.out.println("CRMController.doDelete()");
-		// Validate form data
-		boolean formDataValid = true;
-		if (formDataValid) this.getModel().doDelete();
+		this.getModel().doDelete();
 		if (model.getCount() == 0)  view.clearForm();
-		this.refreshView();
-		return errors;
+		this.refreshView(emptyErrors);
 	};
 
-	public ArrayList<String> doSave() {
-		ArrayList<String> errors = new ArrayList<String>();
+	public void doSave() {
 		System.out.println("CRMController.doSave()");
 		// Validate form data
-		errors = validateForm();
+		ArrayList<String> errors = validateForm();
 		if (errors.size() == 0) {
-			view.disableEditMode();
+			view.formToBean(model.getCurrentBean());
 			this.getModel().doSave();
+			currentBeanIsNew = false;
+			view.disableEditMode();
 		}
 		else {
-			String errorString = "Invalid Form: ";
-			//			for (String s : errors) {
-			//				errorString += s + " : " ;
-			//			}
-			// For now show one validation error at a time
-			errorString = "Invalid Form: " + errors.get(0);
-			view.setMessagesLabel(errorString);
 		}
-		view.formToBean(model.getCurrentBean());
-		this.refreshView();
-		return errors;
-
+		this.refreshView(errors);
 	};
 
-	public ArrayList<String> doCancel() {
+	public void doCancel() {
 		ArrayList<String> errors = new ArrayList<String>();
 		System.out.println("CRMController.doCancel()");
 		// Validate form data
-		errors = validateForm();
+		//		errors = validateForm();
 		view.disableEditMode();
 		this.getModel().doCancel();
 		if (errors.size() > 0) {
 			this.getModel().doDelete();
-			//this.getModel().setIndex(this.getModel().getIndex()-1);
 		}
-		view.clearForm();
-		this.refreshView();
-		return errors;
+		if (currentBeanIsNew) {
+			view.clearForm();
+			this.getModel().doDelete();
+		}
+		else {
+			view.beanToForm(model.getCurrentBean());
+		}
+		this.refreshView(errors);
 	}
 
-	public void refreshView() {
+	public void refreshView(ArrayList<String> errors) {
 		System.out.println("Refreshing View Info");
 		if (model.getCount() > 0) {
 			this.getView().beanToForm(this.getModel().getCurrentBean());
@@ -201,6 +177,16 @@ public abstract class CRMController {
 			view.enableAddButton();
 			if (model.getCount()>0) view.enableDeleteButton();
 		}
+		String errorString = "Action Completed Successfuly";
+		if (errors.size()>0) {
+			errorString = "Invalid Form: ";
+			//			for (String s : errors) {
+			//				errorString += s + " : " ;
+			//			}
+			// For now show one validation error at a time
+			errorString = "Invalid Form: " + errors.get(0);
+		}
+		view.setMessagesLabel(errorString);
 	}
 
 	public abstract ArrayList<String> validateForm();
