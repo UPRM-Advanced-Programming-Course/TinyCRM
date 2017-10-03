@@ -36,13 +36,15 @@ public abstract class CRMView extends JFrame {
 	private MouseAdapter addAdapter;
 	private MouseAdapter deleteAdapter;
 	private MouseAdapter saveAdapter;
+	private MouseAdapter cancelAdapter;
 	
-	JButton leftButton;
-	JButton rightButton;
-	JButton editButton;
-	JButton addButton;
-	JButton deleteButton;
-	JButton saveButton;
+	private JButton leftButton;
+	private JButton rightButton;
+	private JButton editButton;
+	private JButton addButton;
+	private JButton deleteButton;
+	private JButton saveButton;
+	private JButton cancelButton;
 	
 	public CRMView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,9 +75,6 @@ public abstract class CRMView extends JFrame {
 		rootPane.add(bottomPanel, BorderLayout.SOUTH);
 		bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		Component leftHorizontalStrutBottom = Box.createHorizontalStrut(20);
-		bottomPanel.add(leftHorizontalStrutBottom);
-		
 		leftButton = new JButton("Left");
 		bottomPanel.add(leftButton);
 		
@@ -94,9 +93,8 @@ public abstract class CRMView extends JFrame {
 		saveButton = new JButton("Save");
 		bottomPanel.add(saveButton);
 		
-		Component rightHorizontalStrutBottom = Box.createHorizontalStrut(20);
-		rightHorizontalStrutBottom.setPreferredSize(new Dimension(50, 0));
-		bottomPanel.add(rightHorizontalStrutBottom);
+		cancelButton = new JButton("Cancel");
+		bottomPanel.add(cancelButton);
 		
 		indexCountLabel = new JLabel("0/0");
 		indexCountLabel.setForeground(Color.RED);
@@ -188,6 +186,15 @@ public abstract class CRMView extends JFrame {
 		this.saveAdapter = saveAdapter;
 	}
 	
+	public MouseAdapter getCancelAdapter() {
+		return cancelAdapter;
+	}
+
+	public void setCancelAdapter(MouseAdapter cancelAdapter) {
+		cancelButton.addMouseListener(cancelAdapter);
+		this.cancelAdapter = cancelAdapter;
+	}
+	
 	public abstract void beanToForm(CRMBean bean);
 	public abstract void formToBean(CRMBean bean);
 	
@@ -219,4 +226,9 @@ public abstract class CRMView extends JFrame {
 	public void enableSaveButton() { saveButton.setEnabled(true); }
 	public void disableSaveButton() { saveButton.setEnabled(false); }
 	
+	public void enableCancelButton() { cancelButton.setEnabled(true); }
+	public void disableCancelButton() { cancelButton.setEnabled(false); }
+	
+	public abstract void clearForm();
+
 }

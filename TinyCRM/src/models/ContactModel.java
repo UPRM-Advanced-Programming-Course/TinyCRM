@@ -10,8 +10,8 @@ public class ContactModel extends CRMModel {
 
 	@Override
 	public void doLeft() {
+		super.doLeft();
 		System.out.println("ContactModel.doLeft()");
-		this.setIndex(Math.max(this.getIndex()-1, 0));
 	}
 
 	@Override

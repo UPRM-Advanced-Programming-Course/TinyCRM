@@ -51,6 +51,12 @@ public abstract class CRMController {
 				ArrayList<String> errors = doSave();
 			}
 		});
+		this.view.setCancelAdapter(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				ArrayList<String> errors = doCancel();
+			}
+		});
 
 		refreshView();
 
@@ -112,7 +118,10 @@ public abstract class CRMController {
 		System.out.println("CRMController.doAdd()");
 		// Validate form data
 		boolean formDataValid = true;
-		if (formDataValid) this.getModel().doAdd();
+		if (formDataValid) {
+			this.getModel().doAdd();
+			return doEdit();
+		}
 		this.refreshView();
 		return errors;
 	};
@@ -123,6 +132,7 @@ public abstract class CRMController {
 		// Validate form data
 		boolean formDataValid = true;
 		if (formDataValid) this.getModel().doDelete();
+		if (model.getCount() == 0)  view.clearForm();
 		this.refreshView();
 		return errors;
 	};
@@ -138,11 +148,11 @@ public abstract class CRMController {
 		}
 		else {
 			String errorString = "Invalid Form: ";
-//			for (String s : errors) {
-//				errorString += s + " : " ;
-//			}
+			//			for (String s : errors) {
+			//				errorString += s + " : " ;
+			//			}
 			// For now show one validation error at a time
-			errorString = errors.get(0);
+			errorString = "Invalid Form: " + errors.get(0);
 			view.setMessagesLabel(errorString);
 		}
 		view.formToBean(model.getCurrentBean());
@@ -150,6 +160,22 @@ public abstract class CRMController {
 		return errors;
 
 	};
+
+	public ArrayList<String> doCancel() {
+		ArrayList<String> errors = new ArrayList<String>();
+		System.out.println("CRMController.doCancel()");
+		// Validate form data
+		errors = validateForm();
+		view.disableEditMode();
+		this.getModel().doCancel();
+		if (errors.size() > 0) {
+			this.getModel().doDelete();
+			//this.getModel().setIndex(this.getModel().getIndex()-1);
+		}
+		view.clearForm();
+		this.refreshView();
+		return errors;
+	}
 
 	public void refreshView() {
 		System.out.println("Refreshing View Info");
@@ -163,8 +189,10 @@ public abstract class CRMController {
 		view.disableAddButton();
 		view.disableDeleteButton();
 		view.disableSaveButton();
+		view.disableCancelButton();
 		if (view.inEditMode()) {
 			view.enableSaveButton();
+			view.enableCancelButton();
 		}
 		else {
 			if (model.getIndex() > 0) view.enableLeftButton();

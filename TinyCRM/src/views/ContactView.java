@@ -288,4 +288,14 @@ public class ContactView extends CRMView {
 		cb.setEmail(textEmail.getText());
 		cb.setFacebook(textFacebook.getText());
 	}
+	
+	public void clearForm() {
+		textId.setText("");
+		textFirstName.setText("");
+		textLastName.setText("");
+		textCompany.setText("");
+		textTelephone.setText("");
+		textEmail.setText("");
+		textFacebook.setText("");
+	}
 }
