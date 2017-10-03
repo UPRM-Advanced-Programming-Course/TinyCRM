@@ -21,7 +21,7 @@ public abstract class CRMModel {
 		// For now all done by controller
 	}
 	
-	public abstract void doAdd();
+	public abstract void doAdd();  // Needs to call specific bean constructor
 	
 	public void doDelete() {
 		list.remove(index);
@@ -29,7 +29,7 @@ public abstract class CRMModel {
 	}
 	
 	public void doSave() {
-		
+		// TODO Save records permanently in file or DB
 	}
 		
 	public void doCancel() {
