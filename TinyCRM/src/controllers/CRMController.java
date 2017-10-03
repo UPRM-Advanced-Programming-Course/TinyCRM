@@ -4,6 +4,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import models.CRMModel;
 import views.CRMView;
 
@@ -63,6 +65,7 @@ public abstract class CRMController {
 		});
 
 		refreshView(emptyErrors);
+		view.setMessagesLabel("Welcome to TinyCRM: Contacts");
 
 	}
 
@@ -101,6 +104,7 @@ public abstract class CRMController {
 		view.enableEditMode();
 		this.getModel().doEdit();		
 		this.refreshView(emptyErrors);
+		view.setMessagesLabel("Edit Current Contact and Click Save or Cancel");
 	};
 
 	public void doAdd() {
@@ -108,14 +112,23 @@ public abstract class CRMController {
 		this.getModel().doAdd();
 		currentBeanIsNew = true;
 		this.doEdit();
-		view.setMessagesLabel("Edit Current Record and Click Save");
+		view.setMessagesLabel("Edit Current Contact and Click Save or Cancel");
 	};
 
 	public void doDelete() {
 		System.out.println("CRMController.doDelete()");
-		this.getModel().doDelete();
-		if (model.getCount() == 0)  view.clearForm();
-		this.refreshView(emptyErrors);
+		int sureToDelete = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete ths record?", "Warning!", JOptionPane.YES_NO_OPTION);
+		System.out.println("Sure to Delete =" + sureToDelete);
+		if (sureToDelete == 0) {
+			this.getModel().doDelete();
+			if (model.getCount() == 0)  view.clearForm();
+			this.refreshView(emptyErrors);
+			view.setMessagesLabel("Contact Deleted Successfully");
+		}
+		else {
+			this.refreshView(emptyErrors);
+			view.setMessagesLabel("Contact Not Deleted");
+		}
 	};
 
 	public void doSave() {
@@ -131,6 +144,7 @@ public abstract class CRMController {
 		else {
 		}
 		this.refreshView(errors);
+		view.setMessagesLabel("Contact Saved Successfully");
 	};
 
 	public void doCancel() {
@@ -177,12 +191,9 @@ public abstract class CRMController {
 			view.enableAddButton();
 			if (model.getCount()>0) view.enableDeleteButton();
 		}
-		String errorString = "Action Completed Successfuly";
+		String errorString = "";
 		if (errors.size()>0) {
 			errorString = "Invalid Form: ";
-			//			for (String s : errors) {
-			//				errorString += s + " : " ;
-			//			}
 			// For now show one validation error at a time
 			errorString = "Invalid Form: " + errors.get(0);
 		}
