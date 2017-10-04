@@ -10,20 +10,20 @@ public class ContactModel extends CRMModel {
 
 	@Override
 	public void doLeft() {
-		super.doLeft();
 		System.out.println("ContactModel.doLeft()");
+		super.doLeft();
 	}
 
 	@Override
 	public void doRight() {
-		super.doRight();
 		System.out.println("ContactModel.doRight()");
+		super.doRight();
 	}
 
 	@Override
 	public void doEdit() {
-		super.doEdit();
 		System.out.println("ContactModel.doEdit()");
+		super.doEdit();
 	}
 
 	@Override
@@ -39,15 +39,15 @@ public class ContactModel extends CRMModel {
 
 	@Override
 	public void doDelete() {
-		super.doDelete();
 		System.out.println("ContactModel.doDelete()");
+		super.doDelete();
 
 	}
 
 	@Override
 	public void doSave() {
+		System.out.println("ContactModel.doSave()");
 		super.doSave();
-		System.out.println("ContactModel.doSavet()");
 	}
 
 }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import main.CRMMain;
 import models.CRMModel;
 import views.CRMView;
 
@@ -116,7 +117,7 @@ public abstract class CRMController {
 		view.enableEditMode();
 		this.getModel().doEdit();		
 		this.refreshView(emptyErrors);
-		view.setMessagesLabel("Edit Current Contact and Click Save or Cancel");
+		view.setMessagesLabel("Edit Current Record and Click Save or Cancel");
 	};
 
 	public void doAdd() {
@@ -124,7 +125,7 @@ public abstract class CRMController {
 		this.getModel().doAdd();
 		currentBeanIsNew = true;
 		this.doEdit();
-		view.setMessagesLabel("Edit Current Contact and Click Save or Cancel");
+		view.setMessagesLabel("Edit Current Record and Click Save or Cancel");
 	};
 
 	public void doDelete() {
@@ -135,11 +136,11 @@ public abstract class CRMController {
 			this.getModel().doDelete();
 			if (model.getCount() == 0)  view.clearForm();
 			this.refreshView(emptyErrors);
-			view.setMessagesLabel("Contact Deleted Successfully");
+			view.setMessagesLabel("Record Deleted Successfully");
 		}
 		else {
 			this.refreshView(emptyErrors);
-			view.setMessagesLabel("Contact Not Deleted");
+			view.setMessagesLabel("Record Not Deleted");
 		}
 	};
 
@@ -152,11 +153,12 @@ public abstract class CRMController {
 			this.getModel().doSave();
 			currentBeanIsNew = false;
 			view.disableEditMode();
+			this.refreshView(emptyErrors);
+			view.setMessagesLabel("Record Saved Successfully");
 		}
 		else {
+			this.refreshView(errors);
 		}
-		this.refreshView(errors);
-		view.setMessagesLabel("Contact Saved Successfully");
 	};
 
 	public void doCancel() {
@@ -182,14 +184,15 @@ public abstract class CRMController {
 	public void doSelectModule() {
 		String selection = view.getModuleSelected();
 		this.refreshView(emptyErrors);
-		if (!selection.equals("Contacts")) {
-			view.setMessagesLabel(selection + " Module Not Available Yet");
-			view.setModuleSelected("Contacts");
-		}
-		else {
-			view.setMessagesLabel(selection + "Welcome to TinyCRM: Contacts");
-			view.setModuleSelected("Contacts");
-		}
+		CRMMain.switchToModule(selection);
+//		if (!selection.equals("Contacts")) {
+//			view.setMessagesLabel(selection + " Module Not Available Yet");
+//			view.setModuleSelected("Contacts");
+//		}
+//		else {
+//			view.setMessagesLabel(selection + "Welcome to TinyCRM: Contacts");
+//			view.setModuleSelected("Contacts");
+//		}
 	}
 
 	public void refreshView(ArrayList<String> errors) {

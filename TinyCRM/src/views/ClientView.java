@@ -117,7 +117,7 @@ public class ClientView extends CRMView {
 		gbc_lblCompany.anchor = GridBagConstraints.EAST;
 		gbc_lblCompany.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCompany.gridx = 0;
-		gbc_lblCompany.gridy = 3;
+		gbc_lblCompany.gridy = 1;
 		centerGrid.add(lblCompany, gbc_lblCompany);
 		
 		textCompany = new JTextField();
@@ -126,7 +126,7 @@ public class ClientView extends CRMView {
 		gbc_textCompany.insets = new Insets(0, 0, 5, 0);
 		gbc_textCompany.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textCompany.gridx = 1;
-		gbc_textCompany.gridy = 3;
+		gbc_textCompany.gridy = 1;
 		centerGrid.add(textCompany, gbc_textCompany);
 		textCompany.setColumns(10);
 		
@@ -135,7 +135,7 @@ public class ClientView extends CRMView {
 		gbc_lblTelephone.anchor = GridBagConstraints.EAST;
 		gbc_lblTelephone.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTelephone.gridx = 0;
-		gbc_lblTelephone.gridy = 4;
+		gbc_lblTelephone.gridy = 2;
 		centerGrid.add(lblTelephone, gbc_lblTelephone);
 		
 		textTelephone = new JTextField();
@@ -145,7 +145,7 @@ public class ClientView extends CRMView {
 		gbc_textTelephoe.insets = new Insets(0, 0, 5, 0);
 		gbc_textTelephoe.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textTelephoe.gridx = 1;
-		gbc_textTelephoe.gridy = 4;
+		gbc_textTelephoe.gridy = 2;
 		centerGrid.add(textTelephone, gbc_textTelephoe);
 		textTelephone.setColumns(10);
 		
@@ -154,7 +154,7 @@ public class ClientView extends CRMView {
 		gbc_lblEmail.anchor = GridBagConstraints.EAST;
 		gbc_lblEmail.insets = new Insets(0, 0, 5, 5);
 		gbc_lblEmail.gridx = 0;
-		gbc_lblEmail.gridy = 5;
+		gbc_lblEmail.gridy = 3;
 		centerGrid.add(lblEmail, gbc_lblEmail);
 		
 		textEmail = new JTextField();
@@ -164,7 +164,7 @@ public class ClientView extends CRMView {
 		gbc_textEmail.insets = new Insets(0, 0, 5, 0);
 		gbc_textEmail.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textEmail.gridx = 1;
-		gbc_textEmail.gridy = 5;
+		gbc_textEmail.gridy = 3;
 		centerGrid.add(textEmail, gbc_textEmail);
 		textEmail.setColumns(10);
 		
@@ -173,7 +173,7 @@ public class ClientView extends CRMView {
 		gbc_lblWebsite.anchor = GridBagConstraints.EAST;
 		gbc_lblWebsite.insets = new Insets(0, 0, 5, 5);
 		gbc_lblWebsite.gridx = 0;
-		gbc_lblWebsite.gridy = 5;
+		gbc_lblWebsite.gridy = 4;
 		centerGrid.add(lblWebsite, gbc_lblWebsite);
 		
 		textWebsite = new JTextField();
@@ -183,7 +183,7 @@ public class ClientView extends CRMView {
 		gbc_textWebsite.insets = new Insets(0, 0, 5, 0);
 		gbc_textWebsite.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textWebsite.gridx = 1;
-		gbc_textWebsite.gridy = 5;
+		gbc_textWebsite.gridy = 4;
 		centerGrid.add(textWebsite, gbc_textWebsite);
 		textWebsite.setColumns(10);
 
@@ -192,7 +192,7 @@ public class ClientView extends CRMView {
 		gbc_lblFacebook.anchor = GridBagConstraints.EAST;
 		gbc_lblFacebook.insets = new Insets(0, 0, 0, 5);
 		gbc_lblFacebook.gridx = 0;
-		gbc_lblFacebook.gridy = 6;
+		gbc_lblFacebook.gridy = 5;
 		centerGrid.add(lblFacebook, gbc_lblFacebook);
 		
 		textFacebook = new JTextField();
@@ -200,7 +200,7 @@ public class ClientView extends CRMView {
 		GridBagConstraints gbc_textFacebook = new GridBagConstraints();
 		gbc_textFacebook.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFacebook.gridx = 1;
-		gbc_textFacebook.gridy = 6;
+		gbc_textFacebook.gridy = 5;
 		centerGrid.add(textFacebook, gbc_textFacebook);
 		textFacebook.setColumns(10);
 		

@@ -20,6 +20,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import beans.CRMBean;
+import main.CRMMain;
 
 public abstract class CRMView extends JFrame {
 
@@ -71,7 +72,7 @@ public abstract class CRMView extends JFrame {
 
 		moduleComboBox = new JComboBox<String>();
 		topPanel.add(moduleComboBox);
-
+		
 		messagesLabel = new JLabel("This is the messages label");
 		messagesLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		messagesLabel.setPreferredSize(new Dimension(400, 16));
@@ -220,8 +221,8 @@ public abstract class CRMView extends JFrame {
 		return (String) moduleComboBox.getSelectedItem();
 	}
 	
-	public void setModuleSelected(String module) {
-		moduleComboBox.setSelectedItem(module);
+	public void setModuleSelected(int index) {
+		moduleComboBox.setSelectedIndex(index);
 	}
 
 	public abstract void beanToForm(CRMBean bean);
