@@ -30,7 +30,7 @@ public abstract class CRMController {
 				doSelectModule();
 			}
 		});
-		
+
 		this.view.setModuleComboBoxModel(new String[] {"Contacts", "Clients", "Opportunities", "Reports"});
 
 		this.view.setLeftAdapter(new MouseAdapter() {
@@ -178,12 +178,16 @@ public abstract class CRMController {
 		}
 		this.refreshView(errors);
 	}
-	
+
 	public void doSelectModule() {
 		String selection = view.getModuleSelected();
 		this.refreshView(emptyErrors);
 		if (!selection.equals("Contacts")) {
 			view.setMessagesLabel(selection + " Module Not Available Yet");
+			view.setModuleSelected("Contacts");
+		}
+		else {
+			view.setMessagesLabel(selection + "Welcome to TinyCRM: Contacts");
 			view.setModuleSelected("Contacts");
 		}
 	}
