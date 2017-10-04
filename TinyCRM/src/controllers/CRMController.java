@@ -1,7 +1,9 @@
 package controllers;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -21,6 +23,16 @@ public abstract class CRMController {
 	public CRMController(CRMView crmView, CRMModel crmModel) {
 		this.view = crmView;
 		this.model = crmModel;
+
+		this.view.setModuleComboBoxListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Combo Box Selected");
+				doSelectModule();
+			}
+		});
+		
+		this.view.setModuleComboBoxModel(new String[] {"Contacts", "Clients", "Opportunities", "Reports"});
+
 		this.view.setLeftAdapter(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -165,6 +177,15 @@ public abstract class CRMController {
 			view.beanToForm(model.getCurrentBean());
 		}
 		this.refreshView(errors);
+	}
+	
+	public void doSelectModule() {
+		String selection = view.getModuleSelected();
+		this.refreshView(emptyErrors);
+		if (!selection.equals("Contacts")) {
+			view.setMessagesLabel(selection + " Module Not Available Yet");
+			view.setModuleSelected("Contacts");
+		}
 	}
 
 	public void refreshView(ArrayList<String> errors) {
