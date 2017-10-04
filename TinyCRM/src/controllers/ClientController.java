@@ -45,10 +45,6 @@ public class ClientController extends CRMController {
 	public ArrayList<String> validateForm() {
 		ArrayList<String> errors = new ArrayList<String>();
 		String error;
-//		error = validateFirstName();
-//		if (error != null) errors.add(error);
-//		error = validateLastName();
-//		if (error != null) errors.add(error);
 		error = validateCompany();
 		if (error != null) errors.add(error);
 		error = validateTelephone();
@@ -62,20 +58,6 @@ public class ClientController extends CRMController {
 		return errors;
 	}
 
-//	public String validateFirstName() {
-//		ClientView view = (ClientView) getView();
-//		if (view.getTextFirstName().length() == 0) {
-//			return "Empty FirstName";
-//		}
-//		return null;
-//	}
-//	public String validateLastName() {
-//		ClientView view = (ClientView) getView();
-//		if (view.getTextLastName().length() == 0) {
-//			return "Empty LastName";
-//		}
-//		return null;
-//	}	
 	public String validateCompany() {
 		ClientView view = (ClientView) getView();
 		if (view.getTextCompany().length() == 0) {

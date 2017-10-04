@@ -23,8 +23,6 @@ public class ClientView extends CRMView {
 	private static final long serialVersionUID = 1L;
 	
 	private JTextField textId;
-//	private JTextField textFirstName;
-//	private JTextField textLastName;
 	private JTextField textCompany;
 	private JTextField textTelephone;
 	private JTextField textEmail;
@@ -73,45 +71,7 @@ public class ClientView extends CRMView {
 		gbc_txtId.gridy = 0;
 		centerGrid.add(textId, gbc_txtId);
 		textId.setColumns(10);
-		
-//		JLabel lblFirstName = new JLabel("First Name");
-//		lblFirstName.setHorizontalAlignment(SwingConstants.RIGHT);
-//		GridBagConstraints gbc_lblFirstName = new GridBagConstraints();
-//		gbc_lblFirstName.anchor = GridBagConstraints.EAST;
-//		gbc_lblFirstName.insets = new Insets(0, 0, 5, 5);
-//		gbc_lblFirstName.gridx = 0;
-//		gbc_lblFirstName.gridy = 1;
-//		centerGrid.add(lblFirstName, gbc_lblFirstName);
-//		
-//		textFirstName = new JTextField();
-//		textFirstName.setEditable(false);
-//		GridBagConstraints gbc_txtFirstname = new GridBagConstraints();
-//		gbc_txtFirstname.insets = new Insets(0, 0, 5, 0);
-//		gbc_txtFirstname.fill = GridBagConstraints.HORIZONTAL;
-//		gbc_txtFirstname.gridx = 1;
-//		gbc_txtFirstname.gridy = 1;
-//		centerGrid.add(textFirstName, gbc_txtFirstname);
-//		textFirstName.setColumns(10);
-		
-//		JLabel lblLastName = new JLabel("Last Name");
-//		lblLastName.setHorizontalAlignment(SwingConstants.RIGHT);
-//		GridBagConstraints gbc_lblLastName = new GridBagConstraints();
-//		gbc_lblLastName.anchor = GridBagConstraints.EAST;
-//		gbc_lblLastName.insets = new Insets(0, 0, 5, 5);
-//		gbc_lblLastName.gridx = 0;
-//		gbc_lblLastName.gridy = 2;
-//		centerGrid.add(lblLastName, gbc_lblLastName);
-//		
-//		textLastName = new JTextField();
-//		textLastName.setEditable(false);
-//		GridBagConstraints gbc_textLastName = new GridBagConstraints();
-//		gbc_textLastName.insets = new Insets(0, 0, 5, 0);
-//		gbc_textLastName.fill = GridBagConstraints.HORIZONTAL;
-//		gbc_textLastName.gridx = 1;
-//		gbc_textLastName.gridy = 2;
-//		centerGrid.add(textLastName, gbc_textLastName);
-//		textLastName.setColumns(10);
-		
+				
 		JLabel lblCompany = new JLabel("Company");
 		GridBagConstraints gbc_lblCompany = new GridBagConstraints();
 		gbc_lblCompany.anchor = GridBagConstraints.EAST;
@@ -216,22 +176,6 @@ public class ClientView extends CRMView {
 		this.textId.setText(textId);
 	}
 	
-//	public String getTextFirstName() {
-//		return textFirstName.getText();
-//	}
-//
-//	public void setTextFirstName(String textFirstName) {
-//		this.textFirstName.setText(textFirstName);
-//	}
-//	
-//	public String getTextLastName() {
-//		return textLastName.getText();
-//	}
-//
-//	public void setTextLastName(String textLastName) {
-//		this.textLastName.setText(textLastName);
-//	}
-
 	public String getTextCompany() {
 		return textCompany.getText();
 	}
@@ -276,8 +220,6 @@ public class ClientView extends CRMView {
 		super.enableEditMode();
 		// Make all fields editable
 		//textId.setEditable(true);
-//		textFirstName.setEditable(true);
-//		textLastName.setEditable(true);
 		textCompany.setEditable(true);
 		textTelephone.setEditable(true);
 		textEmail.setEditable(true);
@@ -288,8 +230,6 @@ public class ClientView extends CRMView {
 		super.disableEditMode();
 		// Make all fields not editable
 		textId.setEditable(false);
-//		textFirstName.setEditable(false);
-//		textLastName.setEditable(false);
 		textCompany.setEditable(false);
 		textTelephone.setEditable(false);
 		textEmail.setEditable(false);
@@ -300,8 +240,6 @@ public class ClientView extends CRMView {
 	public void beanToForm(CRMBean bean) {
 		ClientBean cb = (ClientBean) bean;
 		this.setTextId(""+cb.getId());
-//		this.setTextFirstName(cb.getFirstName());
-//		this.setTextLastName(cb.getLastName());
 		this.setTextCompany(cb.getCompany());
 		this.setTextTelephone(cb.getTelephone());
 		this.setTextEmail(cb.getEmail());
@@ -312,8 +250,6 @@ public class ClientView extends CRMView {
 	public void formToBean(CRMBean bean) {
 		ClientBean cb = (ClientBean) bean;
 		cb.setId(Integer.parseInt(textId.getText()));
-//		cb.setFirstName(textFirstName.getText());
-//		cb.setLastName(textLastName.getText());
 		cb.setCompany(textCompany.getText());
 		cb.setTelephone(textTelephone.getText());
 		cb.setEmail(textEmail.getText());
@@ -323,8 +259,6 @@ public class ClientView extends CRMView {
 	
 	public void clearForm() {
 		textId.setText("");
-//		textFirstName.setText("");
-//		textLastName.setText("");
 		textCompany.setText("");
 		textTelephone.setText("");
 		textEmail.setText("");
