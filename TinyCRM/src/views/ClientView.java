@@ -13,9 +13,9 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import beans.CRMBean;
-import beans.ContactBean;
+import beans.ClientBean;
 
-public class ContactView extends CRMView {
+public class ClientView extends CRMView {
 
 	/**
 	 * 
@@ -23,19 +23,20 @@ public class ContactView extends CRMView {
 	private static final long serialVersionUID = 1L;
 	
 	private JTextField textId;
-	private JTextField textFirstName;
-	private JTextField textLastName;
+//	private JTextField textFirstName;
+//	private JTextField textLastName;
 	private JTextField textCompany;
 	private JTextField textTelephone;
 	private JTextField textEmail;
+	private JTextField textWebsite;
 	private JTextField textFacebook;
 
 	/**
 	 * Create the frame.
 	 */
-	public ContactView() {
+	public ClientView() {
 		super();
-		setTitle("Contacts");
+		setTitle("Clients");
 
 		JPanel centerPanel = new JPanel();
 		JScrollPane centerScrollPane = new JScrollPane();
@@ -73,43 +74,43 @@ public class ContactView extends CRMView {
 		centerGrid.add(textId, gbc_txtId);
 		textId.setColumns(10);
 		
-		JLabel lblFirstName = new JLabel("First Name");
-		lblFirstName.setHorizontalAlignment(SwingConstants.RIGHT);
-		GridBagConstraints gbc_lblFirstName = new GridBagConstraints();
-		gbc_lblFirstName.anchor = GridBagConstraints.EAST;
-		gbc_lblFirstName.insets = new Insets(0, 0, 5, 5);
-		gbc_lblFirstName.gridx = 0;
-		gbc_lblFirstName.gridy = 1;
-		centerGrid.add(lblFirstName, gbc_lblFirstName);
+//		JLabel lblFirstName = new JLabel("First Name");
+//		lblFirstName.setHorizontalAlignment(SwingConstants.RIGHT);
+//		GridBagConstraints gbc_lblFirstName = new GridBagConstraints();
+//		gbc_lblFirstName.anchor = GridBagConstraints.EAST;
+//		gbc_lblFirstName.insets = new Insets(0, 0, 5, 5);
+//		gbc_lblFirstName.gridx = 0;
+//		gbc_lblFirstName.gridy = 1;
+//		centerGrid.add(lblFirstName, gbc_lblFirstName);
+//		
+//		textFirstName = new JTextField();
+//		textFirstName.setEditable(false);
+//		GridBagConstraints gbc_txtFirstname = new GridBagConstraints();
+//		gbc_txtFirstname.insets = new Insets(0, 0, 5, 0);
+//		gbc_txtFirstname.fill = GridBagConstraints.HORIZONTAL;
+//		gbc_txtFirstname.gridx = 1;
+//		gbc_txtFirstname.gridy = 1;
+//		centerGrid.add(textFirstName, gbc_txtFirstname);
+//		textFirstName.setColumns(10);
 		
-		textFirstName = new JTextField();
-		textFirstName.setEditable(false);
-		GridBagConstraints gbc_txtFirstname = new GridBagConstraints();
-		gbc_txtFirstname.insets = new Insets(0, 0, 5, 0);
-		gbc_txtFirstname.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtFirstname.gridx = 1;
-		gbc_txtFirstname.gridy = 1;
-		centerGrid.add(textFirstName, gbc_txtFirstname);
-		textFirstName.setColumns(10);
-		
-		JLabel lblLastName = new JLabel("Last Name");
-		lblLastName.setHorizontalAlignment(SwingConstants.RIGHT);
-		GridBagConstraints gbc_lblLastName = new GridBagConstraints();
-		gbc_lblLastName.anchor = GridBagConstraints.EAST;
-		gbc_lblLastName.insets = new Insets(0, 0, 5, 5);
-		gbc_lblLastName.gridx = 0;
-		gbc_lblLastName.gridy = 2;
-		centerGrid.add(lblLastName, gbc_lblLastName);
-		
-		textLastName = new JTextField();
-		textLastName.setEditable(false);
-		GridBagConstraints gbc_textLastName = new GridBagConstraints();
-		gbc_textLastName.insets = new Insets(0, 0, 5, 0);
-		gbc_textLastName.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textLastName.gridx = 1;
-		gbc_textLastName.gridy = 2;
-		centerGrid.add(textLastName, gbc_textLastName);
-		textLastName.setColumns(10);
+//		JLabel lblLastName = new JLabel("Last Name");
+//		lblLastName.setHorizontalAlignment(SwingConstants.RIGHT);
+//		GridBagConstraints gbc_lblLastName = new GridBagConstraints();
+//		gbc_lblLastName.anchor = GridBagConstraints.EAST;
+//		gbc_lblLastName.insets = new Insets(0, 0, 5, 5);
+//		gbc_lblLastName.gridx = 0;
+//		gbc_lblLastName.gridy = 2;
+//		centerGrid.add(lblLastName, gbc_lblLastName);
+//		
+//		textLastName = new JTextField();
+//		textLastName.setEditable(false);
+//		GridBagConstraints gbc_textLastName = new GridBagConstraints();
+//		gbc_textLastName.insets = new Insets(0, 0, 5, 0);
+//		gbc_textLastName.fill = GridBagConstraints.HORIZONTAL;
+//		gbc_textLastName.gridx = 1;
+//		gbc_textLastName.gridy = 2;
+//		centerGrid.add(textLastName, gbc_textLastName);
+//		textLastName.setColumns(10);
 		
 		JLabel lblCompany = new JLabel("Company");
 		GridBagConstraints gbc_lblCompany = new GridBagConstraints();
@@ -167,6 +168,25 @@ public class ContactView extends CRMView {
 		centerGrid.add(textEmail, gbc_textEmail);
 		textEmail.setColumns(10);
 		
+		JLabel lblWebsite = new JLabel("Website");
+		GridBagConstraints gbc_lblWebsite = new GridBagConstraints();
+		gbc_lblWebsite.anchor = GridBagConstraints.EAST;
+		gbc_lblWebsite.insets = new Insets(0, 0, 5, 5);
+		gbc_lblWebsite.gridx = 0;
+		gbc_lblWebsite.gridy = 5;
+		centerGrid.add(lblWebsite, gbc_lblWebsite);
+		
+		textWebsite = new JTextField();
+		textWebsite.setEditable(false);
+		textWebsite.setToolTipText("JohnDoe@gmail.com");
+		GridBagConstraints gbc_textWebsite = new GridBagConstraints();
+		gbc_textWebsite.insets = new Insets(0, 0, 5, 0);
+		gbc_textWebsite.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textWebsite.gridx = 1;
+		gbc_textWebsite.gridy = 5;
+		centerGrid.add(textWebsite, gbc_textWebsite);
+		textWebsite.setColumns(10);
+
 		JLabel lblFacebook = new JLabel("Facebook");
 		GridBagConstraints gbc_lblFacebook = new GridBagConstraints();
 		gbc_lblFacebook.anchor = GridBagConstraints.EAST;
@@ -184,7 +204,7 @@ public class ContactView extends CRMView {
 		centerGrid.add(textFacebook, gbc_textFacebook);
 		textFacebook.setColumns(10);
 		
-		this.setMessagesLabel("No Contacts in the CRM");
+		this.setMessagesLabel("No Clients in the CRM");
 		
 	}
 	
@@ -196,21 +216,21 @@ public class ContactView extends CRMView {
 		this.textId.setText(textId);
 	}
 	
-	public String getTextFirstName() {
-		return textFirstName.getText();
-	}
-
-	public void setTextFirstName(String textFirstName) {
-		this.textFirstName.setText(textFirstName);
-	}
-	
-	public String getTextLastName() {
-		return textLastName.getText();
-	}
-
-	public void setTextLastName(String textLastName) {
-		this.textLastName.setText(textLastName);
-	}
+//	public String getTextFirstName() {
+//		return textFirstName.getText();
+//	}
+//
+//	public void setTextFirstName(String textFirstName) {
+//		this.textFirstName.setText(textFirstName);
+//	}
+//	
+//	public String getTextLastName() {
+//		return textLastName.getText();
+//	}
+//
+//	public void setTextLastName(String textLastName) {
+//		this.textLastName.setText(textLastName);
+//	}
 
 	public String getTextCompany() {
 		return textCompany.getText();
@@ -236,6 +256,14 @@ public class ContactView extends CRMView {
 		this.textEmail.setText(textEmail);
 	}
 
+	public String getTextWebsite() {
+		return textWebsite.getText();
+	}
+
+	public void setTextWebsite(String textWebsite) {
+		this.textWebsite.setText(textWebsite);
+	}
+
 	public String getTextFacebook() {
 		return textFacebook.getText();
 	}
@@ -248,54 +276,59 @@ public class ContactView extends CRMView {
 		super.enableEditMode();
 		// Make all fields editable
 		//textId.setEditable(true);
-		textFirstName.setEditable(true);
-		textLastName.setEditable(true);
+//		textFirstName.setEditable(true);
+//		textLastName.setEditable(true);
 		textCompany.setEditable(true);
 		textTelephone.setEditable(true);
 		textEmail.setEditable(true);
+		textWebsite.setEditable(true);
 		textFacebook.setEditable(true);
 	}
 	public void disableEditMode() {
 		super.disableEditMode();
 		// Make all fields not editable
 		textId.setEditable(false);
-		textFirstName.setEditable(false);
-		textLastName.setEditable(false);
+//		textFirstName.setEditable(false);
+//		textLastName.setEditable(false);
 		textCompany.setEditable(false);
 		textTelephone.setEditable(false);
 		textEmail.setEditable(false);
+		textWebsite.setEditable(false);
 		textFacebook.setEditable(false);
 	}
 
 	public void beanToForm(CRMBean bean) {
-		ContactBean cb = (ContactBean) bean;
+		ClientBean cb = (ClientBean) bean;
 		this.setTextId(""+cb.getId());
-		this.setTextFirstName(cb.getFirstName());
-		this.setTextLastName(cb.getLastName());
+//		this.setTextFirstName(cb.getFirstName());
+//		this.setTextLastName(cb.getLastName());
 		this.setTextCompany(cb.getCompany());
 		this.setTextTelephone(cb.getTelephone());
 		this.setTextEmail(cb.getEmail());
+		this.setTextWebsite(cb.getEmail());
 		this.setTextFacebook(cb.getFacebook());
 	}
 	
 	public void formToBean(CRMBean bean) {
-		ContactBean cb = (ContactBean) bean;
+		ClientBean cb = (ClientBean) bean;
 		cb.setId(Integer.parseInt(textId.getText()));
-		cb.setFirstName(textFirstName.getText());
-		cb.setLastName(textLastName.getText());
+//		cb.setFirstName(textFirstName.getText());
+//		cb.setLastName(textLastName.getText());
 		cb.setCompany(textCompany.getText());
 		cb.setTelephone(textTelephone.getText());
 		cb.setEmail(textEmail.getText());
+		cb.setWebsite(textWebsite.getText());
 		cb.setFacebook(textFacebook.getText());
 	}
 	
 	public void clearForm() {
 		textId.setText("");
-		textFirstName.setText("");
-		textLastName.setText("");
+//		textFirstName.setText("");
+//		textLastName.setText("");
 		textCompany.setText("");
 		textTelephone.setText("");
 		textEmail.setText("");
+		textWebsite.setText("");
 		textFacebook.setText("");
 	}
 }
