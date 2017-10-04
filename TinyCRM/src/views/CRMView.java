@@ -55,7 +55,7 @@ public abstract class CRMView extends JFrame {
 	public CRMView() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 633, 488);
+		setBounds(100, 100, 633, 598);
 		rootPane = new JPanel();
 		rootPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(rootPane);

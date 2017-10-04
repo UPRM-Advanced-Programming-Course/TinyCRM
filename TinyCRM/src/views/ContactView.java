@@ -26,6 +26,7 @@ public class ContactView extends CRMView {
 	private JTextField textFirstName;
 	private JTextField textLastName;
 	private JTextField textCompany;
+	private JTextField textClient;
 	private JTextField textTelephone;
 	private JTextField textEmail;
 	private JTextField textFacebook;
@@ -49,9 +50,9 @@ public class ContactView extends CRMView {
 		centerScrollPane.setViewportView(centerGrid);
 		GridBagLayout gbl_centerGrid = new GridBagLayout();
 		gbl_centerGrid.columnWidths = new int[]{100, 475, 0};
-		gbl_centerGrid.rowHeights = new int[]{50, 50, 50, 50, 50, 50, 50, 0};
+		gbl_centerGrid.rowHeights = new int[]{50, 50, 50, 50, 50, 50, 50, 50, 0};
 		gbl_centerGrid.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_centerGrid.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_centerGrid.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		centerGrid.setLayout(gbl_centerGrid);
 		
 		JLabel lblId = new JLabel("ID");
@@ -129,12 +130,30 @@ public class ContactView extends CRMView {
 		centerGrid.add(textCompany, gbc_textCompany);
 		textCompany.setColumns(10);
 		
+		JLabel lblClient = new JLabel("Client");
+		GridBagConstraints gbc_lblClient = new GridBagConstraints();
+		gbc_lblClient.anchor = GridBagConstraints.EAST;
+		gbc_lblClient.insets = new Insets(0, 0, 5, 5);
+		gbc_lblClient.gridx = 0;
+		gbc_lblClient.gridy = 4;
+		centerGrid.add(lblClient, gbc_lblClient);
+		
+		textClient = new JTextField();
+		textClient.setEditable(false);
+		GridBagConstraints gbc_textClient = new GridBagConstraints();
+		gbc_textClient.insets = new Insets(0, 0, 5, 0);
+		gbc_textClient.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textClient.gridx = 1;
+		gbc_textClient.gridy = 4;
+		centerGrid.add(textClient, gbc_textClient);
+		textClient.setColumns(10);
+		
 		JLabel lblTelephone = new JLabel("Telephone");
 		GridBagConstraints gbc_lblTelephone = new GridBagConstraints();
 		gbc_lblTelephone.anchor = GridBagConstraints.EAST;
 		gbc_lblTelephone.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTelephone.gridx = 0;
-		gbc_lblTelephone.gridy = 4;
+		gbc_lblTelephone.gridy = 5;
 		centerGrid.add(lblTelephone, gbc_lblTelephone);
 		
 		textTelephone = new JTextField();
@@ -144,7 +163,7 @@ public class ContactView extends CRMView {
 		gbc_textTelephoe.insets = new Insets(0, 0, 5, 0);
 		gbc_textTelephoe.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textTelephoe.gridx = 1;
-		gbc_textTelephoe.gridy = 4;
+		gbc_textTelephoe.gridy = 5;
 		centerGrid.add(textTelephone, gbc_textTelephoe);
 		textTelephone.setColumns(10);
 		
@@ -153,7 +172,7 @@ public class ContactView extends CRMView {
 		gbc_lblEmail.anchor = GridBagConstraints.EAST;
 		gbc_lblEmail.insets = new Insets(0, 0, 5, 5);
 		gbc_lblEmail.gridx = 0;
-		gbc_lblEmail.gridy = 5;
+		gbc_lblEmail.gridy = 6;
 		centerGrid.add(lblEmail, gbc_lblEmail);
 		
 		textEmail = new JTextField();
@@ -163,7 +182,7 @@ public class ContactView extends CRMView {
 		gbc_textEmail.insets = new Insets(0, 0, 5, 0);
 		gbc_textEmail.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textEmail.gridx = 1;
-		gbc_textEmail.gridy = 5;
+		gbc_textEmail.gridy = 6;
 		centerGrid.add(textEmail, gbc_textEmail);
 		textEmail.setColumns(10);
 		
@@ -172,7 +191,7 @@ public class ContactView extends CRMView {
 		gbc_lblFacebook.anchor = GridBagConstraints.EAST;
 		gbc_lblFacebook.insets = new Insets(0, 0, 0, 5);
 		gbc_lblFacebook.gridx = 0;
-		gbc_lblFacebook.gridy = 6;
+		gbc_lblFacebook.gridy = 7;
 		centerGrid.add(lblFacebook, gbc_lblFacebook);
 		
 		textFacebook = new JTextField();
@@ -180,7 +199,7 @@ public class ContactView extends CRMView {
 		GridBagConstraints gbc_textFacebook = new GridBagConstraints();
 		gbc_textFacebook.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textFacebook.gridx = 1;
-		gbc_textFacebook.gridy = 6;
+		gbc_textFacebook.gridy = 7;
 		centerGrid.add(textFacebook, gbc_textFacebook);
 		textFacebook.setColumns(10);
 		
@@ -220,6 +239,14 @@ public class ContactView extends CRMView {
 		this.textCompany.setText(textCompany);
 	}
 
+	public String getTextClient() {
+		return textClient.getText();
+	}
+
+	public void setTextClient(String textClient) {
+		this.textClient.setText(textClient);
+	}
+
 	public String getTextTelephone() {
 		return textTelephone.getText();
 	}
@@ -251,6 +278,7 @@ public class ContactView extends CRMView {
 		textFirstName.setEditable(true);
 		textLastName.setEditable(true);
 		textCompany.setEditable(true);
+		textClient.setEditable(true);
 		textTelephone.setEditable(true);
 		textEmail.setEditable(true);
 		textFacebook.setEditable(true);
@@ -262,6 +290,7 @@ public class ContactView extends CRMView {
 		textFirstName.setEditable(false);
 		textLastName.setEditable(false);
 		textCompany.setEditable(false);
+		textClient.setEditable(false);
 		textTelephone.setEditable(false);
 		textEmail.setEditable(false);
 		textFacebook.setEditable(false);
@@ -273,6 +302,7 @@ public class ContactView extends CRMView {
 		this.setTextFirstName(cb.getFirstName());
 		this.setTextLastName(cb.getLastName());
 		this.setTextCompany(cb.getCompany());
+		this.setTextClient(cb.getClient());
 		this.setTextTelephone(cb.getTelephone());
 		this.setTextEmail(cb.getEmail());
 		this.setTextFacebook(cb.getFacebook());
@@ -284,6 +314,7 @@ public class ContactView extends CRMView {
 		cb.setFirstName(textFirstName.getText());
 		cb.setLastName(textLastName.getText());
 		cb.setCompany(textCompany.getText());
+		cb.setClient(textClient.getText());
 		cb.setTelephone(textTelephone.getText());
 		cb.setEmail(textEmail.getText());
 		cb.setFacebook(textFacebook.getText());
@@ -294,6 +325,7 @@ public class ContactView extends CRMView {
 		textFirstName.setText("");
 		textLastName.setText("");
 		textCompany.setText("");
+		textClient.setText("");
 		textTelephone.setText("");
 		textEmail.setText("");
 		textFacebook.setText("");

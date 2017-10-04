@@ -38,7 +38,7 @@ public class CRMMain {
 
 		mapModuleToIndex.put("Contacts", 0);
 		mapModuleToIndex.put("Clients", 1);
-
+		
 		switchToModule("Contacts");
 
 	}

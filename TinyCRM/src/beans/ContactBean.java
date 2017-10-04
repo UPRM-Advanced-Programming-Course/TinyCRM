@@ -6,6 +6,7 @@ public class ContactBean extends CRMBean {
 	private String firstName;
 	private String lastName;
 	private String company;
+	private String client;
 	private String telephone;
 	private String email;
 	private String facebook;
@@ -16,6 +17,7 @@ public class ContactBean extends CRMBean {
 		firstName = "";
 		lastName = "";
 		company = "";
+		client = "";
 		telephone = "";
 		email = "";
 		facebook = "";
@@ -44,6 +46,12 @@ public class ContactBean extends CRMBean {
 	}
 	public void setCompany(String company) {
 		this.company = company;
+	}
+	public String getClient() {
+		return client;
+	}
+	public void setClient(String client) {
+		this.client = client;
 	}
 	public String getTelephone() {
 		return telephone;
