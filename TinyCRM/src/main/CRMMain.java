@@ -23,9 +23,8 @@ public class CRMMain {
 	public static CRMModel clientModel = new ClientModel();
 	public static CRMController clientController = new ClientController(clientView, clientModel);
 
-	public static String currentModule = "Contacts";
-	public static CRMView currentView = contactView;
-	public static Thread currentThread;
+	private static String currentModule = "Contacts";
+	private static CRMView currentView = contactView;
 
 	public static HashMap<String,CRMView> mapModuleToView = new HashMap<String,CRMView>();
 	public static HashMap<String,Integer> mapModuleToIndex = new HashMap<String,Integer>();

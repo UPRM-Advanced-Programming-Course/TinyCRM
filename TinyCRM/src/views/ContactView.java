@@ -4,7 +4,10 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -13,20 +16,19 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import beans.CRMBean;
+import beans.ClientBean;
 import beans.ContactBean;
 
 public class ContactView extends CRMView {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	private JTextField textId;
 	private JTextField textFirstName;
 	private JTextField textLastName;
 	private JTextField textCompany;
-	private JTextField textClient;
+	private JComboBox<ClientBean> comboBoxClient;
+	//private JTextField textClient;
 	private JTextField textTelephone;
 	private JTextField textEmail;
 	private JTextField textFacebook;
@@ -138,15 +140,16 @@ public class ContactView extends CRMView {
 		gbc_lblClient.gridy = 4;
 		centerGrid.add(lblClient, gbc_lblClient);
 		
-		textClient = new JTextField();
-		textClient.setEditable(false);
-		GridBagConstraints gbc_textClient = new GridBagConstraints();
-		gbc_textClient.insets = new Insets(0, 0, 5, 0);
-		gbc_textClient.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textClient.gridx = 1;
-		gbc_textClient.gridy = 4;
-		centerGrid.add(textClient, gbc_textClient);
-		textClient.setColumns(10);
+		comboBoxClient = new JComboBox<ClientBean>();
+		comboBoxClient.setEditable(false);
+		comboBoxClient.setEnabled(false);
+		GridBagConstraints gbc_comboBoxClient = new GridBagConstraints();
+		gbc_comboBoxClient.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBoxClient.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxClient.gridx = 1;
+		gbc_comboBoxClient.gridy = 4;
+		centerGrid.add(comboBoxClient, gbc_comboBoxClient);
+		//comboBoxClient.setColumns(10);
 		
 		JLabel lblTelephone = new JLabel("Telephone");
 		GridBagConstraints gbc_lblTelephone = new GridBagConstraints();
@@ -239,12 +242,30 @@ public class ContactView extends CRMView {
 		this.textCompany.setText(textCompany);
 	}
 
-	public String getTextClient() {
-		return textClient.getText();
+	public ClientBean getSelectedComboBoxClient() {
+		System.out.println("Selected Item: " + comboBoxClient.getSelectedItem());
+		return (ClientBean) comboBoxClient.getSelectedItem();
 	}
 
-	public void setTextClient(String textClient) {
-		this.textClient.setText(textClient);
+	public void setSelectedComboBoxClient(ClientBean b) {
+		for (int i=0; i<comboBoxClient.getItemCount(); i++) {
+			ClientBean b2 = (ClientBean) comboBoxClient.getItemAt(i);
+			if (b2.equals(b)) {
+				comboBoxClient.setSelectedIndex(i);
+				return;
+			}
+		}
+	}
+	
+	public void setComboBoxClientItems(ArrayList<CRMBean> list) {
+		comboBoxClient.removeAllItems();
+		for (CRMBean item : list) {
+			comboBoxClient.addItem((ClientBean) item);
+		}
+	}
+	
+	public void setComboBoxClientListener(ActionListener listener) {
+		comboBoxClient.addActionListener(listener);
 	}
 
 	public String getTextTelephone() {
@@ -278,7 +299,7 @@ public class ContactView extends CRMView {
 		textFirstName.setEditable(true);
 		textLastName.setEditable(true);
 		textCompany.setEditable(true);
-		textClient.setEditable(true);
+		comboBoxClient.setEnabled(true);
 		textTelephone.setEditable(true);
 		textEmail.setEditable(true);
 		textFacebook.setEditable(true);
@@ -290,7 +311,7 @@ public class ContactView extends CRMView {
 		textFirstName.setEditable(false);
 		textLastName.setEditable(false);
 		textCompany.setEditable(false);
-		textClient.setEditable(false);
+		comboBoxClient.setEnabled(false);
 		textTelephone.setEditable(false);
 		textEmail.setEditable(false);
 		textFacebook.setEditable(false);
@@ -302,7 +323,7 @@ public class ContactView extends CRMView {
 		this.setTextFirstName(cb.getFirstName());
 		this.setTextLastName(cb.getLastName());
 		this.setTextCompany(cb.getCompany());
-		this.setTextClient(cb.getClient());
+		this.setSelectedComboBoxClient(cb.getClient());
 		this.setTextTelephone(cb.getTelephone());
 		this.setTextEmail(cb.getEmail());
 		this.setTextFacebook(cb.getFacebook());
@@ -314,7 +335,7 @@ public class ContactView extends CRMView {
 		cb.setFirstName(textFirstName.getText());
 		cb.setLastName(textLastName.getText());
 		cb.setCompany(textCompany.getText());
-		cb.setClient(textClient.getText());
+		cb.setClient((ClientBean) this.getSelectedComboBoxClient());
 		cb.setTelephone(textTelephone.getText());
 		cb.setEmail(textEmail.getText());
 		cb.setFacebook(textFacebook.getText());
@@ -325,7 +346,7 @@ public class ContactView extends CRMView {
 		textFirstName.setText("");
 		textLastName.setText("");
 		textCompany.setText("");
-		textClient.setText("");
+		comboBoxClient.setSelectedIndex(0);
 		textTelephone.setText("");
 		textEmail.setText("");
 		textFacebook.setText("");

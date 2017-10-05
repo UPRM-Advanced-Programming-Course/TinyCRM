@@ -229,4 +229,7 @@ public abstract class CRMController {
 	}
 
 	public abstract ArrayList<String> validateForm();
+	
+	public abstract void refreshDropdowns();
+	
 }

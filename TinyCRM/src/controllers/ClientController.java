@@ -93,4 +93,7 @@ public class ClientController extends CRMController {
 		}
 		return null;
 	}
+	
+	public void refreshDropdowns() {}
+	
 }

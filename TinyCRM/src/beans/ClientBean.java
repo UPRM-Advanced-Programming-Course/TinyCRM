@@ -57,5 +57,8 @@ public class ClientBean extends CRMBean {
 		this.facebook = facebook;
 	}
 	
+	public String toString() {
+		return this.getId() + ": " + this.getCompany();
+	}
 	
 }

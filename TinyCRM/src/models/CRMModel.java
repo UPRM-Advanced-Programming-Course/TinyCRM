@@ -44,6 +44,10 @@ public abstract class CRMModel {
 	public CRMBean getBean(int i) { return list.get(i); }
 	
 	public CRMBean getCurrentBean() { return list.get(index); }
+	
+	public ArrayList<CRMBean> getAllBeans() {
+		return list;
+	}
 		
 	public int getCount() { return list.size(); }
 	
