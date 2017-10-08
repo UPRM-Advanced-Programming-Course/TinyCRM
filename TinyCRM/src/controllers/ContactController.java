@@ -3,7 +3,9 @@ package controllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Map;
 
+import exceptions.InvalidFormFieldData;
 import main.CRMMain;
 import models.CRMModel;
 import models.ContactModel;
@@ -11,17 +13,18 @@ import views.CRMView;
 import views.ContactView;
 
 public class ContactController extends CRMController {
-	
+
 	private static final ArrayList<String> emptyErrors = new ArrayList<String>();
 
 	public ContactController(CRMView view, CRMModel model) {
 		super(view, model);
-		
-		
+
+
 		ContactView cv = (ContactView) view;
 		ContactModel cm = (ContactModel) model;
-		
+
 		cv.setComboBoxClientItems(cm.getAllBeans());
+		cv.clearFieldErrors();
 		cv.setComboBoxClientListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Client Combo Box Selected");
@@ -59,75 +62,81 @@ public class ContactController extends CRMController {
 		System.out.println("ContactController.doSave()");
 		super.doSave();
 	}
-	
+
 	public void doSelectClient() {
 		this.refreshView(emptyErrors);
 	}
 
-	public ArrayList<String> validateForm() {
-		ArrayList<String> errors = new ArrayList<String>();
-		String error;
-		error = validateFirstName();
-		if (error != null) errors.add(error);
-		error = validateLastName();
-		if (error != null) errors.add(error);
-		error = validateCompany();
-		if (error != null) errors.add(error);
-		error = validateTelephone();
-		if (error != null) errors.add(error);
-		error = validateEmail();
-		if (error != null) errors.add(error);
-		error = validateFacebook();
-		if (error != null) errors.add(error);
-		return errors;
+	public void validateForm() throws InvalidFormFieldData {
+		validateFirstName();
+		validateLastName();
+		validateCompany();
+		validateTelephone();
+		validateEmail();
+		validateFacebook();
+		if (getValidationErrors().size() > 0)
+			throw new InvalidFormFieldData ("Invalid Form");
 	}
 
-	public String validateFirstName() {
+	public void validateFirstName() throws InvalidFormFieldData {
 		ContactView view = (ContactView) getView();
-		if (view.getTextFirstName().length() == 0) {
-			return "Empty FirstName";
+		if (view.getTextFirstName().trim().length() == 0) {
+			addValidationError("FirstName", "Empty First Name. Required Field.");
 		}
-		return null;
 	}
-	public String validateLastName() {
+	public void validateLastName() throws InvalidFormFieldData {
 		ContactView view = (ContactView) getView();
-		if (view.getTextLastName().length() == 0) {
-			return "Empty LastName";
+		if (view.getTextLastName().trim().length() == 0) {
+			addValidationError("LastName", "Empty Last Name. Required Field.");
 		}
-		return null;
 	}	
-	public String validateCompany() {
+	public void validateCompany() throws InvalidFormFieldData {
 		ContactView view = (ContactView) getView();
-		if (view.getTextCompany().length() == 0) {
-			return "Empty Company";
+		if (view.getTextCompany().trim().length() == 0) {
+			addValidationError("Company", "Empty Company. Required Field.");
 		}
-		return null;
 	}	
-	public String validateTelephone() {
+	public void validateTelephone() throws InvalidFormFieldData {
 		ContactView view = (ContactView) getView();
-		if (view.getTextTelephone().length() == 0) {
-			return "Empty Telephone";
+		if (view.getTextTelephone().trim().length() == 0) {
+			addValidationError("Telephone", "Empty Telephone. Required Field.");
 		}
-		return null;
 	}
-	public String validateEmail() {
+	public void validateEmail() throws InvalidFormFieldData {
 		ContactView view = (ContactView) getView();
-		if (view.getTextEmail().length() == 0) {
-			return "Empty Email";
+		if (view.getTextEmail().trim().length() == 0) {
+			addValidationError("Email", "Empty Email. Required Field.");
 		}
-		return null;
 	}
-	public String validateFacebook() {
+	public void validateFacebook() throws InvalidFormFieldData {
 		ContactView view = (ContactView) getView();
-		if (view.getTextFacebook().length() == 0) {
-			return "Empty Facebook";
+		if (view.getTextFacebook().trim().length() == 0) {
+			addValidationError("Facebook", "Empty Facebook. Required Field.");
 		}
-		return null;
 	}
-	
+
 	public void refreshDropdowns() {
 		ContactView cv = (ContactView) getView();
 		cv.setComboBoxClientItems(CRMMain.clientModel.getAllBeans());
 	}
 
+	public void refreshView(ArrayList<String> errors) {
+		super.refreshView(errors);
+		String errorString = "";
+		ContactView cv = (ContactView) getView();
+		cv.clearFieldErrors();
+		Map<String, String> validationErrors = getValidationErrors();
+		if (validationErrors.size() > 0) {
+			errorString = "Fields in red are invalid";
+			if (validationErrors.containsKey("FirstName")) { cv.setErrorFirstName(validationErrors.get("FirstName")); }
+			if (validationErrors.containsKey("LastName")) { cv.setErrorLastName(validationErrors.get("LastName")); }
+			if (validationErrors.containsKey("Company")) { cv.setErrorCompany(validationErrors.get("Company")); }
+			if (validationErrors.containsKey("Telephone")) { cv.setErrorTelephone(validationErrors.get("Telephone")); }
+			if (validationErrors.containsKey("Email")) { cv.setErrorEmail(validationErrors.get("Email")); }
+			if (validationErrors.containsKey("Facebook")) { cv.setErrorFacebook(validationErrors.get("Facebook")); }
+		}
+		cv.setMessagesLabel(errorString);
+	}
+
 }
+

@@ -55,7 +55,7 @@ public abstract class CRMView extends JFrame {
 	public CRMView() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 633, 598);
+		setBounds(100, 100, 633, 560);
 		rootPane = new JPanel();
 		rootPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(rootPane);
@@ -260,5 +260,7 @@ public abstract class CRMView extends JFrame {
 	public void disableCancelButton() { cancelButton.setEnabled(false); }
 
 	public abstract void clearForm();
+	public abstract void clearFieldErrors();
+
 
 }

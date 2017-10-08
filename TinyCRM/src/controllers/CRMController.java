@@ -5,9 +5,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 
+import exceptions.InvalidFormFieldData;
 import main.CRMMain;
 import models.CRMModel;
 import views.CRMView;
@@ -16,6 +19,8 @@ public abstract class CRMController {
 
 	private CRMModel model;
 	private CRMView view;
+
+	private Map<String, String> validationErrors = new HashMap<String, String>();
 
 	private static final ArrayList<String> emptyErrors = new ArrayList<String>();
 
@@ -147,8 +152,10 @@ public abstract class CRMController {
 	public void doSave() {
 		System.out.println("CRMController.doSave()");
 		// Validate form data
-		ArrayList<String> errors = validateForm();
-		if (errors.size() == 0) {
+		ArrayList<String> errors = emptyErrors;
+		view.clearFieldErrors();
+		try {
+			validateForm();
 			view.formToBean(model.getCurrentBean());
 			this.getModel().doSave();
 			currentBeanIsNew = false;
@@ -156,7 +163,7 @@ public abstract class CRMController {
 			this.refreshView(emptyErrors);
 			view.setMessagesLabel("Record Saved Successfully");
 		}
-		else {
+		catch (InvalidFormFieldData e) {
 			this.refreshView(errors);
 		}
 	};
@@ -185,14 +192,14 @@ public abstract class CRMController {
 		String selection = view.getModuleSelected();
 		this.refreshView(emptyErrors);
 		CRMMain.switchToModule(selection);
-//		if (!selection.equals("Contacts")) {
-//			view.setMessagesLabel(selection + " Module Not Available Yet");
-//			view.setModuleSelected("Contacts");
-//		}
-//		else {
-//			view.setMessagesLabel(selection + "Welcome to TinyCRM: Contacts");
-//			view.setModuleSelected("Contacts");
-//		}
+		//		if (!selection.equals("Contacts")) {
+		//			view.setMessagesLabel(selection + " Module Not Available Yet");
+		//			view.setModuleSelected("Contacts");
+		//		}
+		//		else {
+		//			view.setMessagesLabel(selection + "Welcome to TinyCRM: Contacts");
+		//			view.setModuleSelected("Contacts");
+		//		}
 	}
 
 	public void refreshView(ArrayList<String> errors) {
@@ -219,17 +226,30 @@ public abstract class CRMController {
 			view.enableAddButton();
 			if (model.getCount()>0) view.enableDeleteButton();
 		}
-		String errorString = "";
-		if (errors.size()>0) {
-			errorString = "Invalid Form: ";
-			// For now show one validation error at a time
-			errorString = "Invalid Form: " + errors.get(0);
-		}
-		view.setMessagesLabel(errorString);
+//		String errorString = "";
+//		Map<String,String> validationErrors = getValidationErrors();
+//		view.clearFieldErrors();
+//		if (validationErrors.size()>0) {
+//			C
+//			view.setErrorFirstName("");
+//		}
+//		view.setMessagesLabel(errorString);
 	}
 
-	public abstract ArrayList<String> validateForm();
-	
+	public abstract void validateForm() throws InvalidFormFieldData;
+
 	public abstract void refreshDropdowns();
-	
+
+	public void clearValidationErrors() {
+		validationErrors.clear();
+	}
+
+	public Map<String,String> getValidationErrors() {
+		return validationErrors;
+	}
+
+	public void addValidationError(String fieldName, String msg) {
+		validationErrors.put(fieldName, msg);
+	}
+
 }

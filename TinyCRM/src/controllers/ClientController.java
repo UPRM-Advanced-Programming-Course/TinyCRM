@@ -2,6 +2,7 @@ package controllers;
 
 import java.util.ArrayList;
 
+import exceptions.InvalidFormFieldData;
 import models.CRMModel;
 import views.CRMView;
 import views.ClientView;
@@ -42,7 +43,7 @@ public class ClientController extends CRMController {
 		super.doSave();
 	}
 
-	public ArrayList<String> validateForm() {
+	public void validateForm() throws InvalidFormFieldData {
 		ArrayList<String> errors = new ArrayList<String>();
 		String error;
 		error = validateCompany();
@@ -55,7 +56,6 @@ public class ClientController extends CRMController {
 		if (error != null) errors.add(error);
 		error = validateFacebook();
 		if (error != null) errors.add(error);
-		return errors;
 	}
 
 	public String validateCompany() {

@@ -265,4 +265,8 @@ public class ClientView extends CRMView {
 		textWebsite.setText("");
 		textFacebook.setText("");
 	}
+	
+	public void clearFieldErrors() {
+		
+	}
 }
