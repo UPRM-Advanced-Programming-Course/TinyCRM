@@ -34,7 +34,7 @@ public class ContactView extends CRMView {
 	private JTextField textEmail;
 	private JTextField textFacebook;
 
-	private JLabel firstNameLblbError;
+	private JLabel firstNameLblError;
 
 	private JLabel lastNameLblError;
 
@@ -46,7 +46,7 @@ public class ContactView extends CRMView {
 
 	private JLabel emailLblError;
 
-	private JLabel facebookLblbError;
+	private JLabel facebookLblError;
 
 	private JLabel idLblError;
 
@@ -122,15 +122,15 @@ public class ContactView extends CRMView {
 		centerGrid.add(textFirstName, gbc_txtFirstname);
 		textFirstName.setColumns(10);
 		
-		firstNameLblbError = new JLabel("New label");
-		firstNameLblbError.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-		firstNameLblbError.setForeground(Color.RED);
+		firstNameLblError = new JLabel("New label");
+		firstNameLblError.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+		firstNameLblError.setForeground(Color.RED);
 		GridBagConstraints gbc_firstNameLblbError = new GridBagConstraints();
 		gbc_firstNameLblbError.anchor = GridBagConstraints.WEST;
 		gbc_firstNameLblbError.insets = new Insets(0, 0, 5, 0);
 		gbc_firstNameLblbError.gridx = 1;
 		gbc_firstNameLblbError.gridy = 3;
-		centerGrid.add(firstNameLblbError, gbc_firstNameLblbError);
+		centerGrid.add(firstNameLblError, gbc_firstNameLblbError);
 		
 		JLabel lblLastName = new JLabel("Last Name");
 		lblLastName.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -294,15 +294,15 @@ public class ContactView extends CRMView {
 		centerGrid.add(textFacebook, gbc_textFacebook);
 		textFacebook.setColumns(10);
 		
-		facebookLblbError = new JLabel("New label");
-		facebookLblbError.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
-		facebookLblbError.setForeground(Color.RED);
+		facebookLblError = new JLabel("New label");
+		facebookLblError.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+		facebookLblError.setForeground(Color.RED);
 		GridBagConstraints gbc_facebookLblbError = new GridBagConstraints();
 		gbc_facebookLblbError.anchor = GridBagConstraints.WEST;
 		gbc_facebookLblbError.insets = new Insets(0, 0, 5, 0);
 		gbc_facebookLblbError.gridx = 1;
 		gbc_facebookLblbError.gridy = 15;
-		centerGrid.add(facebookLblbError, gbc_facebookLblbError);
+		centerGrid.add(facebookLblError, gbc_facebookLblbError);
 		
 		this.setMessagesLabel("No Contacts in the CRM");
 		
@@ -391,11 +391,11 @@ public class ContactView extends CRMView {
 	}
 	
 	public String getErrorFirstName() {
-		return firstNameLblbError.getText();
+		return firstNameLblError.getText();
 	}
 
 	public void setErrorFirstName(String errorFirstName) {
-		firstNameLblbError.setText(errorFirstName);
+		firstNameLblError.setText(errorFirstName);
 	}
 	
 	public String getErrorLasttName() {
@@ -431,22 +431,22 @@ public class ContactView extends CRMView {
 	}
 	
 	public String getErrorFacebook() {
-		return facebookLblbError.getText();
+		return facebookLblError.getText();
 	}
 
 	public void setErrorFacebook(String errorFacebok) {
-		facebookLblbError.setText(errorFacebok);
+		facebookLblError.setText(errorFacebok);
 	}
 	
 	public void clearFieldErrors() {
 		idLblError.setText("");
-		firstNameLblbError.setText("");
+		firstNameLblError.setText("");
 		lastNameLblError.setText("");
 		companyLblError.setText("");
 		clientLblError.setText("");
 		telephoneLblError.setText("");
 		emailLblError.setText("");
-		facebookLblbError.setText("");
+		facebookLblError.setText("");
 	}
 	
 	public void enableEditMode() { 
@@ -503,9 +503,10 @@ public class ContactView extends CRMView {
 		textFirstName.setText("");
 		textLastName.setText("");
 		textCompany.setText("");
-		comboBoxClient.setSelectedIndex(0);
+		if (comboBoxClient.getItemCount() > 0) { comboBoxClient.setSelectedIndex(0); }
 		textTelephone.setText("");
 		textEmail.setText("");
 		textFacebook.setText("");
+		clearFieldErrors();
 	}
 }

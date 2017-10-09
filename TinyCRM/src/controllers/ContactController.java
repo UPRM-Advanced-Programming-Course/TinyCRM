@@ -68,6 +68,7 @@ public class ContactController extends CRMController {
 	}
 
 	public void validateForm() throws InvalidFormFieldData {
+		getValidationErrors().clear();
 		validateFirstName();
 		validateLastName();
 		validateCompany();

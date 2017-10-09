@@ -107,6 +107,9 @@ public abstract class CRMController {
 		System.out.println("CRMController.doLeft()");
 		if (getModel().getIndex() > 0) {
 			this.getModel().doLeft();
+			if (model.getCount() > 0) {
+				view.beanToForm(model.getCurrentBean());
+			}
 		}
 		this.refreshView(emptyErrors);
 	};
@@ -114,6 +117,9 @@ public abstract class CRMController {
 	public void doRight() {
 		System.out.println("CRMController.doRight()");
 		this.getModel().doRight();
+		if (model.getCount() > 0) {
+			view.beanToForm(model.getCurrentBean());
+		}
 		this.refreshView(emptyErrors);
 	};
 
@@ -129,6 +135,7 @@ public abstract class CRMController {
 		System.out.println("CRMController.doAdd()");
 		this.getModel().doAdd();
 		currentBeanIsNew = true;
+		view.beanToForm(model.getCurrentBean());
 		this.doEdit();
 		view.setMessagesLabel("Edit Current Record and Click Save or Cancel");
 	};
@@ -139,7 +146,12 @@ public abstract class CRMController {
 		System.out.println("Sure to Delete =" + sureToDelete);
 		if (sureToDelete == 0) {
 			this.getModel().doDelete();
-			if (model.getCount() == 0)  view.clearForm();
+			if (model.getCount() == 0) {
+				view.clearForm();
+			}
+			else {
+				view.beanToForm(model.getCurrentBean());
+			}
 			this.refreshView(emptyErrors);
 			view.setMessagesLabel("Record Deleted Successfully");
 		}
@@ -152,7 +164,6 @@ public abstract class CRMController {
 	public void doSave() {
 		System.out.println("CRMController.doSave()");
 		// Validate form data
-		ArrayList<String> errors = emptyErrors;
 		view.clearFieldErrors();
 		try {
 			validateForm();
@@ -164,28 +175,25 @@ public abstract class CRMController {
 			view.setMessagesLabel("Record Saved Successfully");
 		}
 		catch (InvalidFormFieldData e) {
-			this.refreshView(errors);
+			this.refreshView(emptyErrors);
 		}
 	};
 
 	public void doCancel() {
-		ArrayList<String> errors = new ArrayList<String>();
 		System.out.println("CRMController.doCancel()");
-		// Validate form data
-		//		errors = validateForm();
 		view.disableEditMode();
 		this.getModel().doCancel();
-		if (errors.size() > 0) {
-			this.getModel().doDelete();
-		}
 		if (currentBeanIsNew) {
-			view.clearForm();
 			this.getModel().doDelete();
 		}
-		else {
+		if (model.getCount() > 0) {
 			view.beanToForm(model.getCurrentBean());
 		}
-		this.refreshView(errors);
+		else {
+			view.clearForm();
+		}
+		validationErrors.clear();
+		this.refreshView(emptyErrors);
 	}
 
 	public void doSelectModule() {
@@ -204,10 +212,10 @@ public abstract class CRMController {
 
 	public void refreshView(ArrayList<String> errors) {
 		System.out.println("Refreshing View Info");
-		if (model.getCount() > 0) {
-			this.getView().beanToForm(this.getModel().getCurrentBean());
-		}
-		this.getView().updateIndexCount(this.getModel().getIndex(), this.getModel().getCount());
+//		if (model.getCount() > 0) {
+//			this.getView().beanToForm(this.getModel().getCurrentBean());
+//		}
+		view.updateIndexCount(model.getIndex(), model.getCount());
 		view.disableLeftButton();
 		view.disableRightButton();
 		view.disableEditButton();
