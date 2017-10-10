@@ -54,7 +54,7 @@ public abstract class CRMView extends JFrame {
 	private JLabel tinyCRMLabel;
 
 	public CRMView() {
-		setResizable(false);
+		setTitle("TinyCRM");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 633, 450);
 		rootPane = new JPanel();
