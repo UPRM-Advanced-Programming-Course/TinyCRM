@@ -51,11 +51,12 @@ public abstract class CRMView extends JFrame {
 	private JButton saveButton;
 	private JButton cancelButton;
 	private JComboBox moduleComboBox;
+	private JLabel tinyCRMLabel;
 
 	public CRMView() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 633, 560);
+		setBounds(100, 100, 633, 450);
 		rootPane = new JPanel();
 		rootPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(rootPane);
@@ -64,11 +65,11 @@ public abstract class CRMView extends JFrame {
 		JPanel topPanel = new JPanel();
 		rootPane.add(topPanel, BorderLayout.NORTH);
 		topPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-
-		Component verticalStrut = Box.createVerticalStrut(20);
-		topPanel.add(verticalStrut);
-		verticalStrut.setPreferredSize(new Dimension(0, 18));
-		verticalStrut.setMinimumSize(new Dimension(0, 18));
+		
+		tinyCRMLabel = new JLabel("TinyCRM");
+		tinyCRMLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 22));
+		tinyCRMLabel.setForeground(new Color(0, 128, 0));
+		topPanel.add(tinyCRMLabel);
 
 		moduleComboBox = new JComboBox<String>();
 		topPanel.add(moduleComboBox);
