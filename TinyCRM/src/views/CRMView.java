@@ -11,6 +11,7 @@ import java.awt.event.MouseAdapter;
 
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -20,9 +21,6 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import beans.CRMBean;
-import main.CRMMain;
-import java.awt.event.ActionEvent;
-import javax.swing.ImageIcon;
 
 public abstract class CRMView extends JFrame {
 
@@ -52,7 +50,7 @@ public abstract class CRMView extends JFrame {
 	private JButton deleteButton;
 	private JButton saveButton;
 	private JButton cancelButton;
-	private JComboBox moduleComboBox;
+	private JComboBox<String> moduleComboBox;
 	private JLabel tinyCRMLabel;
 
 	public CRMView() {
@@ -215,7 +213,7 @@ public abstract class CRMView extends JFrame {
 	}
 
 	public void setModuleComboBoxModel(String[] modules) {
-		moduleComboBox.setModel(new DefaultComboBoxModel(modules));
+		moduleComboBox.setModel(new DefaultComboBoxModel<String>(modules));
 	}
 
 	public void setModuleComboBoxListener(ActionListener listener) {

@@ -1,6 +1,5 @@
 package controllers;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 import exceptions.InvalidFormFieldData;
@@ -87,8 +86,8 @@ public class ClientController extends CRMController {
 		}
 	}
 	
-	public void refreshView(ArrayList<String> errors) {
-		super.refreshView(errors);
+	public void refreshView() {
+		super.refreshView();
 		String errorString = "";
 		ClientView cv = (ClientView) getView();
 		cv.clearFieldErrors();
@@ -104,9 +103,6 @@ public class ClientController extends CRMController {
 		cv.setMessagesLabel(errorString);
 	}
 
-	
-
-	
 	public void refreshDropdowns() {}
 	
 }

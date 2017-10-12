@@ -2,7 +2,6 @@ package controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Map;
 
 import exceptions.InvalidFormFieldData;
@@ -13,8 +12,6 @@ import views.CRMView;
 import views.ContactView;
 
 public class ContactController extends CRMController {
-
-	private static final ArrayList<String> emptyErrors = new ArrayList<String>();
 
 	public ContactController(CRMView view, CRMModel model) {
 		super(view, model);
@@ -64,7 +61,7 @@ public class ContactController extends CRMController {
 	}
 
 	public void doSelectClient() {
-		this.refreshView(emptyErrors);
+		this.refreshView();
 	}
 
 	public void validateForm() throws InvalidFormFieldData {
@@ -121,8 +118,8 @@ public class ContactController extends CRMController {
 		cv.setComboBoxClientItems(CRMMain.clientModel.getAllBeans());
 	}
 
-	public void refreshView(ArrayList<String> errors) {
-		super.refreshView(errors);
+	public void refreshView() {
+		super.refreshView();
 		String errorString = "";
 		ContactView cv = (ContactView) getView();
 		cv.clearFieldErrors();

@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,8 +20,6 @@ public abstract class CRMController {
 	private CRMView view;
 
 	private Map<String, String> validationErrors = new HashMap<String, String>();
-
-	private static final ArrayList<String> emptyErrors = new ArrayList<String>();
 
 	private boolean currentBeanIsNew = false;
 
@@ -82,7 +79,7 @@ public abstract class CRMController {
 			}
 		});
 
-		refreshView(emptyErrors);
+		refreshView();
 		view.setMessagesLabel("Welcome to TinyCRM: Contacts");
 
 	}
@@ -111,7 +108,7 @@ public abstract class CRMController {
 				view.beanToForm(model.getCurrentBean());
 			}
 		}
-		this.refreshView(emptyErrors);
+		this.refreshView();
 	};
 
 	public void doRight() {
@@ -120,14 +117,14 @@ public abstract class CRMController {
 		if (model.getCount() > 0) {
 			view.beanToForm(model.getCurrentBean());
 		}
-		this.refreshView(emptyErrors);
+		this.refreshView();
 	};
 
 	public void doEdit() {
 		System.out.println("CRMController.doEdit()");
 		view.enableEditMode();
 		this.getModel().doEdit();		
-		this.refreshView(emptyErrors);
+		this.refreshView();
 		view.setMessagesLabel("Edit Current Record and Click Save or Cancel");
 	};
 
@@ -152,11 +149,11 @@ public abstract class CRMController {
 			else {
 				view.beanToForm(model.getCurrentBean());
 			}
-			this.refreshView(emptyErrors);
+			this.refreshView();
 			view.setMessagesLabel("Record Deleted Successfully");
 		}
 		else {
-			this.refreshView(emptyErrors);
+			this.refreshView();
 			view.setMessagesLabel("Record Not Deleted");
 		}
 	};
@@ -171,11 +168,11 @@ public abstract class CRMController {
 			this.getModel().doSave();
 			currentBeanIsNew = false;
 			view.disableEditMode();
-			this.refreshView(emptyErrors);
+			this.refreshView();
 			view.setMessagesLabel("Record Saved Successfully");
 		}
 		catch (InvalidFormFieldData e) {
-			this.refreshView(emptyErrors);
+			this.refreshView();
 		}
 	};
 
@@ -193,12 +190,12 @@ public abstract class CRMController {
 			view.clearForm();
 		}
 		validationErrors.clear();
-		this.refreshView(emptyErrors);
+		this.refreshView();
 	}
 
 	public void doSelectModule() {
 		String selection = view.getModuleSelected();
-		this.refreshView(emptyErrors);
+		this.refreshView();
 		CRMMain.switchToModule(selection);
 		//		if (!selection.equals("Contacts")) {
 		//			view.setMessagesLabel(selection + " Module Not Available Yet");
@@ -210,7 +207,7 @@ public abstract class CRMController {
 		//		}
 	}
 
-	public void refreshView(ArrayList<String> errors) {
+	public void refreshView() {
 		System.out.println("Refreshing View Info");
 //		if (model.getCount() > 0) {
 //			this.getView().beanToForm(this.getModel().getCurrentBean());
