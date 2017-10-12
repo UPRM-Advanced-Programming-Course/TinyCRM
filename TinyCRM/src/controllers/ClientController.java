@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import exceptions.InvalidFormFieldData;
 import models.CRMModel;
@@ -44,55 +45,67 @@ public class ClientController extends CRMController {
 	}
 
 	public void validateForm() throws InvalidFormFieldData {
-		ArrayList<String> errors = new ArrayList<String>();
-		String error;
-		error = validateCompany();
-		if (error != null) errors.add(error);
-		error = validateTelephone();
-		if (error != null) errors.add(error);
-		error = validateEmail();
-		if (error != null) errors.add(error);
-		error = validateWebsite();
-		if (error != null) errors.add(error);
-		error = validateFacebook();
-		if (error != null) errors.add(error);
+		getValidationErrors().clear();
+		validateCompany();
+		validateTelephone();
+		validateEmail();
+		validateWebsite();
+		validateFacebook();
+		if (getValidationErrors().size() > 0)
+			throw new InvalidFormFieldData ("Invalid Form");
 	}
 
-	public String validateCompany() {
+	public void validateCompany() {
 		ClientView view = (ClientView) getView();
-		if (view.getTextCompany().length() == 0) {
-			return "Empty Company";
+		if (view.getTextCompany().trim().length() == 0) {
+			addValidationError("Company", "Empty Company. Required Field.");
 		}
-		return null;
-	}	
-	public String validateTelephone() {
-		ClientView view = (ClientView) getView();
-		if (view.getTextTelephone().length() == 0) {
-			return "Empty Telephone";
-		}
-		return null;
 	}
-	public String validateEmail() {
+	
+	public void validateTelephone() {
 		ClientView view = (ClientView) getView();
-		if (view.getTextEmail().length() == 0) {
-			return "Empty Email";
+		if (view.getTextTelephone().trim().length() == 0) {
+			addValidationError("Telephone", "Empty Telephone. Required Field.");
 		}
-		return null;
 	}
-	public String validateWebsite() {
+	public void validateEmail() {
 		ClientView view = (ClientView) getView();
-		if (view.getTextWebsite().length() == 0) {
-			return "Empty Website";
+		if (view.getTextEmail().trim().length() == 0) {
+			addValidationError("Email", "Empty Email. Required Field.");
 		}
-		return null;
 	}
-	public String validateFacebook() {
+	public void validateWebsite() {
 		ClientView view = (ClientView) getView();
-		if (view.getTextFacebook().length() == 0) {
-			return "Empty Facebook";
+		if (view.getTextWebsite().trim().length() == 0) {
+			addValidationError("Website", "Empty Website. Required Field.");
 		}
-		return null;
 	}
+	public void validateFacebook() {
+		ClientView view = (ClientView) getView();
+		if (view.getTextFacebook().trim().length() == 0) {
+			addValidationError("Facebook", "Empty Facebook. Required Field.");
+		}
+	}
+	
+	public void refreshView(ArrayList<String> errors) {
+		super.refreshView(errors);
+		String errorString = "";
+		ClientView cv = (ClientView) getView();
+		cv.clearFieldErrors();
+		Map<String, String> validationErrors = getValidationErrors();
+		if (validationErrors.size() > 0) {
+			errorString = "Fields in red are invalid";
+			if (validationErrors.containsKey("Company")) { cv.setErrorCompany(validationErrors.get("Company")); }
+			if (validationErrors.containsKey("Telephone")) { cv.setErrorTelephone(validationErrors.get("Telephone")); }
+			if (validationErrors.containsKey("Email")) { cv.setErrorEmail(validationErrors.get("Email")); }
+			if (validationErrors.containsKey("Website")) { cv.setErrorWebsite(validationErrors.get("Website")); }
+			if (validationErrors.containsKey("Facebook")) { cv.setErrorFacebook(validationErrors.get("Facebook")); }
+		}
+		cv.setMessagesLabel(errorString);
+	}
+
+	
+
 	
 	public void refreshDropdowns() {}
 	

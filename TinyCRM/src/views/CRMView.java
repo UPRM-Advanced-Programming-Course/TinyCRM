@@ -21,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 
 import beans.CRMBean;
 import main.CRMMain;
+import java.awt.event.ActionEvent;
 
 public abstract class CRMView extends JFrame {
 

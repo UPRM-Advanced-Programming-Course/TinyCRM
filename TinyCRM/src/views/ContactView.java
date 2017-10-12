@@ -34,21 +34,14 @@ public class ContactView extends CRMView {
 	private JTextField textEmail;
 	private JTextField textFacebook;
 
-	private JLabel firstNameLblError;
-
-	private JLabel lastNameLblError;
-
-	private JLabel companyLblError;
-
-	private JLabel clientLblError;
-
-	private JLabel telephoneLblError;
-
-	private JLabel emailLblError;
-
-	private JLabel facebookLblError;
-
 	private JLabel idLblError;
+	private JLabel firstNameLblError;
+	private JLabel lastNameLblError;
+	private JLabel companyLblError;
+	private JLabel clientLblError;
+	private JLabel telephoneLblError;
+	private JLabel emailLblError;
+	private JLabel facebookLblError;
 
 	/**
 	 * Create the frame.
@@ -438,17 +431,6 @@ public class ContactView extends CRMView {
 		facebookLblError.setText(errorFacebok);
 	}
 	
-	public void clearFieldErrors() {
-		idLblError.setText("");
-		firstNameLblError.setText("");
-		lastNameLblError.setText("");
-		companyLblError.setText("");
-		clientLblError.setText("");
-		telephoneLblError.setText("");
-		emailLblError.setText("");
-		facebookLblError.setText("");
-	}
-	
 	public void enableEditMode() { 
 		super.enableEditMode();
 		// Make all fields editable
@@ -509,4 +491,17 @@ public class ContactView extends CRMView {
 		textFacebook.setText("");
 		clearFieldErrors();
 	}
+	
+	public void clearFieldErrors() {
+		idLblError.setText("");
+		firstNameLblError.setText("");
+		lastNameLblError.setText("");
+		companyLblError.setText("");
+		clientLblError.setText("");
+		telephoneLblError.setText("");
+		emailLblError.setText("");
+		facebookLblError.setText("");
+	}
+	
+
 }
