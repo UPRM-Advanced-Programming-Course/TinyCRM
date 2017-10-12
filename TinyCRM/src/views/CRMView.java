@@ -22,6 +22,7 @@ import javax.swing.border.EmptyBorder;
 import beans.CRMBean;
 import main.CRMMain;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
 public abstract class CRMView extends JFrame {
 
@@ -67,7 +68,9 @@ public abstract class CRMView extends JFrame {
 		rootPane.add(topPanel, BorderLayout.NORTH);
 		topPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		
-		tinyCRMLabel = new JLabel("TinyCRM");
+		tinyCRMLabel = new JLabel("");
+		tinyCRMLabel.setMaximumSize(new Dimension(57, 16));
+		tinyCRMLabel.setIcon(new ImageIcon(CRMView.class.getResource("/images/TinyCRMLogo.png")));
 		tinyCRMLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 22));
 		tinyCRMLabel.setForeground(new Color(0, 128, 0));
 		topPanel.add(tinyCRMLabel);
