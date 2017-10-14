@@ -7,20 +7,21 @@ import java.util.Map;
 import exceptions.InvalidFormFieldData;
 import main.CRMMain;
 import models.CRMModel;
+import models.ClientModel;
 import models.ContactModel;
 import views.CRMView;
 import views.ContactView;
 
 public class ContactController extends CRMController {
 
-	public ContactController(CRMView view, CRMModel model) {
-		super(view, model);
+	public ContactController(CRMView contactView, CRMModel contactModel, CRMModel clientModel) {
+		super(contactView, contactModel);
 
+		ContactView cv = (ContactView) contactView;
+		ContactModel cm = (ContactModel) contactModel;
+		ClientModel clientModel2 = (ClientModel) clientModel;
 
-		ContactView cv = (ContactView) view;
-		ContactModel cm = (ContactModel) model;
-
-		cv.setComboBoxClientItems(cm.getAllBeans());
+		cv.setComboBoxClientItems(clientModel2.getAllBeans());
 		cv.clearFieldErrors();
 		cv.setComboBoxClientListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

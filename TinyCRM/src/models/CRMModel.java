@@ -9,6 +9,10 @@ public abstract class CRMModel {
 	private ArrayList<CRMBean> list = new ArrayList<CRMBean>();
 	private int index =-1; // Empty list
 
+	public void doInit() {
+		
+	}
+	
 	public void doLeft() {
 		System.out.println("CRMModel.doLeft()");
 		this.setIndex(Math.max(this.getIndex()-1, 0));
@@ -56,5 +60,9 @@ public abstract class CRMModel {
 	public void setIndex(int index) { this.index = index; }
 	
 	public void add(CRMBean b) { list.add(b); }
-
+	
+	public ArrayList<CRMBean> getList() {
+		return list;
+	}
+	
 }

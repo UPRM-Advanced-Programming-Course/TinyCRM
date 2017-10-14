@@ -15,13 +15,13 @@ import views.ContactView;
 
 public class CRMMain {
 
-	public static CRMView contactView = new ContactView();
-	public static CRMModel contactModel = new ContactModel();
-	public static CRMController contactController = new ContactController(contactView, contactModel);
-
 	public static CRMView clientView = new ClientView();
 	public static CRMModel clientModel = new ClientModel();
 	public static CRMController clientController = new ClientController(clientView, clientModel);
+
+	public static CRMView contactView = new ContactView();
+	public static CRMModel contactModel = new ContactModel();
+	public static CRMController contactController = new ContactController(contactView, contactModel, clientModel);
 
 	private static String currentModule = "Contacts";
 	private static CRMView currentView = contactView;
@@ -30,6 +30,8 @@ public class CRMMain {
 	public static HashMap<String,Integer> mapModuleToIndex = new HashMap<String,Integer>();
 
 	public static void main (String[] args) {
+		
+		contactController.doInit();
 
 		// Map each module name to its corresponding view
 		mapModuleToView.put("Contacts", contactView);
@@ -39,7 +41,7 @@ public class CRMMain {
 		mapModuleToIndex.put("Clients", 1);
 		
 		switchToModule("Contacts");
-
+		
 	}
 
 	public static void switchToModule(String module) {

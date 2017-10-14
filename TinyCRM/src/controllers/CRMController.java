@@ -99,6 +99,11 @@ public abstract class CRMController {
 	public void setView(CRMView view) {
 		this.view = view;
 	}
+	
+	public void doInit() {
+		model.doInit();
+		view.beanToForm(model.getCurrentBean());
+	}
 
 	public void doLeft() {
 		System.out.println("CRMController.doLeft()");
