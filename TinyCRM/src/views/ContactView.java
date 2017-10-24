@@ -297,7 +297,7 @@ public class ContactView extends CRMView {
 		gbc_facebookLblbError.gridy = 15;
 		centerGrid.add(facebookLblError, gbc_facebookLblbError);
 		
-		this.setMessagesLabel("No Contacts in the CRM");
+		this.setMessagesText("No Contacts in the CRM");
 		
 	}
 	
