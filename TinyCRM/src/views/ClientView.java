@@ -232,7 +232,7 @@ public class ClientView extends CRMView {
 		gbc_facebookLblError.gridy = 11;
 		centerGrid.add(facebookLblError, gbc_facebookLblError);
 		
-		this.setMessagesLabel("No Clients in the CRM");
+		this.setMessagesText("No Clients in the CRM");
 		
 	}
 	

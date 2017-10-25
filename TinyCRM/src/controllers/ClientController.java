@@ -100,7 +100,7 @@ public class ClientController extends CRMController {
 			if (validationErrors.containsKey("Website")) { cv.setErrorWebsite(validationErrors.get("Website")); }
 			if (validationErrors.containsKey("Facebook")) { cv.setErrorFacebook(validationErrors.get("Facebook")); }
 		}
-		cv.setMessagesLabel(errorString);
+		cv.setMessagesText(errorString);
 	}
 
 	public void refreshDropdowns() {}

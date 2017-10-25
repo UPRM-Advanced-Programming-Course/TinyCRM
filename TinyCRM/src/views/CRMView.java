@@ -124,28 +124,28 @@ public abstract class CRMView extends JFrame {
 		rootPane.add(horizontalStrut_3, BorderLayout.EAST);
 	}
 
-	public JPanel getCenterPanel() {
+	protected JPanel getCenterPanel() {
 		return centerPanel;
 	}
 
-	public void setCenterPanel(JPanel centerPanel) {
+	protected void setCenterPanel(JPanel centerPanel) {
 		this.centerPanel = centerPanel;
 		getContentPane().add(centerPanel, BorderLayout.CENTER);
 	}
 
-	public JLabel getIndexCountLabel() {
+	protected JLabel getIndexCountLabel() {
 		return indexCountLabel;
 	}
 
-	public void setIndexCountLabel(JLabel indexCountLabel) {
+	protected void setIndexCountLabel(JLabel indexCountLabel) {
 		this.indexCountLabel = indexCountLabel;
 	}
 
-	public String getMessagesLabel() {
+	protected String getMessagesText() {
 		return messagesLabel.getText();
 	}
 
-	public void setMessagesLabel(String text) {
+	public void setMessagesText(String text) {
 		this.messagesLabel.setText(text);
 	}
 

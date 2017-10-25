@@ -134,7 +134,7 @@ public class ContactController extends CRMController {
 			if (validationErrors.containsKey("Email")) { cv.setErrorEmail(validationErrors.get("Email")); }
 			if (validationErrors.containsKey("Facebook")) { cv.setErrorFacebook(validationErrors.get("Facebook")); }
 		}
-		cv.setMessagesLabel(errorString);
+		cv.setMessagesText(errorString);
 	}
 
 }

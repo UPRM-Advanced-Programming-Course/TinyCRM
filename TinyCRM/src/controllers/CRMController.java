@@ -80,7 +80,7 @@ public abstract class CRMController {
 		});
 
 		refreshView();
-		view.setMessagesLabel("Welcome to TinyCRM: Contacts");
+		view.setMessagesText("Welcome to TinyCRM: Contacts");
 
 	}
 
@@ -130,7 +130,7 @@ public abstract class CRMController {
 		view.enableEditMode();
 		this.getModel().doEdit();		
 		this.refreshView();
-		view.setMessagesLabel("Edit Current Record and Click Save or Cancel");
+		view.setMessagesText("Edit Current Record and Click Save or Cancel");
 	};
 
 	public void doAdd() {
@@ -139,7 +139,7 @@ public abstract class CRMController {
 		currentBeanIsNew = true;
 		view.beanToForm(model.getCurrentBean());
 		this.doEdit();
-		view.setMessagesLabel("Edit Current Record and Click Save or Cancel");
+		view.setMessagesText("Edit Current Record and Click Save or Cancel");
 	};
 
 	public void doDelete() {
@@ -155,11 +155,11 @@ public abstract class CRMController {
 				view.beanToForm(model.getCurrentBean());
 			}
 			this.refreshView();
-			view.setMessagesLabel("Record Deleted Successfully");
+			view.setMessagesText("Record Deleted Successfully");
 		}
 		else {
 			this.refreshView();
-			view.setMessagesLabel("Record Not Deleted");
+			view.setMessagesText("Record Not Deleted");
 		}
 	};
 
@@ -168,13 +168,13 @@ public abstract class CRMController {
 		// Validate form data
 		view.clearFieldErrors();
 		try {
-			validateForm();
+			this.validateForm();
 			view.formToBean(model.getCurrentBean());
 			this.getModel().doSave();
 			currentBeanIsNew = false;
 			view.disableEditMode();
 			this.refreshView();
-			view.setMessagesLabel("Record Saved Successfully");
+			view.setMessagesText("Record Saved Successfully");
 		}
 		catch (InvalidFormFieldData e) {
 			this.refreshView();
