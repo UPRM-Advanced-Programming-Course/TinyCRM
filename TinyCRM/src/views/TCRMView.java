@@ -28,8 +28,6 @@ public interface TCRMView {
 	void setSaveButtonListener(Runnable listener);
 	void setCancelButtonListener(Runnable listener);
 	
-	//TODO: Add module selector setter/getter/listener
-
 	void enableLeftButton();
 	void enableRightButton();
 	void enableEditButton();
