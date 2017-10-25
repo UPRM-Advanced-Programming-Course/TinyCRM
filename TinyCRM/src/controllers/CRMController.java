@@ -1,9 +1,5 @@
 package controllers;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,72 +8,68 @@ import javax.swing.JOptionPane;
 import exceptions.InvalidFormFieldData;
 import main.CRMMain;
 import models.CRMModel;
-import views.CRMView;
+import views.TCRMView;
 
 public abstract class CRMController {
 
 	private CRMModel model;
-	private CRMView view;
+	private TCRMView view;
 
 	private Map<String, String> validationErrors = new HashMap<String, String>();
 
 	private boolean currentBeanIsNew = false;
 
-	public CRMController(CRMView crmView, CRMModel crmModel) {
+	public CRMController(TCRMView crmView, CRMModel crmModel) {
 		this.view = crmView;
 		this.model = crmModel;
 
-		this.view.setModuleComboBoxListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Combo Box Selected");
-				doSelectModule();
-			}
-		});
+		this.view.setModuleSelectionListener(() -> doSelectModule());
 
-		this.view.setModuleComboBoxModel(new String[] {"Contacts", "Clients", "Opportunities", "Reports"});
+//		this.view.setLeftButtonListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				doLeft();
+//			}
+//		});
+		
+		this.view.setLeftButtonListener(()   -> doLeft());
+		this.view.setRightButtonListener(()  -> doRight());
+		this.view.setEditButtonListener(()   -> doEdit());
+		this.view.setAddButtonListener(()    -> doAdd());
+		this.view.setDeleteButtonListener(() -> doDelete());
+		this.view.setSaveButtonListener(()   -> doSave());
+		this.view.setCancelButtonListener(() -> doCancel());
 
-		this.view.setLeftAdapter(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				doLeft();
-			}
-		});
-		this.view.setRightAdapter(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				doRight();
-			}
-		});
-		this.view.setEditAdapter(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				doEdit();
-			}
-		});
-		this.view.setAddAdapter(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				doAdd();
-			}
-		});
-		this.view.setDeleteAdapter(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				doDelete();
-			}
-		});
-		this.view.setSaveAdapter(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				doSave();
-			}
-		});
-		this.view.setCancelAdapter(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				doCancel();
-			}
-		});
+//		this.view.setEditButtonListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				doEdit();
+//			}
+//		});
+//		this.view.setAddButtonListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				doAdd();
+//			}
+//		});
+//		this.view.setDeleteButtonListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				doDelete();
+//			}
+//		});
+//		this.view.setSaveButtonListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				doSave();
+//			}
+//		});
+//		this.view.setCancelButtonListener(new MouseAdapter() {
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				doCancel();
+//			}
+//		});
 
 		refreshView();
 		view.setMessagesText("Welcome to TinyCRM: Contacts");
@@ -92,11 +84,11 @@ public abstract class CRMController {
 		this.model = model;
 	}
 
-	public CRMView getView() {
+	public TCRMView getView() {
 		return view;
 	}
 
-	public void setView(CRMView view) {
+	public void setView(TCRMView view) {
 		this.view = view;
 	}
 	
@@ -212,7 +204,7 @@ public abstract class CRMController {
 		//		}
 	}
 
-	public void refreshView() {
+	protected void refreshView() {
 		System.out.println("Refreshing View Info");
 //		if (model.getCount() > 0) {
 //			this.getView().beanToForm(this.getModel().getCurrentBean());

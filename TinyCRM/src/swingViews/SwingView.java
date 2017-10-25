@@ -1,4 +1,4 @@
-package views;
+package swingViews;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -6,8 +6,10 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
@@ -21,8 +23,9 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import beans.CRMBean;
+import views.TCRMView;
 
-public abstract class CRMView extends JFrame {
+public abstract class SwingView extends JFrame implements TCRMView {
 
 	private static final long serialVersionUID = 1L;
 
@@ -35,14 +38,6 @@ public abstract class CRMView extends JFrame {
 
 	private boolean editMode = false;
 
-	private MouseAdapter leftAdapter;
-	private MouseAdapter rightAdapter;
-	private MouseAdapter editAdapter;
-	private MouseAdapter addAdapter;
-	private MouseAdapter deleteAdapter;
-	private MouseAdapter saveAdapter;
-	private MouseAdapter cancelAdapter;
-
 	private JButton leftButton;
 	private JButton rightButton;
 	private JButton editButton;
@@ -53,7 +48,7 @@ public abstract class CRMView extends JFrame {
 	private JComboBox<String> moduleComboBox;
 	private JLabel tinyCRMLabel;
 
-	public CRMView() {
+	public SwingView() {
 		setTitle("TinyCRM");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 633, 450);
@@ -68,7 +63,7 @@ public abstract class CRMView extends JFrame {
 		
 		tinyCRMLabel = new JLabel("");
 		tinyCRMLabel.setMaximumSize(new Dimension(57, 16));
-		tinyCRMLabel.setIcon(new ImageIcon(CRMView.class.getResource("/images/TinyCRMLogo.png")));
+		tinyCRMLabel.setIcon(new ImageIcon(SwingView.class.getResource("/images/TinyCRMLogo.png")));
 		tinyCRMLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 22));
 		tinyCRMLabel.setForeground(new Color(0, 128, 0));
 		topPanel.add(tinyCRMLabel);
@@ -145,125 +140,157 @@ public abstract class CRMView extends JFrame {
 		return messagesLabel.getText();
 	}
 
+	@Override
 	public void setMessagesText(String text) {
 		this.messagesLabel.setText(text);
 	}
 
-	public MouseAdapter getLeftAdapter() {
-		return leftAdapter;
+	public void setLeftButtonListener(Runnable listener) {
+		leftButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				listener.run();
+			}
+		});
 	}
 
-	public void setLeftAdapter(MouseAdapter leftAdapter) {
-		leftButton.addMouseListener(leftAdapter);
-		this.leftAdapter = leftAdapter;
+	@Override
+	public void setRightButtonListener(Runnable listener) {
+		rightButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				listener.run();
+			}
+		});
 	}
 
-	public MouseAdapter getRightAdapter() {
-		return rightAdapter;
+	public void setEditButtonListener(Runnable listener) {
+		editButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				listener.run();
+			}
+		});
 	}
 
-	public void setRightAdapter(MouseAdapter rightAdapter) {
-		rightButton.addMouseListener(rightAdapter);
-		this.rightAdapter = rightAdapter;
+	public void setAddButtonListener(Runnable listener) {
+		addButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				listener.run();
+			}
+		});
 	}
 
-	public MouseAdapter getEditAdapter() {
-		return editAdapter;
+	public void setDeleteButtonListener(Runnable listener) {
+		deleteButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				listener.run();
+			}
+		});
 	}
 
-	public void setEditAdapter(MouseAdapter editAdapter) {
-		editButton.addMouseListener(editAdapter);
-		this.editAdapter = editAdapter;
+	public void setSaveButtonListener(Runnable listener) {
+		saveButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				listener.run();
+			}
+		});
 	}
 
-	public MouseAdapter getAddAdapter() {
-		return addAdapter;
+	public void setCancelButtonListener(Runnable listener) {
+		cancelButton.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				listener.run();
+			}
+		});
 	}
 
-	public void setAddAdapter(MouseAdapter addAdapter) {
-		addButton.addMouseListener(addAdapter);
-		this.addAdapter = addAdapter;
-	}
-
-	public MouseAdapter getDeleteAdapter() {
-		return deleteAdapter;
-	}
-
-	public void setDeleteAdapter(MouseAdapter deleteAdapter) {
-		deleteButton.addMouseListener(deleteAdapter);
-		this.deleteAdapter = deleteAdapter;
-	}
-
-	public MouseAdapter getSaveAdapter() {
-		return saveAdapter;
-	}
-
-	public void setSaveAdapter(MouseAdapter saveAdapter) {
-		saveButton.addMouseListener(saveAdapter);
-		this.saveAdapter = saveAdapter;
-	}
-
-	public MouseAdapter getCancelAdapter() {
-		return cancelAdapter;
-	}
-
-	public void setCancelAdapter(MouseAdapter cancelAdapter) {
-		cancelButton.addMouseListener(cancelAdapter);
-		this.cancelAdapter = cancelAdapter;
-	}
-
-	public void setModuleComboBoxModel(String[] modules) {
+	public void setModuleSelectionItems(String[] modules) {
 		moduleComboBox.setModel(new DefaultComboBoxModel<String>(modules));
 	}
 
-	public void setModuleComboBoxListener(ActionListener listener) {
-		moduleComboBox.addActionListener(listener);
+	public void setModuleSelectionListener(Runnable listener) {
+		moduleComboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Combo Box Selected");
+				listener.run();
+			}
+		});
 	}
 	
+	@Override
 	public String getModuleSelected() {
 		return (String) moduleComboBox.getSelectedItem();
 	}
 	
+	@Override
 	public void setModuleSelected(int index) {
 		moduleComboBox.setSelectedIndex(index);
 	}
 
+	@Override
 	public abstract void beanToForm(CRMBean bean);
+
+	@Override
 	public abstract void formToBean(CRMBean bean);
 
+	@Override
 	public void updateIndexCount(int index, int count) {
 		indexCountLabel.setText(index+1 + "/" + count);
 	}
 
+	@Override
 	public boolean inEditMode() { return editMode; }
 
-	// The following should be overriden to enable/disable editing of input components
+	@Override
 	public void enableEditMode() { editMode = true; }
+
+	@Override
 	public void disableEditMode() {editMode = false; }
 
+	@Override
 	public void enableLeftButton() { leftButton.setEnabled(true); }
+
+	@Override
 	public void disableLeftButton() { leftButton.setEnabled(false); }
 
+	@Override
 	public void enableRightButton() { rightButton.setEnabled(true); }
+
+	@Override
 	public void disableRightButton() { rightButton.setEnabled(false); }
 
+	@Override
 	public void enableEditButton() { editButton.setEnabled(true); }
+
+	@Override
 	public void disableEditButton() { editButton.setEnabled(false); }
 
+	@Override
 	public void enableAddButton() { addButton.setEnabled(true); }
+
+	@Override
 	public void disableAddButton() { addButton.setEnabled(false); }
 
+	@Override
 	public void enableDeleteButton() { deleteButton.setEnabled(true); }
+
+	@Override
 	public void disableDeleteButton() { deleteButton.setEnabled(false); }
 
+	@Override
 	public void enableSaveButton() { saveButton.setEnabled(true); }
+
+	@Override
 	public void disableSaveButton() { saveButton.setEnabled(false); }
 
+	@Override
 	public void enableCancelButton() { cancelButton.setEnabled(true); }
+
+	@Override
 	public void disableCancelButton() { cancelButton.setEnabled(false); }
 
+	@Override
 	public abstract void clearForm();
+
+	@Override
 	public abstract void clearFieldErrors();
-
-
+	
 }
