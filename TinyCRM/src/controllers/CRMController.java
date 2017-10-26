@@ -2,11 +2,11 @@ package controllers;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import javax.swing.JOptionPane;
 
 import exceptions.InvalidFormFieldData;
-import main.CRMMain;
 import models.CRMModel;
 import views.TCRMView;
 
@@ -18,19 +18,14 @@ public abstract class CRMController {
 	private Map<String, String> validationErrors = new HashMap<String, String>();
 
 	private boolean currentBeanIsNew = false;
+	
+	private Consumer<String> switchModuleListener = null;
 
 	public CRMController(TCRMView crmView, CRMModel crmModel) {
 		this.view = crmView;
 		this.model = crmModel;
 
 		this.view.setModuleSelectionListener(() -> doSelectModule());
-
-//		this.view.setLeftButtonListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				doLeft();
-//			}
-//		});
 		
 		this.view.setLeftButtonListener(()   -> doLeft());
 		this.view.setRightButtonListener(()  -> doRight());
@@ -40,39 +35,8 @@ public abstract class CRMController {
 		this.view.setSaveButtonListener(()   -> doSave());
 		this.view.setCancelButtonListener(() -> doCancel());
 
-//		this.view.setEditButtonListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				doEdit();
-//			}
-//		});
-//		this.view.setAddButtonListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				doAdd();
-//			}
-//		});
-//		this.view.setDeleteButtonListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				doDelete();
-//			}
-//		});
-//		this.view.setSaveButtonListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				doSave();
-//			}
-//		});
-//		this.view.setCancelButtonListener(new MouseAdapter() {
-//			@Override
-//			public void mouseClicked(MouseEvent e) {
-//				doCancel();
-//			}
-//		});
-
 		refreshView();
-		view.setMessagesText("Welcome to TinyCRM: Contacts");
+		//view.setMessagesText("Welcome to TinyCRM: Contacts");
 
 	}
 
@@ -189,26 +153,19 @@ public abstract class CRMController {
 		validationErrors.clear();
 		this.refreshView();
 	}
+	
+	public void setSwitchModuleListener(Consumer <String> f) {
+		switchModuleListener = f;
+	}
 
 	public void doSelectModule() {
 		String selection = view.getModuleSelected();
 		this.refreshView();
-		CRMMain.switchToModule(selection);
-		//		if (!selection.equals("Contacts")) {
-		//			view.setMessagesLabel(selection + " Module Not Available Yet");
-		//			view.setModuleSelected("Contacts");
-		//		}
-		//		else {
-		//			view.setMessagesLabel(selection + "Welcome to TinyCRM: Contacts");
-		//			view.setModuleSelected("Contacts");
-		//		}
+		switchModuleListener.accept(selection);
 	}
 
 	protected void refreshView() {
 		System.out.println("Refreshing View Info");
-//		if (model.getCount() > 0) {
-//			this.getView().beanToForm(this.getModel().getCurrentBean());
-//		}
 		view.updateIndexCount(model.getIndex(), model.getCount());
 		view.disableLeftButton();
 		view.disableRightButton();
@@ -228,14 +185,6 @@ public abstract class CRMController {
 			view.enableAddButton();
 			if (model.getCount()>0) view.enableDeleteButton();
 		}
-//		String errorString = "";
-//		Map<String,String> validationErrors = getValidationErrors();
-//		view.clearFieldErrors();
-//		if (validationErrors.size()>0) {
-//			C
-//			view.setErrorFirstName("");
-//		}
-//		view.setMessagesLabel(errorString);
 	}
 
 	public abstract void validateForm() throws InvalidFormFieldData;

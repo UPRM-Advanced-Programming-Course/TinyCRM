@@ -38,7 +38,7 @@ public abstract class CRMModel {
 	
 	public void doSave() {
 		System.out.println("CRMModel.doSave()");
-		// TODO Save records permanently in file or DB
+		// TODO: Save records permanently in file or DB
 	}
 		
 	public void doCancel() {

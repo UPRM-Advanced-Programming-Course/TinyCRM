@@ -23,8 +23,6 @@ public class CRMMain {
 	// Create Clients module MVC objects
 	public static SwingView contactView = new ContactSwingView();
 	public static CRMModel contactModel = new ContactModel();
-	
-	
 	// Contacts module has relationship with Clients module so we pass the Clients model object to the Contacts controller
 	public static CRMController contactController = new ContactController(contactView, contactModel, clientModel); 
 	
@@ -38,7 +36,6 @@ public class CRMMain {
 
 	public static void main (String[] args) {
 
-		contactController.doInit();
 		
 		contactView.setModuleSelectionItems(new String[] {"Contacts", "Clients", "Opportunities", "Reports"});
 		clientView.setModuleSelectionItems(new String[] {"Contacts", "Clients", "Opportunities", "Reports"});
@@ -48,7 +45,16 @@ public class CRMMain {
 
 		mapModuleToIndex.put("Contacts", 0);
 		mapModuleToIndex.put("Clients", 1);
+		
+		contactController.doInit();
+		contactController.setSwitchModuleListener((String s) -> CRMMain.switchToModule(s));
 
+
+		// TODO: Uncomment when Client module file storage completed
+		//clientController.doInit();
+		clientController.setSwitchModuleListener((String s) -> CRMMain.switchToModule(s));
+
+		//contactView.setModuleSelected(mapModuleToIndex.get("Contacts"));
 		switchToModule("Contacts"); // Initially open the Contacts module
 
 	}
@@ -58,32 +64,26 @@ public class CRMMain {
 		SwingView nextView = mapModuleToView.get(module);
 
 		if (nextView != null) {
-			nextView.setMessagesText(module + "Welcome to TinyCRM: " + module);
-			nextView.setModuleSelected(mapModuleToIndex.get(module));
-			//currentView.setVisible(false);
+			nextView.setMessagesText("Welcome to TinyCRM: " + module);
 
 			if (currentView != null) {
-				currentView.setMessagesText("");
-				currentView.setModuleSelected(mapModuleToIndex.get(currentModule));
 				currentView.setVisible(false);
 			}
 			
 			currentModule = module;
 			currentView = nextView;
+			
+			SwingView v = currentView;
+			
+			EventQueue.invokeLater(() -> currentView.setVisible(true));
+			
+			currentView.setModuleSelected(mapModuleToIndex.get(currentModule));
 
-			EventQueue.invokeLater(new Runnable() {
-				public void run() {
-					try {
-						currentView.setVisible(true);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			});
+
 		}
 		else {
+			//currentView.setModuleSelected(mapModuleToIndex.get(currentModule));
 			currentView.setMessagesText(module + " Module Not Available Yet");
-			currentView.setModuleSelected(mapModuleToIndex.get(currentModule));
 		}
 	}
 }

@@ -121,7 +121,7 @@ public class ContactController extends CRMController {
 
 	protected void refreshView() {
 		super.refreshView();
-		String errorString = "";
+		String errorString;
 		ContactSwingView cv = (ContactSwingView) getView();
 		cv.clearFieldErrors();
 		Map<String, String> validationErrors = getValidationErrors();
@@ -133,8 +133,8 @@ public class ContactController extends CRMController {
 			if (validationErrors.containsKey("Telephone")) { cv.setErrorTelephone(validationErrors.get("Telephone")); }
 			if (validationErrors.containsKey("Email")) { cv.setErrorEmail(validationErrors.get("Email")); }
 			if (validationErrors.containsKey("Facebook")) { cv.setErrorFacebook(validationErrors.get("Facebook")); }
+			cv.setMessagesText(errorString);
 		}
-		cv.setMessagesText(errorString);
 	}
 
 }

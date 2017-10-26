@@ -77,7 +77,7 @@ public class ContactModel extends CRMModel {
 		try {
 			ArrayList<CRMBean> contactBeans = new ArrayList<CRMBean>();
 			Scanner inputScanner = new Scanner(inputFile);
-			String headerLine = inputScanner.nextLine();  // Ignore header line
+			inputScanner.nextLine();  // Ignore header line
 			int count = 0;
 			inputScanner.useDelimiter("[\t\n]");
 			while (inputScanner.hasNextLine()) {
@@ -96,7 +96,7 @@ public class ContactModel extends CRMModel {
 				System.out.println("Next Company: " + company);
 				String client = inputScanner.next();
 				int clientId = Integer.parseInt(client);
-				newBean.setClient(new ClientBean(clientId));  // TODO Find bean in Clients model
+				newBean.setClient(new ClientBean(clientId));  // TODO: Find bean in Clients model
 				System.out.println("Next client: " + client);
 				String telephone = inputScanner.next();
 				newBean.setTelephone(telephone);
@@ -107,7 +107,7 @@ public class ContactModel extends CRMModel {
 				String facebook = inputScanner.next();
 				newBean.setFacebook(facebook);
 				System.out.println("Next Facebook: " + facebook);
-				String restOfLine = inputScanner.nextLine();  // Skip over anything left in line
+				inputScanner.nextLine();  // Skip over anything left in line
 				contactBeans.add(newBean);
 				count++;
 			}
