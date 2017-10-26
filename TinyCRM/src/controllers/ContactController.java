@@ -8,17 +8,17 @@ import exceptions.InvalidFormFieldData;
 import main.CRMMain;
 import models.CRMModel;
 import models.ClientModel;
-import models.ContactModel;
-import views.CRMView;
-import views.ContactView;
+import swingViews.ContactSwingView;
+import swingViews.SwingView;
+import views.ContactTCRMView;
 
 public class ContactController extends CRMController {
 
-	public ContactController(CRMView contactView, CRMModel contactModel, CRMModel clientModel) {
+	public ContactController(SwingView contactView, CRMModel contactModel, CRMModel clientModel) {
 		super(contactView, contactModel);
 
-		ContactView cv = (ContactView) contactView;
-		ContactModel cm = (ContactModel) contactModel;
+		ContactSwingView cv = (ContactSwingView) contactView;
+		//ContactModel cm = (ContactModel) contactModel;
 		ClientModel clientModel2 = (ClientModel) clientModel;
 
 		cv.setComboBoxClientItems(clientModel2.getAllBeans());
@@ -78,51 +78,51 @@ public class ContactController extends CRMController {
 	}
 
 	public void validateFirstName() throws InvalidFormFieldData {
-		ContactView view = (ContactView) getView();
+		ContactTCRMView view = (ContactTCRMView) getView();
 		if (view.getTextFirstName().trim().length() == 0) {
 			addValidationError("FirstName", "Empty First Name. Required Field.");
 		}
 	}
 	public void validateLastName() throws InvalidFormFieldData {
-		ContactView view = (ContactView) getView();
+		ContactTCRMView view = (ContactTCRMView) getView();
 		if (view.getTextLastName().trim().length() == 0) {
 			addValidationError("LastName", "Empty Last Name. Required Field.");
 		}
 	}	
 	public void validateCompany() throws InvalidFormFieldData {
-		ContactView view = (ContactView) getView();
+		ContactTCRMView view = (ContactTCRMView) getView();
 		if (view.getTextCompany().trim().length() == 0) {
 			addValidationError("Company", "Empty Company. Required Field.");
 		}
 	}	
 	public void validateTelephone() throws InvalidFormFieldData {
-		ContactView view = (ContactView) getView();
+		ContactTCRMView view = (ContactTCRMView) getView();
 		if (view.getTextTelephone().trim().length() == 0) {
 			addValidationError("Telephone", "Empty Telephone. Required Field.");
 		}
 	}
 	public void validateEmail() throws InvalidFormFieldData {
-		ContactView view = (ContactView) getView();
+		ContactTCRMView view = (ContactTCRMView) getView();
 		if (view.getTextEmail().trim().length() == 0) {
 			addValidationError("Email", "Empty Email. Required Field.");
 		}
 	}
 	public void validateFacebook() throws InvalidFormFieldData {
-		ContactView view = (ContactView) getView();
+		ContactTCRMView view = (ContactTCRMView) getView();
 		if (view.getTextFacebook().trim().length() == 0) {
 			addValidationError("Facebook", "Empty Facebook. Required Field.");
 		}
 	}
 
 	public void refreshDropdowns() {
-		ContactView cv = (ContactView) getView();
+		ContactTCRMView cv = (ContactTCRMView) getView();
 		cv.setComboBoxClientItems(CRMMain.clientModel.getAllBeans());
 	}
 
-	public void refreshView() {
+	protected void refreshView() {
 		super.refreshView();
 		String errorString = "";
-		ContactView cv = (ContactView) getView();
+		ContactSwingView cv = (ContactSwingView) getView();
 		cv.clearFieldErrors();
 		Map<String, String> validationErrors = getValidationErrors();
 		if (validationErrors.size() > 0) {
