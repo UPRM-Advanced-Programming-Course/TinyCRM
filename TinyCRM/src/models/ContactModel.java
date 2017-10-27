@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import beans.CRMBean;
-import beans.ClientBean;
 import beans.ContactBean;
 
 public class ContactModel extends CRMModel {
@@ -69,8 +68,6 @@ public class ContactModel extends CRMModel {
 		//super.doSave();
 		saveContactBeansCSV(CONTACTS_FILE);
 	}
-
-
 
 	public static ArrayList<CRMBean> parseBeansFromFile(String filename) {
 		File inputFile = new File(filename);

@@ -1,6 +1,7 @@
 package swingViews;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -16,11 +17,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import beans.CRMBean;
-import beans.ClientBean;
 import beans.ContactBean;
 import views.ContactTCRMView;
-
-import java.awt.Font;
 
 public class ContactSwingView extends SwingView implements ContactTCRMView {
 
@@ -49,6 +47,12 @@ public class ContactSwingView extends SwingView implements ContactTCRMView {
 		protected void setDescription(String description) {
 			this.description = description;
 		}
+		
+		// toString() called by JComboBox to obtain display text for item
+		public String toString() {
+			return description;
+		}
+		
 	}
 
 	private JTextField textId;
@@ -386,7 +390,12 @@ public class ContactSwingView extends SwingView implements ContactTCRMView {
 		this.setTextFirstName(cb.getFirstName());
 		this.setTextLastName(cb.getLastName());
 		this.setTextCompany(cb.getCompany());
-		//this.setSelectedClientIndex(cb.getClient());  // // TODO: Use bean id as reference
+		for (int i=0; i < comboBoxClient.getItemCount(); i++) {
+			ClientForComboBox item = comboBoxClient.getItemAt(i);
+			if (item.getId() == cb.getId()) {
+				this.setSelectedClientIndex(i);
+			}
+		}
 		this.setTextTelephone(cb.getTelephone());
 		this.setTextEmail(cb.getEmail());
 		this.setTextFacebook(cb.getFacebook());
@@ -398,7 +407,7 @@ public class ContactSwingView extends SwingView implements ContactTCRMView {
 		cb.setFirstName(textFirstName.getText());
 		cb.setLastName(textLastName.getText());
 		cb.setCompany(textCompany.getText());
-		//cb.setClient((ClientBean) this.getSelectedClientIndex());  // TODO: Use bean id as reference
+		cb.setClient(((ClientForComboBox) comboBoxClient.getSelectedItem()).getId());
 		cb.setTelephone(textTelephone.getText());
 		cb.setEmail(textEmail.getText());
 		cb.setFacebook(textFacebook.getText());

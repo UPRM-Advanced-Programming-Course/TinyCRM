@@ -49,9 +49,7 @@ public class CRMMain {
 		contactController.doInit();
 		contactController.setSwitchModuleListener((String s) -> CRMMain.switchToModule(s));
 
-
-		// TODO: Uncomment when Client module file storage completed
-		//clientController.doInit();
+		clientController.doInit();
 		clientController.setSwitchModuleListener((String s) -> CRMMain.switchToModule(s));
 
 		//contactView.setModuleSelected(mapModuleToIndex.get("Contacts"));

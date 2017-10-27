@@ -4,7 +4,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import beans.CRMBean;
-import beans.ClientBean;
 
 public interface ContactTCRMView extends TCRMView {
 

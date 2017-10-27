@@ -32,6 +32,7 @@ public abstract class CRMModel {
 	
 	public void doDelete() {
 		System.out.println("CRMModel.doDelete()");
+		// TODO: Verify that integrity is preserved before deleting. E.g. dangling references
 		list.remove(index);
 		index = index-1;
 	}
