@@ -234,119 +234,34 @@ public class ClientSwingView extends SwingView implements ClientTCRMView {
 		
 	}
 	
-	@Override
-	public String getTextId() {
-		return textId.getText();
-	}
+	public String getTextId()        { return textId.getText(); }
+	public String getTextCompany()   { return textCompany.getText(); }
+	public String getTextTelephone() { return textTelephone.getText(); }
+	public String getTextEmail()     { return textEmail.getText(); }
+	public String getTextWebsite()   { return textWebsite.getText(); }
+	public String getTextFacebook()  { return textFacebook.getText(); }
 
-	@Override
-	public void setTextId(String textId) {
-		this.textId.setText(textId);
-	}
+	public void setTextId(String textId)              { this.textId.setText(textId); }
+	public void setTextCompany(String textCompany)    { this.textCompany.setText(textCompany); }
+	public void setTextTelephone(String textTelephoe) { this.textTelephone.setText(textTelephoe); }
+	public void setTextEmail(String textEmail)        { this.textEmail.setText(textEmail); }
+	public void setTextWebsite(String textWebsite)    { this.textWebsite.setText(textWebsite); }
+	public void setTextFacebook(String textFacebook)  { this.textFacebook.setText(textFacebook); }
 	
-	@Override
-	public String getTextCompany() {
-		return textCompany.getText();
-	}
+	public String getErrorCompany()   { return companyLblError.getText(); }
+	public String getErrorTelephone() { return telephoneLblError.getText(); }
+	public String getErrorEmail()     { return emailLblError.getText(); }
+	public String getErrorWebsite()   { return websiteLblError.getText(); }
+	public String getErrorFacebook()  { return facebookLblError.getText(); }
 
-	@Override
-	public void setTextCompany(String textCompany) {
-		this.textCompany.setText(textCompany);
-	}
-
-	@Override
-	public String getTextTelephone() {
-		return textTelephone.getText();
-	}
-
-	@Override
-	public void setTextTelephone(String textTelephoe) {
-		this.textTelephone.setText(textTelephoe);
-	}
-
-	@Override
-	public String getTextEmail() {
-		return textEmail.getText();
-	}
-
-	@Override
-	public void setTextEmail(String textEmail) {
-		this.textEmail.setText(textEmail);
-	}
-
-	@Override
-	public String getTextWebsite() {
-		return textWebsite.getText();
-	}
-
-	@Override
-	public void setTextWebsite(String textWebsite) {
-		this.textWebsite.setText(textWebsite);
-	}
-
-	@Override
-	public String getTextFacebook() {
-		return textFacebook.getText();
-	}
-
-	@Override
-	public void setTextFacebook(String textFacebook) {
-		this.textFacebook.setText(textFacebook);
-	}
-	
-	@Override
-	public String getErrorCompany() {
-		return companyLblError.getText();
-	}
-
-	@Override
-	public void setErrorCompany(String errorCompany) {
-		companyLblError.setText(errorCompany);
-	}
-	
-	@Override
-	public String getErrorTelephone() {
-		return telephoneLblError.getText();
-	}
-
-	@Override
-	public void setErrorTelephone(String errorFirstName) {
-		telephoneLblError.setText(errorFirstName);
-	}
-	
-	@Override
-	public String getErrorEmail() {
-		return emailLblError.getText();
-	}
-
-	@Override
-	public void setErrorEmail(String errorEmail) {
-		emailLblError.setText(errorEmail);
-	}
-	
-	@Override
-	public String getErrorWebsite() {
-		return websiteLblError.getText();
-	}
-
-	@Override
-	public void setErrorWebsite(String errorWebsite) {
-		websiteLblError.setText(errorWebsite);
-	}
-	
-	@Override
-	public String getErrorFacebook() {
-		return facebookLblError.getText();
-	}
-
-	@Override
-	public void setErrorFacebook(String errorFacebook) {
-		facebookLblError.setText(errorFacebook);
-	}
+	public void setErrorCompany(String errorCompany)     { companyLblError.setText(errorCompany); }
+	public void setErrorTelephone(String errorFirstName) { telephoneLblError.setText(errorFirstName); }
+	public void setErrorEmail(String errorEmail)         { emailLblError.setText(errorEmail); }
+	public void setErrorWebsite(String errorWebsite)     { websiteLblError.setText(errorWebsite); }
+	public void setErrorFacebook(String errorFacebook)   { facebookLblError.setText(errorFacebook); }
 	
 	public void enableEditMode() { 
 		super.enableEditMode();
-		// Make all fields editable
 		//textId.setEditable(true);
 		textCompany.setEditable(true);
 		textTelephone.setEditable(true);
@@ -354,17 +269,7 @@ public class ClientSwingView extends SwingView implements ClientTCRMView {
 		textWebsite.setEditable(true);
 		textFacebook.setEditable(true);
 	}
-	public void disableEditMode() {
-		super.disableEditMode();
-		// Make all fields not editable
-		textId.setEditable(false);
-		textCompany.setEditable(false);
-		textTelephone.setEditable(false);
-		textEmail.setEditable(false);
-		textWebsite.setEditable(false);
-		textFacebook.setEditable(false);
-	}
-
+	
 	public void beanToForm(CRMBean bean) {
 		ClientBean cb = (ClientBean) bean;
 		this.setTextId(""+cb.getId());
@@ -385,6 +290,17 @@ public class ClientSwingView extends SwingView implements ClientTCRMView {
 		cb.setFacebook(textFacebook.getText());
 	}
 	
+	public void disableEditMode() {
+		super.disableEditMode();
+		// Make all fields not editable
+		textId.setEditable(false);
+		textCompany.setEditable(false);
+		textTelephone.setEditable(false);
+		textEmail.setEditable(false);
+		textWebsite.setEditable(false);
+		textFacebook.setEditable(false);
+	}
+
 	public void clearForm() {
 		textId.setText("");
 		textCompany.setText("");

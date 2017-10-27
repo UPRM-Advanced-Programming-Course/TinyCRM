@@ -3,47 +3,27 @@ package views;
 public interface ClientTCRMView extends TCRMView {
 
 	String getTextId();
-
-	void setTextId(String textId);
-
 	String getTextCompany();
-
-	void setTextCompany(String textCompany);
-
 	String getTextTelephone();
-
-	void setTextTelephone(String textTelephoe);
-
 	String getTextEmail();
-
-	void setTextEmail(String textEmail);
-
 	String getTextWebsite();
-
-	void setTextWebsite(String textWebsite);
-
 	String getTextFacebook();
-
-	void setTextFacebook(String textFacebook);
-
 	String getErrorCompany();
-
-	void setErrorCompany(String errorCompany);
-
 	String getErrorTelephone();
-
-	void setErrorTelephone(String errorFirstName);
-
 	String getErrorEmail();
-
-	void setErrorEmail(String errorEmail);
-
 	String getErrorWebsite();
-
-	void setErrorWebsite(String errorWebsite);
-
 	String getErrorFacebook();
 
+	void setTextId(String textId);
+	void setTextCompany(String textCompany);
+	void setTextTelephone(String textTelephoe);
+	void setTextEmail(String textEmail);
+	void setTextWebsite(String textWebsite);
+	void setTextFacebook(String textFacebook);
+	void setErrorCompany(String errorCompany);
+	void setErrorTelephone(String errorFirstName);
+	void setErrorEmail(String errorEmail);
+	void setErrorWebsite(String errorWebsite);
 	void setErrorFacebook(String errorFacebook);
 
 }

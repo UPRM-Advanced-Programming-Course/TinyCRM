@@ -29,12 +29,12 @@ public abstract class SwingView extends JFrame implements TCRMView {
 
 	private static final long serialVersionUID = 1L;
 
-	private JPanel rootPane;
+	private JPanel rootPanel;
 	private JPanel centerPanel;
 
 	// Dynamic Labels
-	JLabel indexCountLabel;
-	JLabel messagesLabel;
+	private JLabel indexCountLabel;
+	private JLabel messagesLabel;
 
 	private boolean editMode = false;
 
@@ -52,13 +52,13 @@ public abstract class SwingView extends JFrame implements TCRMView {
 		setTitle("TinyCRM");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 633, 450);
-		rootPane = new JPanel();
-		rootPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(rootPane);
-		rootPane.setLayout(new BorderLayout(0, 0));
+		rootPanel = new JPanel();
+		rootPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(rootPanel);
+		rootPanel.setLayout(new BorderLayout(0, 0));
 
 		JPanel topPanel = new JPanel();
-		rootPane.add(topPanel, BorderLayout.NORTH);
+		rootPanel.add(topPanel, BorderLayout.NORTH);
 		topPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		
 		tinyCRMLabel = new JLabel("");
@@ -69,22 +69,24 @@ public abstract class SwingView extends JFrame implements TCRMView {
 		topPanel.add(tinyCRMLabel);
 
 		moduleComboBox = new JComboBox<String>();
+		moduleComboBox.setMaximumSize(new Dimension(150, 27));
+		moduleComboBox.setPreferredSize(new Dimension(150, 27));
 		topPanel.add(moduleComboBox);
 		
 		messagesLabel = new JLabel("This is the messages label");
 		messagesLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		messagesLabel.setPreferredSize(new Dimension(400, 16));
-		messagesLabel.setMinimumSize(new Dimension(300, 16));
-		messagesLabel.setMaximumSize(new Dimension(300, 16));
+		messagesLabel.setPreferredSize(new Dimension(340, 16));
+		messagesLabel.setMinimumSize(new Dimension(340, 16));
+		messagesLabel.setMaximumSize(new Dimension(340, 16));
 		messagesLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
 		messagesLabel.setForeground(Color.RED);
 		topPanel.add(messagesLabel);
 
 		JPanel panel = new JPanel();
-		rootPane.add(panel, BorderLayout.CENTER);
+		rootPanel.add(panel, BorderLayout.CENTER);
 
 		JPanel bottomPanel = new JPanel();
-		rootPane.add(bottomPanel, BorderLayout.SOUTH);
+		rootPanel.add(bottomPanel, BorderLayout.SOUTH);
 		bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		leftButton = new JButton("Left");
@@ -113,10 +115,10 @@ public abstract class SwingView extends JFrame implements TCRMView {
 		bottomPanel.add(indexCountLabel);
 
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
-		rootPane.add(horizontalStrut_2, BorderLayout.WEST);
+		rootPanel.add(horizontalStrut_2, BorderLayout.WEST);
 
 		Component horizontalStrut_3 = Box.createHorizontalStrut(20);
-		rootPane.add(horizontalStrut_3, BorderLayout.EAST);
+		rootPanel.add(horizontalStrut_3, BorderLayout.EAST);
 	}
 
 	protected JPanel getCenterPanel() {
@@ -140,10 +142,43 @@ public abstract class SwingView extends JFrame implements TCRMView {
 		return messagesLabel.getText();
 	}
 
-	@Override
 	public void setMessagesText(String text) {
 		this.messagesLabel.setText(text);
 	}
+	
+	public String getModuleSelected() {
+		return (String) moduleComboBox.getSelectedItem();
+	}
+	
+	public void setModuleSelected(int index) {
+		moduleComboBox.setEnabled(false); // Avoid firing event listeners
+		moduleComboBox.setSelectedIndex(index);
+		moduleComboBox.setEnabled(true);
+	}
+	
+	public void setModuleSelectionItems(String[] modules) {
+		moduleComboBox.setModel(new DefaultComboBoxModel<String>(modules));
+	}
+
+	public void setModuleSelectionListener(Runnable listener) {
+		moduleComboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Combo Box Selected");
+				listener.run();
+			}
+		});
+	}
+
+	public abstract void beanToForm(CRMBean bean);
+	public abstract void formToBean(CRMBean bean);
+
+	public void updateIndexCount(int index, int count) {
+		indexCountLabel.setText(index+1 + "/" + count);
+	}
+
+	public boolean inEditMode() { return editMode; }
+	public void enableEditMode() { editMode = true; }
+	public void disableEditMode() {editMode = false; }
 
 	public void setLeftButtonListener(Runnable listener) {
 		leftButton.addMouseListener(new MouseAdapter() {
@@ -153,7 +188,6 @@ public abstract class SwingView extends JFrame implements TCRMView {
 		});
 	}
 
-	@Override
 	public void setRightButtonListener(Runnable listener) {
 		rightButton.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -201,96 +235,24 @@ public abstract class SwingView extends JFrame implements TCRMView {
 			}
 		});
 	}
-
-	public void setModuleSelectionItems(String[] modules) {
-		moduleComboBox.setModel(new DefaultComboBoxModel<String>(modules));
-	}
-
-	public void setModuleSelectionListener(Runnable listener) {
-		moduleComboBox.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Combo Box Selected");
-				listener.run();
-			}
-		});
-	}
 	
-	@Override
-	public String getModuleSelected() {
-		return (String) moduleComboBox.getSelectedItem();
-	}
-	
-	@Override
-	public void setModuleSelected(int index) {
-		moduleComboBox.setSelectedIndex(index);
-	}
-
-	@Override
-	public abstract void beanToForm(CRMBean bean);
-
-	@Override
-	public abstract void formToBean(CRMBean bean);
-
-	@Override
-	public void updateIndexCount(int index, int count) {
-		indexCountLabel.setText(index+1 + "/" + count);
-	}
-
-	@Override
-	public boolean inEditMode() { return editMode; }
-
-	@Override
-	public void enableEditMode() { editMode = true; }
-
-	@Override
-	public void disableEditMode() {editMode = false; }
-
-	@Override
 	public void enableLeftButton() { leftButton.setEnabled(true); }
-
-	@Override
-	public void disableLeftButton() { leftButton.setEnabled(false); }
-
-	@Override
 	public void enableRightButton() { rightButton.setEnabled(true); }
-
-	@Override
-	public void disableRightButton() { rightButton.setEnabled(false); }
-
-	@Override
 	public void enableEditButton() { editButton.setEnabled(true); }
-
-	@Override
-	public void disableEditButton() { editButton.setEnabled(false); }
-
-	@Override
 	public void enableAddButton() { addButton.setEnabled(true); }
-
-	@Override
-	public void disableAddButton() { addButton.setEnabled(false); }
-
-	@Override
 	public void enableDeleteButton() { deleteButton.setEnabled(true); }
-
-	@Override
-	public void disableDeleteButton() { deleteButton.setEnabled(false); }
-
-	@Override
 	public void enableSaveButton() { saveButton.setEnabled(true); }
-
-	@Override
-	public void disableSaveButton() { saveButton.setEnabled(false); }
-
-	@Override
 	public void enableCancelButton() { cancelButton.setEnabled(true); }
 
-	@Override
+	public void disableLeftButton() { leftButton.setEnabled(false); }
+	public void disableRightButton() { rightButton.setEnabled(false); }
+	public void disableEditButton() { editButton.setEnabled(false); }
+	public void disableAddButton() { addButton.setEnabled(false); }
+	public void disableDeleteButton() { deleteButton.setEnabled(false); }
+	public void disableSaveButton() { saveButton.setEnabled(false); }
 	public void disableCancelButton() { cancelButton.setEnabled(false); }
 
-	@Override
 	public abstract void clearForm();
-
-	@Override
 	public abstract void clearFieldErrors();
 	
 }

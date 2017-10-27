@@ -9,63 +9,39 @@ import beans.ClientBean;
 public interface ContactTCRMView extends TCRMView {
 
 	String getTextId();
-
-	void setTextId(String textId);
-
 	String getTextFirstName();
-
-	void setTextFirstName(String textFirstName);
-
 	String getTextLastName();
-
-	void setTextLastName(String textLastName);
-
 	String getTextCompany();
-
-	void setTextCompany(String textCompany);
-
-	ClientBean getSelectedComboBoxClient();
-
-	void setSelectedComboBoxClient(ClientBean b);
-
-	void setComboBoxClientItems(ArrayList<CRMBean> list);
-
-	void setComboBoxClientListener(ActionListener listener);
-
 	String getTextTelephone();
-
-	void setTextTelephone(String textTelephoe);
-
 	String getTextEmail();
-
-	void setTextEmail(String textEmail);
-
 	String getTextFacebook();
-
+	
+	void setTextId(String textId);
+	void setTextFirstName(String textFirstName);
+	void setTextLastName(String textLastName);
+	void setTextCompany(String textCompany);
+	void setTextTelephone(String textTelephoe);
+	void setTextEmail(String textEmail);
 	void setTextFacebook(String textFacebook);
 
+	// TODO: Verify MVC compliance of these methods
+	ClientBean getSelectedComboBoxClient();
+	void setSelectedComboBoxClient(ClientBean b);
+	void setComboBoxClientItems(ArrayList<CRMBean> list);
+	void setComboBoxClientListener(ActionListener listener);
+	
 	String getErrorFirstName();
-
-	void setErrorFirstName(String errorFirstName);
-
 	String getErrorLasttName();
-
-	void setErrorLastName(String errorLastName);
-
 	String getErrorCompany();
-
-	void setErrorCompany(String errorCompany);
-
 	String getErrorTelephone();
-
-	void setErrorTelephone(String errorTelephone);
-
 	String getErrorEmail();
-
-	void setErrorEmail(String errorEmail);
-
 	String getErrorFacebook();
-
+	
+	void setErrorFirstName(String errorFirstName);
+	void setErrorLastName(String errorLastName);
+	void setErrorCompany(String errorCompany);
+	void setErrorTelephone(String errorTelephone);
+	void setErrorEmail(String errorEmail);
 	void setErrorFacebook(String errorFacebok);
 
 }

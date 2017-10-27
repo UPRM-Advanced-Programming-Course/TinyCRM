@@ -66,23 +66,17 @@ public class CRMMain {
 		if (nextView != null) {
 			nextView.setMessagesText("Welcome to TinyCRM: " + module);
 
+			EventQueue.invokeLater(() -> nextView.setVisible(true));
+			
 			if (currentView != null) {
 				currentView.setVisible(false);
 			}
-			
 			currentModule = module;
 			currentView = nextView;
-			
-			SwingView v = currentView;
-			
-			EventQueue.invokeLater(() -> currentView.setVisible(true));
-			
 			currentView.setModuleSelected(mapModuleToIndex.get(currentModule));
-
-
 		}
 		else {
-			//currentView.setModuleSelected(mapModuleToIndex.get(currentModule));
+			currentView.setModuleSelected(mapModuleToIndex.get(currentModule));
 			currentView.setMessagesText(module + " Module Not Available Yet");
 		}
 	}

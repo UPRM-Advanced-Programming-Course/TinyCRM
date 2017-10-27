@@ -303,53 +303,27 @@ public class ContactSwingView extends SwingView implements ContactTCRMView {
 		
 	}
 	
-	@Override
-	public String getTextId() {
-		return textId.getText();
-	}
+	public String getTextId()        { return textId.getText(); }
+	public String getTextFirstName() { return textFirstName.getText(); }
+	public String getTextLastName()  { return textLastName.getText(); }
+	public String getTextCompany()   { return textCompany.getText(); }
+	public String getTextTelephone() { return textTelephone.getText(); }
+	public String getTextEmail()     { return textEmail.getText(); }
+	public String getTextFacebook()  { return textFacebook.getText(); }
 
-	@Override
-	public void setTextId(String textId) {
-		this.textId.setText(textId);
-	}
+	public void setTextId(String textId)               { this.textId.setText(textId); }
+	public void setTextFirstName(String textFirstName) { this.textFirstName.setText(textFirstName); }
+	public void setTextLastName(String textLastName)   { this.textLastName.setText(textLastName); }
+	public void setTextCompany(String textCompany)     { this.textCompany.setText(textCompany); }
+	public void setTextTelephone(String textTelephoe)  { this.textTelephone.setText(textTelephoe); }
+	public void setTextEmail(String textEmail)         { this.textEmail.setText(textEmail); }
+	public void setTextFacebook(String textFacebook)   { this.textFacebook.setText(textFacebook); }
 	
-	@Override
-	public String getTextFirstName() {
-		return textFirstName.getText();
-	}
-
-	@Override
-	public void setTextFirstName(String textFirstName) {
-		this.textFirstName.setText(textFirstName);
-	}
-	
-	@Override
-	public String getTextLastName() {
-		return textLastName.getText();
-	}
-
-	@Override
-	public void setTextLastName(String textLastName) {
-		this.textLastName.setText(textLastName);
-	}
-
-	@Override
-	public String getTextCompany() {
-		return textCompany.getText();
-	}
-
-	@Override
-	public void setTextCompany(String textCompany) {
-		this.textCompany.setText(textCompany);
-	}
-
-	@Override
 	public ClientBean getSelectedComboBoxClient() {
 		System.out.println("Selected Item: " + comboBoxClient.getSelectedItem());
 		return (ClientBean) comboBoxClient.getSelectedItem();
 	}
 
-	@Override
 	public void setSelectedComboBoxClient(ClientBean b) {
 		for (int i=0; i<comboBoxClient.getItemCount(); i++) {
 			ClientBean b2 = (ClientBean) comboBoxClient.getItemAt(i);
@@ -360,7 +334,6 @@ public class ContactSwingView extends SwingView implements ContactTCRMView {
 		}
 	}
 	
-	@Override
 	public void setComboBoxClientItems(ArrayList<CRMBean> list) {
 		comboBoxClient.removeAllItems();
 		for (CRMBean item : list) {
@@ -368,125 +341,23 @@ public class ContactSwingView extends SwingView implements ContactTCRMView {
 		}
 	}
 	
-	@Override
 	public void setComboBoxClientListener(ActionListener listener) {
 		comboBoxClient.addActionListener(listener);
 	}
 
-	@Override
-	public String getTextTelephone() {
-		return textTelephone.getText();
-	}
+	public String getErrorFirstName() { return firstNameLblError.getText(); }
+	public String getErrorLasttName() { return lastNameLblError.getText(); }
+	public String getErrorCompany()   { return companyLblError.getText(); }
+	public String getErrorTelephone() { return telephoneLblError.getText(); }
+	public String getErrorEmail()     { return emailLblError.getText(); }
+	public String getErrorFacebook()  { return facebookLblError.getText(); }
 
-	@Override
-	public void setTextTelephone(String textTelephoe) {
-		this.textTelephone.setText(textTelephoe);
-	}
-
-	@Override
-	public String getTextEmail() {
-		return textEmail.getText();
-	}
-
-	@Override
-	public void setTextEmail(String textEmail) {
-		this.textEmail.setText(textEmail);
-	}
-
-	@Override
-	public String getTextFacebook() {
-		return textFacebook.getText();
-	}
-
-	@Override
-	public void setTextFacebook(String textFacebook) {
-		this.textFacebook.setText(textFacebook);
-	}
-	
-	@Override
-	public String getErrorFirstName() {
-		return firstNameLblError.getText();
-	}
-
-	@Override
-	public void setErrorFirstName(String errorFirstName) {
-		firstNameLblError.setText(errorFirstName);
-	}
-	
-	@Override
-	public String getErrorLasttName() {
-		return lastNameLblError.getText();
-	}
-
-	@Override
-	public void setErrorLastName(String errorLastName) {
-		lastNameLblError.setText(errorLastName);
-	}
-	
-	@Override
-	public String getErrorCompany() {
-		return companyLblError.getText();
-	}
-
-	@Override
-	public void setErrorCompany(String errorCompany) {
-		companyLblError.setText(errorCompany);
-	}
-	
-	@Override
-	public String getErrorTelephone() {
-		return telephoneLblError.getText();
-	}
-
-	@Override
-	public void setErrorTelephone(String errorTelephone) {
-		telephoneLblError.setText(errorTelephone);
-	}
-	
-	@Override
-	public String getErrorEmail() {
-		return emailLblError.getText();
-	}
-
-	@Override
-	public void setErrorEmail(String errorEmail) {
-		emailLblError.setText(errorEmail);
-	}
-	
-	@Override
-	public String getErrorFacebook() {
-		return facebookLblError.getText();
-	}
-
-	@Override
-	public void setErrorFacebook(String errorFacebok) {
-		facebookLblError.setText(errorFacebok);
-	}
-	
-	public void enableEditMode() { 
-		super.enableEditMode();
-		// Make all fields editable
-		//textId.setEditable(true);
-		textFirstName.setEditable(true);
-		textLastName.setEditable(true);
-		textCompany.setEditable(true);
-		comboBoxClient.setEnabled(true);
-		textTelephone.setEditable(true);
-		textEmail.setEditable(true);
-		textFacebook.setEditable(true);
-	}
-	public void disableEditMode() {
-		super.disableEditMode();
-		// Make all fields not editable
-		textId.setEditable(false);
-		textFirstName.setEditable(false);
-		textLastName.setEditable(false);
-		textCompany.setEditable(false);
-		comboBoxClient.setEnabled(false);
-		textTelephone.setEditable(false);
-		textEmail.setEditable(false);
-		textFacebook.setEditable(false);
-	}
+	public void setErrorFirstName(String errorFirstName) { firstNameLblError.setText(errorFirstName); }
+	public void setErrorLastName(String errorLastName)   { lastNameLblError.setText(errorLastName); }
+	public void setErrorCompany(String errorCompany)     { companyLblError.setText(errorCompany); }
+	public void setErrorTelephone(String errorTelephone) { telephoneLblError.setText(errorTelephone); }
+	public void setErrorEmail(String errorEmail)         { emailLblError.setText(errorEmail); }
+	public void setErrorFacebook(String errorFacebok)    { facebookLblError.setText(errorFacebok); }
 
 	public void beanToForm(CRMBean bean) {
 		ContactBean cb = (ContactBean) bean;
@@ -512,6 +383,29 @@ public class ContactSwingView extends SwingView implements ContactTCRMView {
 		cb.setFacebook(textFacebook.getText());
 	}
 	
+	public void enableEditMode() { 
+		super.enableEditMode();
+		//textId.setEditable(true);
+		textFirstName.setEditable(true);
+		textLastName.setEditable(true);
+		textCompany.setEditable(true);
+		comboBoxClient.setEnabled(true);
+		textTelephone.setEditable(true);
+		textEmail.setEditable(true);
+		textFacebook.setEditable(true);
+	}
+	public void disableEditMode() {
+		super.disableEditMode();
+		textId.setEditable(false);
+		textFirstName.setEditable(false);
+		textLastName.setEditable(false);
+		textCompany.setEditable(false);
+		comboBoxClient.setEnabled(false);
+		textTelephone.setEditable(false);
+		textEmail.setEditable(false);
+		textFacebook.setEditable(false);
+	}
+
 	public void clearForm() {
 		textId.setText("");
 		textFirstName.setText("");
