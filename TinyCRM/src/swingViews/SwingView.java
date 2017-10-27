@@ -236,20 +236,20 @@ public abstract class SwingView extends JFrame implements TCRMView {
 		});
 	}
 	
-	public void enableLeftButton() { leftButton.setEnabled(true); }
-	public void enableRightButton() { rightButton.setEnabled(true); }
-	public void enableEditButton() { editButton.setEnabled(true); }
-	public void enableAddButton() { addButton.setEnabled(true); }
+	public void enableLeftButton()   { leftButton.setEnabled(true); }
+	public void enableRightButton()  { rightButton.setEnabled(true); }
+	public void enableEditButton()   { editButton.setEnabled(true); }
+	public void enableAddButton()    { addButton.setEnabled(true); }
 	public void enableDeleteButton() { deleteButton.setEnabled(true); }
-	public void enableSaveButton() { saveButton.setEnabled(true); }
+	public void enableSaveButton()   { saveButton.setEnabled(true); }
 	public void enableCancelButton() { cancelButton.setEnabled(true); }
 
-	public void disableLeftButton() { leftButton.setEnabled(false); }
-	public void disableRightButton() { rightButton.setEnabled(false); }
-	public void disableEditButton() { editButton.setEnabled(false); }
-	public void disableAddButton() { addButton.setEnabled(false); }
+	public void disableLeftButton()   { leftButton.setEnabled(false); }
+	public void disableRightButton()  { rightButton.setEnabled(false); }
+	public void disableEditButton()   { editButton.setEnabled(false); }
+	public void disableAddButton()    { addButton.setEnabled(false); }
 	public void disableDeleteButton() { deleteButton.setEnabled(false); }
-	public void disableSaveButton() { saveButton.setEnabled(false); }
+	public void disableSaveButton()   { saveButton.setEnabled(false); }
 	public void disableCancelButton() { cancelButton.setEnabled(false); }
 
 	public abstract void clearForm();

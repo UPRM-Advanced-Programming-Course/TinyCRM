@@ -96,7 +96,7 @@ public class ContactModel extends CRMModel {
 				System.out.println("Next Company: " + company);
 				String client = inputScanner.next();
 				int clientId = Integer.parseInt(client);
-				newBean.setClient(new ClientBean(clientId));  // TODO: Find bean in Clients model
+				newBean.setClient(clientId);
 				System.out.println("Next client: " + client);
 				String telephone = inputScanner.next();
 				newBean.setTelephone(telephone);
@@ -133,11 +133,11 @@ public class ContactModel extends CRMModel {
 		result += '\t';
 		result += cb.getCompany();
 		result += '\t';
-		if (cb.getClient() == null) {
+		if (cb.getClient() < 0) {
 			result += "-1";
 		}
 		else {
-			result += ""+cb.getClient().getId();
+			result += ""+cb.getClient();
 		}
 		result += '\t';
 		result += cb.getTelephone();

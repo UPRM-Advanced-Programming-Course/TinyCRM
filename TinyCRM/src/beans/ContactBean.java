@@ -2,33 +2,25 @@ package beans;
 
 public class ContactBean extends CRMBean {
 
-	private int id;
 	private String firstName;
 	private String lastName;
 	private String company;
-	private ClientBean client;
+	private int client;
 	private String telephone;
 	private String email;
 	private String facebook;
 	
 	public ContactBean(int id) {
-		super();
-		this.id = id;
+		super(id);
 		firstName = "";
 		lastName = "";
 		company = "";
-		client = new ClientBean(-1);
+		client = -1;
 		telephone = "";
 		email = "";
 		facebook = "";
 	}
 	
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public String getFirstName() {
 		return firstName;
 	}
@@ -47,11 +39,11 @@ public class ContactBean extends CRMBean {
 	public void setCompany(String company) {
 		this.company = company;
 	}
-	public ClientBean getClient() {
+	public int getClient() {
 		return client;
 	}
-	public void setClient(ClientBean client) {
-		this.client = client;
+	public void setClient(int id) {
+		this.client = id;
 	}
 	public String getTelephone() {
 		return telephone;
@@ -70,6 +62,10 @@ public class ContactBean extends CRMBean {
 	}
 	public void setFacebook(String facebook) {
 		this.facebook = facebook;
+	}
+	
+	public String getDescription() {
+		return firstName + " " + lastName;
 	}
 	
 	public String toString() {

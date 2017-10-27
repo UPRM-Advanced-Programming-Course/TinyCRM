@@ -25,10 +25,10 @@ public interface ContactTCRMView extends TCRMView {
 	void setTextFacebook(String textFacebook);
 
 	// TODO: Verify MVC compliance of these methods
-	ClientBean getSelectedComboBoxClient();
-	void setSelectedComboBoxClient(ClientBean b);
-	void setComboBoxClientItems(ArrayList<CRMBean> list);
-	void setComboBoxClientListener(ActionListener listener);
+	int getSelectedClientIndex();
+	void setSelectedClientIndex(int index);
+	void setSelectClientItems(ArrayList<CRMBean> list);
+	void setSelectClientListener(ActionListener listener);
 	
 	String getErrorFirstName();
 	String getErrorLasttName();

@@ -62,6 +62,8 @@ public class CRMMain {
 	public static void switchToModule(String module) {
 
 		SwingView nextView = mapModuleToView.get(module);
+		
+		if (nextView == currentView) return;
 
 		if (nextView != null) {
 			nextView.setMessagesText("Welcome to TinyCRM: " + module);

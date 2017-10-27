@@ -282,7 +282,7 @@ public class ClientSwingView extends SwingView implements ClientTCRMView {
 	
 	public void formToBean(CRMBean bean) {
 		ClientBean cb = (ClientBean) bean;
-		cb.setId(Integer.parseInt(textId.getText()));
+		// cb.setId(Integer.parseInt(textId.getText()));  // Id is never editable
 		cb.setCompany(textCompany.getText());
 		cb.setTelephone(textTelephone.getText());
 		cb.setEmail(textEmail.getText());

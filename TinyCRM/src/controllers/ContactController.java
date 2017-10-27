@@ -21,9 +21,9 @@ public class ContactController extends CRMController {
 		//ContactModel cm = (ContactModel) contactModel;
 		ClientModel clientModel2 = (ClientModel) clientModel;
 
-		cv.setComboBoxClientItems(clientModel2.getAllBeans());
+		cv.setSelectClientItems(clientModel2.getAllBeans());
 		cv.clearFieldErrors();
-		cv.setComboBoxClientListener(new ActionListener() {
+		cv.setSelectClientListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Client Combo Box Selected");
 			}
@@ -116,7 +116,7 @@ public class ContactController extends CRMController {
 
 	public void refreshDropdowns() {
 		ContactTCRMView cv = (ContactTCRMView) getView();
-		cv.setComboBoxClientItems(CRMMain.clientModel.getAllBeans());
+		cv.setSelectClientItems(CRMMain.clientModel.getAllBeans());
 	}
 
 	protected void refreshView() {
