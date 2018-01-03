@@ -1,5 +1,10 @@
 package controllers;
 
+/**
+ * In the Model-View-Controller model (MVC) Controllers connect views with their models
+ * Ideally one should be able to connect any View with any Model
+ */
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;

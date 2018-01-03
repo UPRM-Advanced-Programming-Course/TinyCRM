@@ -26,14 +26,14 @@ public class ContactSwingView extends SwingView implements ContactTCRMView {
 
 	protected class ClientForComboBox {
 
-		private int id;
+		private long id;
 		private String description;
 
-		protected int getId() {
+		protected long getId() {
 			return id;
 		}
 
-		protected ClientForComboBox(int id, String description) {
+		protected ClientForComboBox(long id, String description) {
 			this.id = id;
 			this.description = description;
 		}
@@ -41,7 +41,7 @@ public class ContactSwingView extends SwingView implements ContactTCRMView {
 		protected String getDescription() {
 			return description;
 		}
-		protected void setId(int id) {
+		protected void setId(long id) {
 			this.id = id;
 		}
 		protected void setDescription(String description) {

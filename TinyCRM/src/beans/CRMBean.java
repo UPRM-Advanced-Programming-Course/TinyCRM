@@ -2,20 +2,24 @@ package beans;
 
 public abstract class CRMBean {
 	
-	private int id;
+	private long id;  // Unique ID among all beans of a given type
 	
-	public CRMBean(int id) {
+	public CRMBean(long id) {
 		this.id = id;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 	
-	protected void setId(int id) {
+	protected void setId(long id) {
 		this.id = id;
 	}
 	
+	/**
+	 * 
+	 * @return A descriptive String that could be used for isntance in a drop-down menu
+	 */
 	public abstract String getDescription();
 
 }

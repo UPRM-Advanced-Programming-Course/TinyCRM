@@ -2,6 +2,7 @@ package main;
 
 import java.awt.EventQueue;
 import java.util.HashMap;
+import java.util.Map;
 
 import controllers.CRMController;
 import controllers.ClientController;
@@ -30,13 +31,12 @@ public class CRMMain {
 	private static SwingView currentView;
 
 	// mapModuleToView holds the view object for each module
-	public static HashMap<String,SwingView> mapModuleToView = new HashMap<String,SwingView>();
+	public static Map<String,SwingView> mapModuleToView = new HashMap<String,SwingView>();
 	// mapModuleToIndex holds the index in the module selection combo box for each module
-	public static HashMap<String,Integer> mapModuleToIndex = new HashMap<String,Integer>();
+	public static Map<String,Integer> mapModuleToIndex = new HashMap<String,Integer>();
 
 	public static void main (String[] args) {
 
-		
 		contactView.setModuleSelectionItems(new String[] {"Contacts", "Clients", "Opportunities", "Reports"});
 		clientView.setModuleSelectionItems(new String[] {"Contacts", "Clients", "Opportunities", "Reports"});
 
@@ -45,6 +45,8 @@ public class CRMMain {
 
 		mapModuleToIndex.put("Contacts", 0);
 		mapModuleToIndex.put("Clients", 1);
+		mapModuleToIndex.put("Opportunities", 1);
+		mapModuleToIndex.put("Reports", 1);
 		
 		contactController.doInit();
 		contactController.setSwitchModuleListener((String s) -> CRMMain.switchToModule(s));
@@ -57,27 +59,26 @@ public class CRMMain {
 
 	}
 
-	public static void switchToModule(String module) {
+	public static void switchToModule(String moduleName) {
 
-		SwingView nextView = mapModuleToView.get(module);
+		if (moduleName.equals(currentModule)) return;
 		
-		if (nextView == currentView) return;
-
+		SwingView nextView = mapModuleToView.get(moduleName);
+		
 		if (nextView != null) {
-			nextView.setMessagesText("Welcome to TinyCRM: " + module);
-
-			EventQueue.invokeLater(() -> nextView.setVisible(true));
 			
-			if (currentView != null) {
-				currentView.setVisible(false);
-			}
-			currentModule = module;
+			nextView.setMessagesText("Welcome to TinyCRM: " + moduleName);
+
+			nextView.setVisible(true);
+			if (currentView != null) currentView.setVisible(false);
+			
+			currentModule = moduleName;
 			currentView = nextView;
 			currentView.setModuleSelected(mapModuleToIndex.get(currentModule));
 		}
 		else {
 			currentView.setModuleSelected(mapModuleToIndex.get(currentModule));
-			currentView.setMessagesText(module + " Module Not Available Yet");
+			currentView.setMessagesText(moduleName + " Module Not Available Yet");
 		}
 	}
 }

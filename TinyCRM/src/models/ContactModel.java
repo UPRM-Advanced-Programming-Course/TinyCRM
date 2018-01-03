@@ -14,62 +14,59 @@ public class ContactModel extends CRMModel {
 	private static String CONTACTS_FILE = "data/contacts.tsv";
 
 	public ContactModel() {
+		super();
 	}
 	
 	@Override
 	public void doInit() {
+		super.doInit();
 		ArrayList<CRMBean> beans = parseBeansFromFile(CONTACTS_FILE);
-		for (CRMBean b : beans) {
-			add((ContactBean) b);
-		}
-		setIndex(0);
+		this.setList(beans);
+		this.setIndex(0);
 	}
 
+//	@Override
+//	public void doLeft() {
+//		super.doLeft();
+//	}
 
-	@Override
-	public void doLeft() {
-		System.out.println("ContactModel.doLeft()");
-		super.doLeft();
-	}
+//	@Override
+//	public void doRight() {
+//		super.doRight();
+//	}
 
-	@Override
-	public void doRight() {
-		System.out.println("ContactModel.doRight()");
-		super.doRight();
-	}
-
-	@Override
-	public void doEdit() {
-		System.out.println("ContactModel.doEdit()");
-		super.doEdit();
-	}
+//	@Override
+//	public void doEdit() {
+//		super.doEdit();
+//	}
 
 	@Override
 	public void doAdd() {
-		System.out.println("ContactModel.doAdd()");
-		int id = 1;
+		long id = 1;
 		if (this.getCount() > 0) {
 			id = ((ContactBean) this.getBean(this.getCount()-1)).getId() + 1;
 		}
-		this.add(new ContactBean(id));
-		this.setIndex(this.getCount() - 1);
+		this.getAllBeans().add(new ContactBean(id));
+		this.setIndex(this.getCount() - 1);  // New record becomes the current one
 	}
 
-	@Override
-	public void doDelete() {
-		System.out.println("ContactModel.doDelete()");
-		super.doDelete();
-
-	}
+//	@Override
+//	public void doDelete() {
+//		super.doDelete();
+//	}
 
 	@Override
 	public void doSave() {
-		System.out.println("ContactModel.doSave()");
-		//super.doSave();
-		saveContactBeansCSV(CONTACTS_FILE);
+		super.doSave();
+		saveBeansToFile(CONTACTS_FILE);
 	}
+	
+//	@Override
+//	public void doCancel() {
+//		super.doCancel();
+//	}
 
-	public static ArrayList<CRMBean> parseBeansFromFile(String filename) {
+	public ArrayList<CRMBean> parseBeansFromFile(String filename) {
 		File inputFile = new File(filename);
 		try {
 			ArrayList<CRMBean> contactBeans = new ArrayList<CRMBean>();
@@ -81,35 +78,25 @@ public class ContactModel extends CRMModel {
 				String ID = inputScanner.next();
 				int id = Integer.parseInt(ID);
 				ContactBean newBean = new ContactBean(id);
-				System.out.println("Next ID: " + ID);
 				String firstName = inputScanner.next();
 				newBean.setFirstName(firstName);
-				System.out.println("Next FirstName: " + firstName);
 				String lastName = inputScanner.next();
 				newBean.setLastName(lastName);
-				System.out.println("Next LastName: " + lastName);
 				String company = inputScanner.next();
 				newBean.setCompany(company);
-				System.out.println("Next Company: " + company);
 				String client = inputScanner.next();
 				int clientId = Integer.parseInt(client);
 				newBean.setClient(clientId);
-				System.out.println("Next client: " + client);
 				String telephone = inputScanner.next();
 				newBean.setTelephone(telephone);
-				System.out.println("Next Telephone: " + telephone);
 				String email = inputScanner.next();
 				newBean.setEmail(email);
-				System.out.println("Next Email: " + email);
 				String facebook = inputScanner.next();
 				newBean.setFacebook(facebook);
-				System.out.println("Next Facebook: " + facebook);
 				inputScanner.nextLine();  // Skip over anything left in line
 				contactBeans.add(newBean);
 				count++;
 			}
-			System.out.println("Total ContactBeans in file:" + count);
-			System.out.println("Total ContactBeans added:" + contactBeans.size());
 			inputScanner.close();
 			return contactBeans;
 		}
@@ -146,9 +133,9 @@ public class ContactModel extends CRMModel {
 		
 	}
 
-	public void saveContactBeansCSV(String filename) {
+	public void saveBeansToFile(String filename) {
 		
-		ArrayList<CRMBean> contactBeans = getList();
+		ArrayList<CRMBean> contactBeans = getAllBeans();
 		File outputFile = new File(filename);
 		try {
 			PrintWriter out = new PrintWriter(outputFile);
