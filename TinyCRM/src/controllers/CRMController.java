@@ -171,7 +171,7 @@ public abstract class CRMController {
 
 	protected void refreshView() {
 		System.out.println("Refreshing View Info");
-		view.updateIndexCount(model.getIndex(), model.getCount());
+		view.updateIndexCountLabel(model.getIndex(), model.getCount());
 		view.disableLeftButton();
 		view.disableRightButton();
 		view.disableEditButton();

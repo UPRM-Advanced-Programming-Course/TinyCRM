@@ -8,18 +8,20 @@ public interface ClientTCRMView extends TCRMView {
 	String getTextEmail();
 	String getTextWebsite();
 	String getTextFacebook();
-	String getErrorCompany();
-	String getErrorTelephone();
-	String getErrorEmail();
-	String getErrorWebsite();
-	String getErrorFacebook();
-
+	
 	void setTextId(String textId);
 	void setTextCompany(String textCompany);
 	void setTextTelephone(String textTelephoe);
 	void setTextEmail(String textEmail);
 	void setTextWebsite(String textWebsite);
 	void setTextFacebook(String textFacebook);
+	
+	String getErrorCompany();
+	String getErrorTelephone();
+	String getErrorEmail();
+	String getErrorWebsite();
+	String getErrorFacebook();
+
 	void setErrorCompany(String errorCompany);
 	void setErrorTelephone(String errorFirstName);
 	void setErrorEmail(String errorEmail);

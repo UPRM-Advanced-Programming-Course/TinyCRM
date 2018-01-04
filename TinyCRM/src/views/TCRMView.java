@@ -14,7 +14,7 @@ public interface TCRMView {
 	void beanToForm(CRMBean bean);
 	void formToBean(CRMBean bean);
 
-	void updateIndexCount(int index, int count);
+	void updateIndexCountLabel(int index, int count);
 
 	boolean inEditMode();
 	void enableEditMode();
