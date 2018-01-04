@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
@@ -80,13 +81,10 @@ public class ContactSwingView extends SwingView implements ContactTCRMView {
 		super();
 		setTitle("Contacts");
 
-		JPanel centerPanel = new JPanel();
 		JScrollPane centerScrollPane = new JScrollPane();
-		centerScrollPane.setViewportBorder(new LineBorder(new Color(0, 0, 0)));
-		centerPanel.add(centerScrollPane);
-		this.setCenterPanel(centerPanel);
-		//rootPane.add(centerPanel, BorderLayout.CENTER);
-
+		centerScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		centerScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		setCenterPanel(centerScrollPane);
 
 		JPanel centerGrid = new JPanel();
 		centerScrollPane.setViewportView(centerGrid);

@@ -16,6 +16,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -30,7 +31,7 @@ public abstract class SwingView extends JFrame implements TCRMView {
 	private static final long serialVersionUID = 1L;
 
 	private JPanel rootPanel;
-	private JPanel centerPanel;
+	private JComponent centerPanel;
 
 	// Dynamic Labels
 	private JLabel indexCountLabel;
@@ -121,11 +122,11 @@ public abstract class SwingView extends JFrame implements TCRMView {
 		rootPanel.add(horizontalStrut_3, BorderLayout.EAST);
 	}
 
-	protected JPanel getCenterPanel() {
+	protected JComponent getCenterPanel() {
 		return centerPanel;
 	}
 
-	protected void setCenterPanel(JPanel centerPanel) {
+	protected void setCenterPanel(JComponent centerPanel) {
 		this.centerPanel = centerPanel;
 		getContentPane().add(centerPanel, BorderLayout.CENTER);
 	}
