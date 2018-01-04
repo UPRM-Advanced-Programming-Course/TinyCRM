@@ -172,7 +172,7 @@ public abstract class SwingView extends JFrame implements TCRMView {
 	public abstract void beanToForm(CRMBean bean);
 	public abstract void formToBean(CRMBean bean);
 
-	public void updateIndexCount(int index, int count) {
+	public void updateIndexCountLabel(int index, int count) {
 		indexCountLabel.setText(index+1 + "/" + count);
 	}
 
