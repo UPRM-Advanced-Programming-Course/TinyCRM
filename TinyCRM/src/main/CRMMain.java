@@ -48,11 +48,11 @@ public class CRMMain {
 		mapModuleToIndex.put("Opportunities", 1);
 		mapModuleToIndex.put("Reports", 1);
 		
-		contactController.doInit();
-		contactController.setSwitchModuleListener((String s) -> CRMMain.switchToModule(s));
-
 		clientController.doInit();
 		clientController.setSwitchModuleListener((String s) -> CRMMain.switchToModule(s));
+
+		contactController.doInit();
+		contactController.setSwitchModuleListener((String s) -> CRMMain.switchToModule(s));
 
 		//contactView.setModuleSelected(mapModuleToIndex.get("Contacts"));
 		switchToModule("Contacts"); // Initially open the Contacts module

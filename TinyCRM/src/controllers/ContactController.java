@@ -30,6 +30,11 @@ public class ContactController extends CRMController {
 		});
 	}
 
+	public void doInit() {
+		super.doInit();
+		refreshDropdowns();
+	}
+	
 	public void doLeft() {
 		System.out.println("ContactController.doLeft()");
 		super.doLeft();
