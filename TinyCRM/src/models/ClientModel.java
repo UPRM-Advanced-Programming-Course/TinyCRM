@@ -80,12 +80,12 @@ public class ClientModel extends CRMModel {
 				ClientBean newBean = new ClientBean(id);
 				String company = inputScanner.next();
 				newBean.setCompany(company);
-				String website = inputScanner.next();
-				newBean.setWebsite(website);
 				String telephone = inputScanner.next();
 				newBean.setTelephone(telephone);
 				String email = inputScanner.next();
 				newBean.setEmail(email);
+				String website = inputScanner.next();
+				newBean.setWebsite(website);
 				String facebook = inputScanner.next();
 				newBean.setFacebook(facebook);
 				inputScanner.nextLine();  // Skip over anything left in line
@@ -107,7 +107,7 @@ public class ClientModel extends CRMModel {
 		try {
 			PrintWriter out = new PrintWriter(outputFile);
 			// Print Header Line
-			out.println("TinyCRM Contacts data file");
+			out.println("TinyCRM Clients data file");
 			for (CRMBean bean : contactBeans) {
 				out.println(beanToFileLine(bean));
 			}
@@ -126,12 +126,11 @@ public class ClientModel extends CRMModel {
 		result += '\t';
 		result += cb.getCompany();
 		result += '\t';
-		result += '\t';
 		result += cb.getTelephone();
 		result += '\t';
-		result += cb.getWebsite();
-		result += '\t';
 		result += cb.getEmail();
+		result += '\t';
+		result += cb.getWebsite();
 		result += '\t';
 		result += cb.getFacebook();
 		return result;

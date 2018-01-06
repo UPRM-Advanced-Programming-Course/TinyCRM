@@ -276,7 +276,7 @@ public class ClientSwingView extends SwingView implements ClientTCRMView {
 		this.setTextCompany(cb.getCompany());
 		this.setTextTelephone(cb.getTelephone());
 		this.setTextEmail(cb.getEmail());
-		this.setTextWebsite(cb.getEmail());
+		this.setTextWebsite(cb.getWebsite());
 		this.setTextFacebook(cb.getFacebook());
 	}
 	
