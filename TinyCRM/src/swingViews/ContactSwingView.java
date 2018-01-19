@@ -351,9 +351,10 @@ public class ContactSwingView extends SwingView implements ContactTCRMView {
 
 	public void setSelectedClientIndex(int index) {
 		if (index >= 0 && index <= comboBoxClient.getItemCount()) {
+			boolean previous = comboBoxClient.isEnabled();
 			comboBoxClient.setEnabled(false);
 			comboBoxClient.setSelectedIndex(index);
-			comboBoxClient.setEnabled(true);
+			comboBoxClient.setEnabled(previous);
 		}
 	}
 
@@ -429,6 +430,7 @@ public class ContactSwingView extends SwingView implements ContactTCRMView {
 		textLastName.setEditable(false);
 		textCompany.setEditable(false);
 		comboBoxClient.setEnabled(false);
+		//comboBoxClient.setEditable(false);
 		textTelephone.setEditable(false);
 		textEmail.setEditable(false);
 		textFacebook.setEditable(false);

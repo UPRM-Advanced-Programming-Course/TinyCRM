@@ -61,7 +61,7 @@ public abstract class SwingView extends JFrame implements TCRMView {
 		JPanel topPanel = new JPanel();
 		rootPanel.add(topPanel, BorderLayout.NORTH);
 		topPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-		
+
 		tinyCRMLabel = new JLabel("");
 		tinyCRMLabel.setMaximumSize(new Dimension(57, 16));
 		tinyCRMLabel.setIcon(new ImageIcon(SwingView.class.getResource("/images/TinyCRMLogo.png")));
@@ -73,7 +73,7 @@ public abstract class SwingView extends JFrame implements TCRMView {
 		moduleComboBox.setMaximumSize(new Dimension(150, 27));
 		moduleComboBox.setPreferredSize(new Dimension(150, 27));
 		topPanel.add(moduleComboBox);
-		
+
 		messagesLabel = new JLabel("This is the messages label");
 		messagesLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		messagesLabel.setPreferredSize(new Dimension(340, 16));
@@ -146,17 +146,18 @@ public abstract class SwingView extends JFrame implements TCRMView {
 	public void setMessagesText(String text) {
 		this.messagesLabel.setText(text);
 	}
-	
+
 	public String getModuleSelected() {
 		return (String) moduleComboBox.getSelectedItem();
 	}
-	
+
 	public void setModuleSelected(int index) {
+		boolean previous = moduleComboBox.isEnabled();
 		moduleComboBox.setEnabled(false); // Avoid firing event listeners
 		moduleComboBox.setSelectedIndex(index);
-		moduleComboBox.setEnabled(true);
+		moduleComboBox.setEnabled(previous);
 	}
-	
+
 	public void setModuleSelectionItems(String[] modules) {
 		moduleComboBox.setModel(new DefaultComboBoxModel<String>(modules));
 	}
@@ -236,7 +237,7 @@ public abstract class SwingView extends JFrame implements TCRMView {
 			}
 		});
 	}
-	
+
 	public void enableLeftButton()   { leftButton.setEnabled(true); }
 	public void enableRightButton()  { rightButton.setEnabled(true); }
 	public void enableEditButton()   { editButton.setEnabled(true); }
@@ -255,5 +256,5 @@ public abstract class SwingView extends JFrame implements TCRMView {
 
 	public abstract void clearForm();
 	public abstract void clearFieldErrors();
-	
+
 }
