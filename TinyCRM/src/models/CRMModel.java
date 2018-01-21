@@ -48,7 +48,12 @@ public abstract class CRMModel {
 	public void doDelete() {
 		// TODO: Verify that integrity is preserved before deleting. E.g. dangling references
 		list.remove(index);
-		index = index-1;
+		if (list.size() > 0) {
+			index = Math.max(index-1, 0);
+		}
+		else {
+			index = 0;
+		}
 	}
 	
 	/**
