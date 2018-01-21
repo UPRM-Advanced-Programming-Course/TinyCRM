@@ -23,7 +23,7 @@ public abstract class CRMController {
 	private Map<String, String> validationErrors = new HashMap<String, String>();
 
 	private boolean currentBeanIsNew = false;
-	
+
 	private Consumer<String> switchModuleListener = null;
 
 	public CRMController(TCRMView crmView, CRMModel crmModel) {
@@ -31,7 +31,7 @@ public abstract class CRMController {
 		this.model = crmModel;
 
 		this.view.setModuleSelectionListener(() -> doSelectModule());
-		
+
 		this.view.setLeftButtonListener(()   -> doLeft());
 		this.view.setRightButtonListener(()  -> doRight());
 		this.view.setEditButtonListener(()   -> doEdit());
@@ -60,7 +60,7 @@ public abstract class CRMController {
 	public void setView(TCRMView view) {
 		this.view = view;
 	}
-	
+
 	public void doInit() {
 		model.doInit();
 		view.beanToForm(model.getCurrentBean());
@@ -70,11 +70,11 @@ public abstract class CRMController {
 		System.out.println("CRMController.doLeft()");
 		if (getModel().getIndex() > 0) {
 			this.getModel().doLeft();
-			if (model.getCount() > 0) {
-				view.beanToForm(model.getCurrentBean());
-			}
 		}
-		this.refreshView();
+		if (model.getCount() > 0) {
+			view.beanToForm(model.getCurrentBean());
+			this.refreshView();
+		}
 	};
 
 	public void doRight() {
@@ -158,7 +158,7 @@ public abstract class CRMController {
 		validationErrors.clear();
 		this.refreshView();
 	}
-	
+
 	public void setSwitchModuleListener(Consumer <String> f) {
 		switchModuleListener = f;
 	}
