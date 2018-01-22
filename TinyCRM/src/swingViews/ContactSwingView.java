@@ -391,7 +391,7 @@ public class ContactSwingView extends SwingView implements ContactTCRMView {
 		this.setTextCompany(cb.getCompany());
 		for (int i=0; i < comboBoxClient.getItemCount(); i++) {
 			ClientForComboBox item = comboBoxClient.getItemAt(i);
-			if (item.getId() == cb.getId()) {
+			if (item.getId() == cb.getClient()) {
 				this.setSelectedClientIndex(i);
 			}
 		}
